@@ -1053,33 +1053,10 @@
         }
       },
 
-      // === BUCHUNG ===
-      "buchungsmodelle": {
-        title: "Buchungsmodelle",
-        phase: "buchung",
-        content: {
-          intro: `Flexibilität ist unser Prinzip. Sie wählen das Engagement-Modell, das zu Ihrer Situation passt. Kein Vendor Lock-in – flexibel rein, flexibel raus.`,
-          sections: [
-            {
-              label: "Phasen-Paket (empfohlen)",
-              text: "Komplette Phase als Paket mit Festpreis möglich. Ideal für: Klarer Scope, planbare Kosten, definierte Deliverables."
-            },
-            {
-              label: "Einzelbaustein",
-              text: "Einzelne Services aus dem Baukasten auf Time & Material Basis. Ideal für: Punktuelle Unterstützung, zweite Meinung, Quick Checks."
-            },
-            {
-              label: "End-to-End (Projektvertrag)",
-              text: "Begleitung über alle 4 Phasen hinweg. Ideal für: Maximale Kontinuität, durchgängiger Wissenstransfer, komplexe Programme."
-            }
-          ],
-          highlight: "Kein Vendor Lock-in: Flexibel rein, flexibel raus. Sie entscheiden über den Umfang.",
-          deliverables: ["Individuelles Angebot", "Klarer Scope", "Transparente Preise", "Flexible Laufzeit"]
-        }
-      },
+      // === KONTAKT ===
       "kontakt": {
         title: "Starten Sie jetzt",
-        phase: "kontakt",
+        phase: "buchung",
         content: {
           intro: `Der erste Schritt zu einer erfolgreichen ERP-Transformation ist ein Gespräch. Wir freuen uns auf Sie.`,
           sections: [
@@ -1144,7 +1121,6 @@
         { id: "nutzen-business", label: "Nutzen für Business Owner" }
       ],
       buchung: [
-        { id: "buchungsmodelle", label: "Buchungsmodelle" },
         { id: "kontakt", label: "Starten Sie jetzt" }
       ]
     };
@@ -1156,7 +1132,7 @@
       betrieb: "Phase 4: Betrieb",
       info: "Warum ERP Transformation Advisory?",
       nutzen: "Nutzen nach Zielgruppe",
-      buchung: "Buchung & Kontakt"
+      buchung: "Kontakt"
     };
 
     let currentView = 'home';
@@ -1248,8 +1224,8 @@
                 <div class="info-button-desc">CFO, CIO, Business Owner</div>
               </button>
               <button class="info-button" onclick="navigate('buchung')">
-                <div class="info-button-title">Buchung</div>
-                <div class="info-button-desc">Modelle & Kontakt</div>
+                <div class="info-button-title">Kontakt</div>
+                <div class="info-button-desc">Starten Sie jetzt</div>
               </button>
             </div>
           </div>
