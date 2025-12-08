@@ -8,6 +8,7 @@
   <meta name="theme-color" content="#0A1A29">
   <title>TIMETOACT GROUP - ERP Transformation Advisory</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230A1A29' width='100' height='100' rx='15'/><text x='50' y='68' font-size='45' text-anchor='middle' fill='%23DA5500' font-family='sans-serif' font-weight='bold'>TTA</text></svg>">
+  <script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
   <style>
     :root {
       --tta-dark: #0A1A29;
@@ -1501,187 +1502,236 @@
       render();
     }
 
-    function downloadSelectedTopics() {
+    async function downloadSelectedTopics() {
       if (selectedTopics.size === 0) {
         alert('Bitte wählen Sie mindestens ein Thema aus.');
         return;
       }
 
+      const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, 
+              Header, Footer, AlignmentType, BorderStyle, WidthType, 
+              HeadingLevel, ShadingType, LevelFormat, PageNumber } = docx;
+
       const totals = calculateTotalPT();
       const geschaetzteDauer = Math.ceil(totals.gesamtPT / 2.5);
+      const today = new Date().toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
 
-      let htmlContent = `<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <title>TIMETOACT GROUP - Ausgewählte ERP Advisory Services</title>
-  <style>
-    @page { margin: 1.5cm; size: A4; }
-    body { font-family: 'Segoe UI', Arial, sans-serif; max-width: 100%; margin: 0; padding: 20px; color: #0A1A29; line-height: 1.5; font-size: 11pt; }
-    h1 { color: #0A1A29; border-bottom: 3px solid #DA5500; padding-bottom: 10px; font-size: 18pt; margin-bottom: 5px; }
-    h2 { color: #098F9B; margin-top: 20px; border-bottom: 2px solid #098F9B; padding-bottom: 6px; font-size: 14pt; page-break-after: avoid; }
-    .subtitle { color: #666; margin-bottom: 20px; font-size: 10pt; }
-    .intro { font-size: 11pt; margin-bottom: 12px; }
-    .section { margin-bottom: 10px; }
-    .section-title { font-weight: 600; color: #DA5500; margin-bottom: 4px; text-transform: uppercase; font-size: 9pt; letter-spacing: 0.5px; }
-    ul { margin: 0; padding-left: 18px; }
-    li { margin-bottom: 2px; font-size: 10pt; }
-    p { margin: 0 0 8px 0; font-size: 10pt; }
-    .highlight { background: linear-gradient(135deg, rgba(218,85,0,0.08) 0%, rgba(9,143,155,0.08) 100%); border-left: 3px solid #DA5500; padding: 10px 14px; margin: 12px 0; font-style: italic; font-size: 10pt; }
-    .deliverables { background: #f5f5f5; padding: 10px 14px; border-radius: 6px; margin-top: 10px; }
-    .deliverables-title { font-weight: 600; color: #DA5500; margin-bottom: 4px; text-transform: uppercase; font-size: 8pt; }
-    .deliverables p { font-size: 9pt; margin: 0; }
-    .footer { margin-top: 30px; padding-top: 15px; border-top: 2px solid #e0e0e0; text-align: center; color: #666; font-size: 9pt; }
-    .logo { font-size: 16pt; font-weight: 700; margin-bottom: 3px; color: #0A1A29; }
-    .logo span { color: #DA5500; }
-    .tagline { margin-bottom: 8px; }
-    .tagline span { color: #DA5500; font-weight: 600; }
-    .topic-block { page-break-inside: avoid; margin-bottom: 15px; }
-    
-    /* Calculation Table */
-    .calc-summary { background: #f8f9fa; border: 2px solid #098F9B; border-radius: 8px; padding: 16px; margin-bottom: 24px; page-break-inside: avoid; }
-    .calc-title { font-size: 12pt; font-weight: 600; color: #098F9B; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
-    .calc-table { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
-    .calc-table th, .calc-table td { padding: 8px 12px; text-align: left; font-size: 10pt; }
-    .calc-table th { background: #098F9B; color: white; font-weight: 600; }
-    .calc-table td { border-bottom: 1px solid #ddd; }
-    .calc-table tr:last-child td { border-bottom: none; font-weight: 600; background: #e9ecef; }
-    .calc-table .num { text-align: right; }
-    .complexity-tag { display: inline-block; padding: 2px 6px; border-radius: 3px; font-size: 8pt; font-weight: 600; margin-left: 6px; }
-    .complexity-tag.low { background: #28a745; color: white; }
-    .complexity-tag.medium { background: #ffc107; color: #333; }
-    .complexity-tag.high { background: #dc3545; color: white; }
-    .calc-note { font-size: 8pt; color: #666; font-style: italic; margin-top: 8px; }
-    
-    @page { margin: 1.5cm; size: A4; }
-    @media print {
-      /* Browser Header/Footer komplett entfernen */
-      @page { 
-        size: A4;
-        margin: 15mm;
-      }
-      html, body { 
-        -webkit-print-color-adjust: exact; 
-        print-color-adjust: exact;
-        margin: 0;
-        padding: 0;
-      }
-      .no-print { display: none; }
-    }
-  </style>
-</head>
-<body>
-  <h1>ERP Transformation Advisory</h1>
-  <p class="subtitle">Ausgewählte Services für Ihre ERP-Transformation</p>
-  
-  <div class="calc-summary">
-    <div class="calc-title">📊 Aufwandsschätzung (Richtwerte)</div>
-    <table class="calc-table">
-      <tr>
-        <th>Service</th>
-        <th>Komplexität</th>
-        <th class="num">Business (PT)</th>
-        <th class="num">Technik (PT)</th>
-        <th class="num">PM (PT)</th>
-        <th class="num">Gesamt</th>
-      </tr>
-`;
+      // Collect all content
+      const children = [];
+      
+      // Title
+      children.push(new Paragraph({
+        heading: HeadingLevel.TITLE,
+        children: [new TextRun({ text: "ERP Transformation Advisory", bold: true, size: 56, color: "0A1A29" })]
+      }));
+      
+      children.push(new Paragraph({
+        spacing: { after: 400 },
+        children: [new TextRun({ text: "Ausgewählte Services für Ihre ERP-Transformation", size: 24, color: "666666" })]
+      }));
+
+      // Calculation table
+      const tableBorder = { style: BorderStyle.SINGLE, size: 1, color: "CCCCCC" };
+      const cellBorders = { top: tableBorder, bottom: tableBorder, left: tableBorder, right: tableBorder };
+      
+      const tableRows = [
+        new TableRow({
+          tableHeader: true,
+          children: [
+            new TableCell({ borders: cellBorders, width: { size: 3500, type: WidthType.DXA }, shading: { fill: "098F9B", type: ShadingType.CLEAR }, children: [new Paragraph({ children: [new TextRun({ text: "Service", bold: true, color: "FFFFFF", size: 20 })] })] }),
+            new TableCell({ borders: cellBorders, width: { size: 1500, type: WidthType.DXA }, shading: { fill: "098F9B", type: ShadingType.CLEAR }, children: [new Paragraph({ children: [new TextRun({ text: "Komplexität", bold: true, color: "FFFFFF", size: 20 })] })] }),
+            new TableCell({ borders: cellBorders, width: { size: 1200, type: WidthType.DXA }, shading: { fill: "098F9B", type: ShadingType.CLEAR }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: "Business", bold: true, color: "FFFFFF", size: 20 })] })] }),
+            new TableCell({ borders: cellBorders, width: { size: 1200, type: WidthType.DXA }, shading: { fill: "098F9B", type: ShadingType.CLEAR }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: "Technik", bold: true, color: "FFFFFF", size: 20 })] })] }),
+            new TableCell({ borders: cellBorders, width: { size: 1000, type: WidthType.DXA }, shading: { fill: "098F9B", type: ShadingType.CLEAR }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: "PM", bold: true, color: "FFFFFF", size: 20 })] })] }),
+            new TableCell({ borders: cellBorders, width: { size: 1000, type: WidthType.DXA }, shading: { fill: "098F9B", type: ShadingType.CLEAR }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: "Gesamt", bold: true, color: "FFFFFF", size: 20 })] })] }),
+          ]
+        })
+      ];
 
       selectedTopics.forEach(topicId => {
         const topic = detailContent[topicId];
         const complexity = getTopicComplexity(topicId);
         const pt = ptMatrix[complexity];
-        const complexityLabel = complexityLabels[complexity];
         const topicTotal = pt.advisory + pt.technik + pt.pm;
         if (topic) {
-          htmlContent += '<tr>';
-          htmlContent += '<td>' + topic.title + '</td>';
-          htmlContent += '<td><span class="complexity-tag ' + complexity + '">' + complexityLabel + '</span></td>';
-          htmlContent += '<td class="num">' + pt.advisory + ' PT</td>';
-          htmlContent += '<td class="num">' + pt.technik + ' PT</td>';
-          htmlContent += '<td class="num">' + pt.pm + ' PT</td>';
-          htmlContent += '<td class="num">' + topicTotal + ' PT</td>';
-          htmlContent += '</tr>';
+          tableRows.push(new TableRow({
+            children: [
+              new TableCell({ borders: cellBorders, width: { size: 3500, type: WidthType.DXA }, children: [new Paragraph({ children: [new TextRun({ text: topic.title, size: 20 })] })] }),
+              new TableCell({ borders: cellBorders, width: { size: 1500, type: WidthType.DXA }, children: [new Paragraph({ children: [new TextRun({ text: complexityLabels[complexity], size: 20 })] })] }),
+              new TableCell({ borders: cellBorders, width: { size: 1200, type: WidthType.DXA }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: pt.advisory + " PT", size: 20 })] })] }),
+              new TableCell({ borders: cellBorders, width: { size: 1200, type: WidthType.DXA }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: pt.technik + " PT", size: 20 })] })] }),
+              new TableCell({ borders: cellBorders, width: { size: 1000, type: WidthType.DXA }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: pt.pm + " PT", size: 20 })] })] }),
+              new TableCell({ borders: cellBorders, width: { size: 1000, type: WidthType.DXA }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: topicTotal + " PT", size: 20 })] })] }),
+            ]
+          }));
         }
       });
 
-      htmlContent += `
-      <tr>
-        <td><strong>GESAMT</strong></td>
-        <td></td>
-        <td class="num">${totals.advisory} PT</td>
-        <td class="num">${totals.technik} PT</td>
-        <td class="num">${totals.pm} PT</td>
-        <td class="num"><strong>${totals.gesamtPT} PT</strong></td>
-      </tr>
-    </table>
-    <div style="text-align: right; font-size: 11pt; font-weight: 600; color: #DA5500;">
-      Gesamt: ${totals.gesamtPT} Personentage · Geschätzte Dauer: ~${geschaetzteDauer} Wochen
-    </div>
-    <div class="calc-note">* Richtwerte basierend auf Erfahrungswerten. Individuelle Angebote nach Anforderungsanalyse. PT = Personentage.</div>
-  </div>
-`;
+      // Total row
+      tableRows.push(new TableRow({
+        children: [
+          new TableCell({ borders: cellBorders, width: { size: 3500, type: WidthType.DXA }, shading: { fill: "E9ECEF", type: ShadingType.CLEAR }, children: [new Paragraph({ children: [new TextRun({ text: "GESAMT", bold: true, size: 20 })] })] }),
+          new TableCell({ borders: cellBorders, width: { size: 1500, type: WidthType.DXA }, shading: { fill: "E9ECEF", type: ShadingType.CLEAR }, children: [new Paragraph({ children: [new TextRun({ text: "", size: 20 })] })] }),
+          new TableCell({ borders: cellBorders, width: { size: 1200, type: WidthType.DXA }, shading: { fill: "E9ECEF", type: ShadingType.CLEAR }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: totals.advisory + " PT", bold: true, size: 20 })] })] }),
+          new TableCell({ borders: cellBorders, width: { size: 1200, type: WidthType.DXA }, shading: { fill: "E9ECEF", type: ShadingType.CLEAR }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: totals.technik + " PT", bold: true, size: 20 })] })] }),
+          new TableCell({ borders: cellBorders, width: { size: 1000, type: WidthType.DXA }, shading: { fill: "E9ECEF", type: ShadingType.CLEAR }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: totals.pm + " PT", bold: true, size: 20 })] })] }),
+          new TableCell({ borders: cellBorders, width: { size: 1000, type: WidthType.DXA }, shading: { fill: "E9ECEF", type: ShadingType.CLEAR }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: totals.gesamtPT + " PT", bold: true, size: 20 })] })] }),
+        ]
+      }));
 
+      children.push(new Paragraph({
+        spacing: { before: 200 },
+        children: [new TextRun({ text: "AUFWANDSSCHÄTZUNG (RICHTWERTE)", bold: true, size: 24, color: "098F9B" })]
+      }));
+
+      children.push(new Table({
+        columnWidths: [3500, 1500, 1200, 1200, 1000, 1000],
+        rows: tableRows
+      }));
+
+      children.push(new Paragraph({
+        spacing: { before: 200, after: 100 },
+        alignment: AlignmentType.RIGHT,
+        children: [new TextRun({ text: `Gesamt: ${totals.gesamtPT} Personentage · Geschätzte Dauer: ~${geschaetzteDauer} Wochen`, bold: true, size: 22, color: "DA5500" })]
+      }));
+
+      children.push(new Paragraph({
+        spacing: { after: 400 },
+        children: [new TextRun({ text: "* Richtwerte basierend auf Erfahrungswerten. Individuelle Angebote nach Anforderungsanalyse.", italics: true, size: 18, color: "666666" })]
+      }));
+
+      // Service details
+      let bulletIndex = 0;
+      const numberingConfig = [];
+      
       selectedTopics.forEach(topicId => {
         const topic = detailContent[topicId];
         const complexity = getTopicComplexity(topicId);
         if (topic) {
-          htmlContent += '<div class="topic-block">';
-          htmlContent += '<h2>' + topic.title + ' <span class="complexity-tag ' + complexity + '">' + complexityLabels[complexity] + '</span></h2>';
-          htmlContent += '<div class="intro">' + topic.content.intro + '</div>';
-          
+          // Service title
+          children.push(new Paragraph({
+            heading: HeadingLevel.HEADING_1,
+            spacing: { before: 400, after: 200 },
+            children: [
+              new TextRun({ text: topic.title, bold: true, size: 28, color: "098F9B" }),
+              new TextRun({ text: "  [" + complexityLabels[complexity] + "]", size: 20, color: "666666" })
+            ]
+          }));
+
+          // Intro
+          children.push(new Paragraph({
+            spacing: { after: 200 },
+            children: [new TextRun({ text: topic.content.intro, size: 22 })]
+          }));
+
+          // Sections
           if (topic.content.sections) {
             topic.content.sections.forEach(section => {
-              htmlContent += '<div class="section">';
-              htmlContent += '<div class="section-title">' + section.label + '</div>';
+              children.push(new Paragraph({
+                spacing: { before: 200, after: 100 },
+                children: [new TextRun({ text: section.label.toUpperCase(), bold: true, size: 20, color: "DA5500" })]
+              }));
+
               if (section.items) {
-                htmlContent += '<ul>';
-                section.items.forEach(item => {
-                  htmlContent += '<li>' + item + '</li>';
+                const bulletRef = 'bullet-' + bulletIndex++;
+                numberingConfig.push({
+                  reference: bulletRef,
+                  levels: [{ level: 0, format: LevelFormat.BULLET, text: "•", alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 720, hanging: 360 } } } }]
                 });
-                htmlContent += '</ul>';
+                section.items.forEach(item => {
+                  children.push(new Paragraph({
+                    numbering: { reference: bulletRef, level: 0 },
+                    children: [new TextRun({ text: item, size: 20 })]
+                  }));
+                });
               }
+
               if (section.text) {
-                htmlContent += '<p>' + section.text.replace(/\\n/g, '<br>') + '</p>';
+                children.push(new Paragraph({
+                  spacing: { after: 100 },
+                  children: [new TextRun({ text: section.text, size: 20 })]
+                }));
               }
-              htmlContent += '</div>';
             });
           }
-          
+
+          // Highlight
           if (topic.content.highlight) {
-            htmlContent += '<div class="highlight">' + topic.content.highlight + '</div>';
+            children.push(new Paragraph({
+              spacing: { before: 200, after: 200 },
+              indent: { left: 400 },
+              border: { left: { style: BorderStyle.SINGLE, size: 24, color: "DA5500" } },
+              children: [new TextRun({ text: topic.content.highlight, italics: true, size: 20, color: "333333" })]
+            }));
           }
-          
+
+          // Deliverables
           if (topic.content.deliverables && topic.content.deliverables.length > 0) {
-            htmlContent += '<div class="deliverables">';
-            htmlContent += '<div class="deliverables-title">Deliverables</div>';
-            htmlContent += '<p>' + topic.content.deliverables.join(' · ') + '</p>';
-            htmlContent += '</div>';
+            children.push(new Paragraph({
+              spacing: { before: 100 },
+              shading: { fill: "F5F5F5", type: ShadingType.CLEAR },
+              children: [
+                new TextRun({ text: "DELIVERABLES: ", bold: true, size: 18, color: "DA5500" }),
+                new TextRun({ text: topic.content.deliverables.join(" · "), size: 18 })
+              ]
+            }));
           }
-          htmlContent += '</div>';
         }
       });
 
-      htmlContent += `
-  <div class="footer">
-    <div class="logo">TIMETOACT<span>GROUP</span></div>
-    <div class="tagline"><span>We Care.</span> <span>We Drive.</span> <span>We Deliver.</span></div>
-    <p>© 2025 TIMETOACT GROUP · ERP Transformation Advisory</p>
-    <p>Marcel Wagner · marcel.wagner@timetoact-group.com</p>
-  </div>
-  <scr` + `ipt>
-    window.onload = function() {
-      setTimeout(function() {
-        window.print();
-      }, 300);
-    };
-  </scr` + `ipt>
-</body>
-</html>`;
+      // Create document
+      const doc = new Document({
+        styles: {
+          default: { document: { run: { font: "Arial", size: 22 } } },
+          paragraphStyles: [
+            { id: "Title", name: "Title", basedOn: "Normal", run: { size: 56, bold: true, color: "0A1A29", font: "Arial" }, paragraph: { spacing: { before: 0, after: 120 } } },
+            { id: "Heading1", name: "Heading 1", basedOn: "Normal", next: "Normal", quickFormat: true, run: { size: 28, bold: true, color: "098F9B", font: "Arial" }, paragraph: { spacing: { before: 400, after: 200 } } },
+          ]
+        },
+        numbering: { config: numberingConfig },
+        sections: [{
+          properties: {
+            page: { margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 } }
+          },
+          headers: {
+            default: new Header({
+              children: [new Paragraph({
+                alignment: AlignmentType.RIGHT,
+                children: [
+                  new TextRun({ text: "TIMETOACT", bold: true, size: 20, color: "0A1A29" }),
+                  new TextRun({ text: "GROUP", bold: true, size: 20, color: "DA5500" }),
+                  new TextRun({ text: "  |  ERP Transformation Advisory", size: 18, color: "666666" })
+                ]
+              })]
+            })
+          },
+          footers: {
+            default: new Footer({
+              children: [new Paragraph({
+                alignment: AlignmentType.CENTER,
+                children: [
+                  new TextRun({ text: "© 2025 TIMETOACT GROUP · Marcel Wagner · marcel.wagner@timetoact-group.com · Seite ", size: 16, color: "666666" }),
+                  new TextRun({ children: [PageNumber.CURRENT], size: 16, color: "666666" }),
+                  new TextRun({ text: " von ", size: 16, color: "666666" }),
+                  new TextRun({ children: [PageNumber.TOTAL_PAGES], size: 16, color: "666666" })
+                ]
+              })]
+            })
+          },
+          children: children
+        }]
+      });
 
-      const printWindow = window.open('', '_blank');
-      printWindow.document.write(htmlContent);
-      printWindow.document.close();
+      // Generate and download
+      const blob = await Packer.toBlob(doc);
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'TIMETOACT_ERP_Advisory_Services_' + today.replace(/\./g, '-') + '.docx';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
     }
 
     function render() {
@@ -1781,7 +1831,7 @@
               Ausgewählte Themen:<span class="selection-count">${selectedTopics.size}</span>
             </div>
             <div class="selection-buttons">
-              <button class="download-button" onclick="downloadSelectedTopics()">📥 Als PDF speichern</button>
+              <button class="download-button" onclick="downloadSelectedTopics()">📥 Als Word speichern</button>
               <button class="clear-button" onclick="clearSelection()">✕ Auswahl löschen</button>
             </div>
           </div>
@@ -1827,7 +1877,7 @@
             Ausgewählte Themen:<span class="selection-count">${selectedTopics.size}</span>
           </div>
           <div class="selection-buttons">
-            <button class="download-button" onclick="downloadSelectedTopics()">📥 Als PDF speichern</button>
+            <button class="download-button" onclick="downloadSelectedTopics()">📥 Als Word speichern</button>
             <button class="clear-button" onclick="clearSelection()">✕ Auswahl löschen</button>
           </div>
         </div>
@@ -1929,7 +1979,7 @@
                 ${selectedTopics.has(selectedTopic) ? '✓ In Auswahl' : '+ Zur Auswahl hinzufügen'}
               </button>
               ` : ''}
-              ${selectedTopics.size > 0 ? `<button class="download-button" onclick="downloadSelectedTopics()" style="margin-top: 16px;">📥 ${selectedTopics.size} Themen als PDF</button>` : ''}
+              ${selectedTopics.size > 0 ? `<button class="download-button" onclick="downloadSelectedTopics()" style="margin-top: 16px;">📥 ${selectedTopics.size} Themen als Word</button>` : ''}
             </div>
           </div>
         </div>
