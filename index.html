@@ -526,22 +526,56 @@
     // Wir mappen Ihre Prozesse zum passenden ERP
     // =====================================================
 
+    // =====================================================
+    // EXPERTENQUELLEN FÜR GLAUBWÜRDIGKEIT
+    // =====================================================
+    const expertQuotes = {
+      gartner: {
+        failure: "Bis 2027 werden mehr als 70% der kürzlich implementierten ERP-Initiativen ihre ursprünglichen Business-Case-Ziele nicht vollständig erreichen. Bis zu 25% davon werden katastrophal scheitern.",
+        adoption: "Geringe Endanwender-Akzeptanz entsteht, wenn Anwender die Gründe für die ERP-Implementierung und deren Auswirkungen auf sie nicht verstehen.",
+        source: "Gartner Research, 2024"
+      },
+      mckinsey: {
+        transformation: "Weniger als ein Drittel der organisatorischen Transformationen sind erfolgreich. Bei digitalen Transformationen liegt die Erfolgsquote sogar noch niedriger – nur 16% verbessern die Performance nachhaltig.",
+        changeStory: "Unternehmen, deren Management eine klare Change-Story etabliert, haben eine 3,1-mal höhere Erfolgsrate.",
+        tools: "Die Implementierung digitaler Tools, um Informationen unternehmensweit zugänglich zu machen, kann die Erfolgsrate von Transformationen mehr als verdoppeln.",
+        source: "McKinsey Global Survey on Digital Transformations"
+      },
+      prosci: {
+        changeManagement: "Projekte mit exzellentem Change Management sind 7-mal wahrscheinlicher erfolgreich als solche mit schlechtem Change Management.",
+        sponsor: "Projekte mit gutem oder exzellentem Executive-Sponsor-Zugang haben eine Erfolgsquote von 72%.",
+        adoption: "Mit effektivem Change Management sehen Unternehmen operative Verbesserungen und finanzielle Erträge Monate früher als bei Implementierungen, die die menschliche Seite des Wandels vernachlässigen.",
+        erpSuccess: "Nur 55% der ERP-Projekte erreichen oder übertreffen ihre Ziele.",
+        source: "Prosci Best Practices Research"
+      },
+      industry: {
+        budget: "55-75% aller ERP-Projekte erreichen ihre Ziele nicht. Die häufigsten Probleme: Budgetüberschreitung (55%), Terminüberschreitung (47%) und mangelnde Transparenz (53%).",
+        dataQuality: "Datenqualitätsprobleme sind eine der Hauptursachen für ERP-Projektverzögerungen. Unternehmen identifizieren sowohl Genauigkeits- als auch Datentransformationsprobleme bei der Migration.",
+        complexity: "Prozesskomplexität ist die größte Herausforderung (62%), gefolgt von Integration (49%) und dem Verständnis von Prozessanforderungen (49%).",
+        source: "Branchenstudien 2024/2025"
+      }
+    };
+
     const detailContent = {
       // === WARUM ADVISORY ===
       "warum-advisory": {
         title: "Warum ERP Transformation Advisory?",
         phase: "info",
         content: {
-          intro: `60-70% aller ERP-Projekte überschreiten Budget oder Timeline. Die typische Budgetüberschreitung bei großen Transformationen liegt bei 20-40%. Die vier Hauptursachen sind bekannt – und vermeidbar.`,
+          intro: `Laut Gartner werden bis 2027 mehr als 70% der ERP-Initiativen ihre Business-Case-Ziele nicht erreichen – bis zu 25% scheitern katastrophal. 55-75% aller ERP-Projekte verfehlen ihre Ziele. Die Hauptursachen sind bekannt – und vermeidbar.`,
           sections: [
             {
               label: "Die vier Hauptursachen für ERP-Projektprobleme",
               items: [
-                "Unklare Prozessanforderungen: Fehlende Ist-Analyse führt zu Scope Creep",
-                "Schlechte Datenqualität: Stammdaten werden zu spät bereinigt",
-                "Unrealistische Planung: Komplexität wird systematisch unterschätzt",
-                "Fehlende unabhängige QA: Der Systemintegrator kontrolliert sich selbst"
+                "Unklare Prozessanforderungen: Fehlende Ist-Analyse führt zu Scope Creep und nachträglichen Änderungen",
+                "Schlechte Datenqualität: Datenprobleme sind eine der Hauptursachen für Go-Live-Verzögerungen",
+                "Unrealistische Planung: 47% der Projekte überschreiten die Timeline (Branchenstudien)",
+                "Fehlende unabhängige QA: Der Systemintegrator kontrolliert sich selbst – mit vorhersehbaren Ergebnissen"
               ]
+            },
+            {
+              label: "Was die Forschung zeigt",
+              text: "McKinsey: Nur 16% der digitalen Transformationen verbessern die Performance nachhaltig. Prosci: Projekte mit exzellentem Change Management sind 7-mal wahrscheinlicher erfolgreich."
             }
           ],
           highlight: "Die Lösung: Ein unabhängiger Advisory-Partner, der Ihre Interessen vertritt – nicht die des ERP-Vendors oder Systemintegrators.",
@@ -637,7 +671,7 @@
         title: "Process Mapping",
         phase: "analyse",
         content: {
-          intro: `Das Process Mapping ist der Grundstein jeder erfolgreichen ERP-Transformation. Wir dokumentieren Ihre Ist-Prozesse und identifizieren Optimierungspotenziale – bevor Sie sich für ein ERP entscheiden.`,
+          intro: `Das Process Mapping ist der Grundstein jeder erfolgreichen ERP-Transformation. Wir dokumentieren Ihre Ist-Prozesse und identifizieren Optimierungspotenziale – bevor Sie sich für ein ERP entscheiden. Branchenstudien zeigen: Prozesskomplexität ist mit 62% die größte Herausforderung bei ERP-Migrationen.`,
           sections: [
             {
               label: "Was wir tun",
@@ -646,12 +680,12 @@
                 "Dokumentation in BPMN 2.0 für einheitliches Verständnis",
                 "Identifikation von Medienbrüchen und Ineffizienzen",
                 "Benchmarking gegen Best Practices Ihrer Branche",
-                "Priorisierung der Optimierungspotenziale"
+                "Priorisierung der Optimierungspotenziale nach Business Impact"
               ]
             },
             {
               label: "Warum das wichtig ist",
-              text: "Ohne klare Prozessdokumentation wird jedes ERP-Projekt zum Blindflug. Scope Creep, Budgetüberschreitungen und Unzufriedenheit sind die Folge. Process Mapping schafft die Grundlage für fundierte Entscheidungen."
+              text: "Das Verstehen und Definieren von Prozessanforderungen ist mit 49% eine der Top-3-Herausforderungen bei ERP-Projekten. Ohne klare Prozessdokumentation wird jedes ERP-Projekt zum Blindflug. Scope Creep und Budgetüberschreitungen sind die Folge."
             }
           ],
           highlight: "Wer seine Prozesse nicht kennt, kann kein ERP auswählen. Wer seine Prozesse kennt, wählt das richtige ERP.",
@@ -662,7 +696,7 @@
         title: "Readiness Assessment",
         phase: "analyse",
         content: {
-          intro: `Das Readiness Assessment bewertet, wie bereit Ihre Organisation für eine ERP-Transformation wirklich ist. Wir identifizieren Gaps und Risiken, bevor sie zu teuren Problemen werden.`,
+          intro: `Das Readiness Assessment bewertet, wie bereit Ihre Organisation für eine ERP-Transformation wirklich ist. Gartner warnt: Bis zu 25% der ERP-Initiativen scheitern katastrophal – oft weil Gaps und Risiken zu spät erkannt werden.`,
           sections: [
             {
               label: "Assessment-Dimensionen",
@@ -671,7 +705,7 @@
                 "Technische Readiness: IT-Infrastruktur, Systemlandschaft, Integrationsfähigkeit",
                 "Prozess-Readiness: Standardisierungsgrad, Dokumentationsstand, Prozessreife",
                 "Daten-Readiness: Datenqualität, Stammdaten-Governance, Migrationsfähigkeit",
-                "Budget- und Zeitrahmen-Realismus: Sind die Erwartungen realistisch?"
+                "Budget- und Zeitrahmen-Realismus: 47% der ERP-Projekte überschreiten die Zeitplanung"
               ]
             },
             {
@@ -687,7 +721,7 @@
         title: "Business Case & ROI",
         phase: "analyse",
         content: {
-          intro: `Ein fundierter Business Case ist die Grundlage für die Projektfreigabe und das Budget. Wir erstellen eine realistische TCO-Berechnung und ROI-Analyse für verschiedene ERP-Optionen.`,
+          intro: `Ein fundierter Business Case ist die Grundlage für die Projektfreigabe und das Budget. 55% der ERP-Projekte überschreiten das Budget – oft weil der Business Case unrealistisch war. Wir erstellen eine realistische TCO-Berechnung und ROI-Analyse.`,
           sections: [
             {
               label: "Business-Case-Inhalte",
@@ -712,7 +746,7 @@
         title: "Datenqualitäts-Analyse",
         phase: "analyse",
         content: {
-          intro: `Schlechte Datenqualität ist eine der Hauptursachen für ERP-Projektprobleme. Wir analysieren Ihre Stammdaten und ermitteln den Bereinigungsbedarf – rechtzeitig vor der Migration.`,
+          intro: `Schlechte Datenqualität ist eine der Hauptursachen für ERP-Projektprobleme und Go-Live-Verzögerungen. Branchenstudien zeigen: Datenqualitätsprobleme gehören zu den am meisten unterschätzten Risiken. Wir analysieren Ihre Stammdaten rechtzeitig vor der Migration.`,
           sections: [
             {
               label: "Analyse-Bereiche",
@@ -731,6 +765,10 @@
                 "Aktualität: Veraltete oder obsolete Datensätze?",
                 "Dubletten: Mehrfach angelegte Stammdaten?"
               ]
+            },
+            {
+              label: "Branchenstimme",
+              text: "Datenqualität ist eine kritische, aber oft übersehene Herausforderung. Unternehmen identifizieren sowohl Genauigkeits- als auch Datentransformationsprobleme beim Verschieben von Legacy-Daten in neue ERP-Umgebungen. (Branchenstudien 2024/2025)"
             }
           ],
           highlight: "Garbage in, garbage out. Datenbereinigung muss VOR der Migration starten, nicht währenddessen.",
@@ -849,7 +887,7 @@
         title: "Lösungsdesign",
         phase: "konzeption",
         content: {
-          intro: `Das Lösungsdesign ist der technische Blueprint für Ihre ERP-Implementierung. Wir definieren Architektur, Konfiguration und Customizing im Detail.`,
+          intro: `Das Lösungsdesign ist der technische Blueprint für Ihre ERP-Implementierung. Wir definieren Architektur, Konfiguration und Customizing im Detail – mit dem Ziel maximaler Standardisierung.`,
           sections: [
             {
               label: "Design-Elemente",
@@ -862,8 +900,8 @@
               ]
             },
             {
-              label: "Clean-Core-Prinzip",
-              text: "Wir folgen dem Clean-Core-Prinzip: Der ERP-Kern bleibt sauber, Erweiterungen werden in definierten Extension Points oder Side-by-Side umgesetzt. Das sichert Update-Fähigkeit."
+              label: "Clean-Architecture-Prinzip",
+              text: "Wir folgen dem Clean-Architecture-Prinzip: Der ERP-Kern bleibt sauber und standardnah, Erweiterungen werden in definierten Extension Points oder als Side-by-Side-Lösungen umgesetzt. Das sichert Update-Fähigkeit und reduziert technische Schulden."
             }
           ],
           highlight: "Ein sauberes Design heute spart Millionen bei zukünftigen Updates.",
@@ -874,7 +912,7 @@
         title: "Integrationskonzept",
         phase: "konzeption",
         content: {
-          intro: `Das ERP ist das Herzstück Ihrer IT-Landschaft. Das Integrationskonzept definiert, wie das ERP mit allen anderen Systemen kommuniziert.`,
+          intro: `Das ERP ist das Herzstück Ihrer IT-Landschaft. Integration ist mit 49% eine der Top-3-Herausforderungen bei ERP-Projekten. Das Integrationskonzept definiert, wie das ERP mit allen anderen Systemen kommuniziert.`,
           sections: [
             {
               label: "Integrationsbereiche",
@@ -900,7 +938,7 @@
         title: "Change Readiness",
         phase: "konzeption",
         content: {
-          intro: `Die beste Technik nützt nichts, wenn die Menschen nicht mitziehen. Change Readiness bereitet Ihre Organisation auf die Transformation vor.`,
+          intro: `Die beste Technik nützt nichts, wenn die Menschen nicht mitziehen. McKinsey zeigt: Unternehmen mit einer klaren Change-Story haben eine 3,1-mal höhere Erfolgsrate. Change Readiness bereitet Ihre Organisation auf die Transformation vor.`,
           sections: [
             {
               label: "Analyse-Elemente",
@@ -915,6 +953,10 @@
             {
               label: "Change-Strategie",
               text: "Basierend auf der Analyse entwickeln wir eine maßgeschneiderte Change-Strategie mit Kommunikationsplan, Stakeholder-Engagement und Trainingskonzept."
+            },
+            {
+              label: "Forschungsergebnis",
+              text: "Projekte mit gutem oder exzellentem Executive-Sponsor-Zugang haben eine Erfolgsquote von 72%. (Prosci Best Practices Research)"
             }
           ],
           highlight: "Technik-Projekte scheitern selten an der Technik. Sie scheitern an den Menschen.",
@@ -927,7 +969,7 @@
         title: "Datenmigration",
         phase: "umsetzung",
         content: {
-          intro: `Die Datenmigration ist oft der kritischste Teil der Transformation. Wir begleiten die Migration von der Konzeption über Testläufe bis zur produktiven Übernahme.`,
+          intro: `Die Datenmigration ist oft der kritischste Teil der Transformation. Datenqualitätsprobleme gehören zu den Hauptursachen für Go-Live-Verzögerungen. Wir begleiten die Migration von der Konzeption über Testläufe bis zur produktiven Übernahme.`,
           sections: [
             {
               label: "Migrations-Phasen",
@@ -978,7 +1020,7 @@
         title: "Change Management",
         phase: "umsetzung",
         content: {
-          intro: `Change Management begleitet Ihre Mitarbeiter durch die Transformation. Wir setzen die Change-Strategie um und managen aktiv den Widerstand.`,
+          intro: `Change Management begleitet Ihre Mitarbeiter durch die Transformation. Prosci-Forschung zeigt: Projekte mit exzellentem Change Management sind 7-mal wahrscheinlicher erfolgreich. Wir setzen die Change-Strategie um und managen aktiv den Widerstand.`,
           sections: [
             {
               label: "Aktivitäten",
@@ -993,6 +1035,10 @@
             {
               label: "Adoption messen",
               text: "Wir messen die User Adoption mit definierten KPIs und passen die Change-Maßnahmen bei Bedarf an. Das Ziel: Hohe Akzeptanz und produktive Nutzung ab Go-Live."
+            },
+            {
+              label: "Forschungsergebnis",
+              text: "Mit effektivem Change Management sehen Unternehmen operative Verbesserungen und finanzielle Erträge Monate früher als bei Implementierungen, die die menschliche Seite des Wandels vernachlässigen. (Prosci Research)"
             }
           ],
           highlight: "Change Management ist kein Nice-to-have. Es ist erfolgskritisch.",
@@ -1003,7 +1049,7 @@
         title: "Training & Enablement",
         phase: "umsetzung",
         content: {
-          intro: `Gut geschulte Anwender sind produktiv ab Tag 1. Wir entwickeln und koordinieren das Schulungskonzept für alle Anwendergruppen.`,
+          intro: `Gut geschulte Anwender sind produktiv ab Tag 1. Gartner warnt: Geringe Endanwender-Akzeptanz entsteht, wenn Anwender die Gründe für die ERP-Implementierung nicht verstehen. Wir entwickeln und koordinieren das Schulungskonzept für alle Anwendergruppen.`,
           sections: [
             {
               label: "Trainingskonzept",
@@ -1018,6 +1064,10 @@
             {
               label: "Nachhaltigkeit",
               text: "Training ist kein einmaliges Event. Wir etablieren eine Struktur für kontinuierliches Lernen und Onboarding neuer Mitarbeiter nach Go-Live."
+            },
+            {
+              label: "Forschungsergebnis",
+              text: "McKinsey: Die Entwicklung von Talenten und Skills in der gesamten Organisation ist einer der wichtigsten Erfolgsfaktoren bei digitalen Transformationen."
             }
           ],
           highlight: "In Schulung zu investieren zahlt sich 10x zurück. An Schulung zu sparen rächt sich.",
@@ -1028,7 +1078,7 @@
         title: "Qualitätssicherung (QA)",
         phase: "umsetzung",
         content: {
-          intro: `Als unabhängiger Partner sichern wir die Qualität der Implementierung. Wir kontrollieren den Systemintegrator und stellen sicher, dass vereinbarte Standards eingehalten werden.`,
+          intro: `Als unabhängiger Partner sichern wir die Qualität der Implementierung. Laut Prosci erreichen nur 55% der ERP-Projekte ihre Ziele – unabhängige QA erhöht Ihre Erfolgschancen deutlich.`,
           sections: [
             {
               label: "QA-Aktivitäten",
@@ -1182,7 +1232,7 @@
         title: "Nutzen für CFO & Finance",
         phase: "nutzen",
         content: {
-          intro: `Als CFO oder Finance-Verantwortlicher tragen Sie die Budgetverantwortung für die ERP-Transformation. Wir helfen Ihnen, das Investment abzusichern.`,
+          intro: `Als CFO oder Finance-Verantwortlicher tragen Sie die Budgetverantwortung für die ERP-Transformation. Laut Branchenstudien überschreiten 55% der ERP-Projekte das Budget. Wir helfen Ihnen, das Investment abzusichern.`,
           sections: [
             {
               label: "Ihr Nutzen",
@@ -1195,8 +1245,12 @@
               ]
             },
             {
-              label: "Typische Einsparungen",
+              label: "Typische Ergebnisse",
               text: "Unsere Kunden berichten von 20-30% Zeitgewinn durch bessere Vorbereitung und 30-50% schnellerem ROI durch konsequenten Fit-to-Standard-Ansatz."
+            },
+            {
+              label: "Forschungsergebnis",
+              text: "Prosci: Nur 55% der ERP-Projekte erreichen oder übertreffen ihre Ziele. Mit unabhängiger Beratung erhöhen Sie Ihre Erfolgschancen signifikant."
             }
           ],
           highlight: "Wir schützen Ihr Budget und beschleunigen Ihren ROI.",
@@ -1207,13 +1261,13 @@
         title: "Nutzen für CIO & IT",
         phase: "nutzen",
         content: {
-          intro: `Als CIO oder IT-Verantwortlicher tragen Sie die technische Verantwortung für die ERP-Transformation. Wir unterstützen Sie mit objektiver Expertise.`,
+          intro: `Als CIO oder IT-Verantwortlicher tragen Sie die technische Verantwortung für die ERP-Transformation. Wir unterstützen Sie mit objektiver Expertise und Multi-ERP-Know-how.`,
           sections: [
             {
               label: "Ihr Nutzen",
               items: [
                 "Objektive ERP-Evaluation ohne Vendor-Bias",
-                "Clean Core / Clean Architecture Beratung",
+                "Clean Architecture Beratung für Update-Fähigkeit",
                 "Integrations- und API-Strategie",
                 "Technische Risikominimierung",
                 "Unabhängige Qualitätssicherung der Implementierung"
@@ -1221,7 +1275,7 @@
             },
             {
               label: "Multi-ERP Know-how",
-              text: "Wir kennen SAP, Oracle, Microsoft, Infor und andere aus zahlreichen Projekten. Dieses Cross-ERP-Wissen hilft, die richtige Entscheidung zu treffen."
+              text: "Wir kennen SAP, Oracle, Microsoft, Infor und andere aus zahlreichen Projekten. Dieses Cross-ERP-Wissen hilft, die richtige Entscheidung zu treffen – unabhängig vom Hersteller."
             }
           ],
           highlight: "Wir bringen Multi-ERP-Expertise ohne Vendor-Abhängigkeit.",
