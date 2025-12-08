@@ -163,6 +163,206 @@
     .topic-button.umsetzung { border-left-color: var(--tta-orange); }
     .topic-button.betrieb { border-left-color: var(--tta-teal-dark); }
 
+    /* Selection Mode */
+    .selection-bar {
+      background: linear-gradient(135deg, var(--tta-orange) 0%, #B34700 100%);
+      padding: 12px 20px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .selection-info {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--tta-white);
+    }
+    .selection-count {
+      background: var(--tta-white);
+      color: var(--tta-orange);
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-weight: 700;
+      margin-left: 8px;
+    }
+    .selection-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .download-button, .clear-button, .toggle-select-button {
+      background: var(--tta-white);
+      color: var(--tta-dark);
+      border: none;
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .download-button:hover { background: var(--tta-gray-light); transform: translateY(-1px); }
+    .clear-button { background: transparent; color: var(--tta-white); border: 1px solid var(--tta-white); }
+    .clear-button:hover { background: rgba(255,255,255,0.1); }
+    .toggle-select-button { background: var(--tta-teal); color: var(--tta-white); }
+    .toggle-select-button:hover { background: var(--tta-teal-dark); }
+    .toggle-select-button.active { background: var(--tta-orange); }
+
+    /* Topic Item with Checkbox */
+    .topic-item {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+    }
+    .topic-checkbox-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(218, 85, 0, 0.2);
+      border: 1px solid var(--tta-orange);
+      border-right: none;
+      border-radius: 8px 0 0 8px;
+      padding: 0 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .topic-checkbox-wrapper:hover { background: rgba(218, 85, 0, 0.3); }
+    .topic-checkbox-wrapper.checked { background: var(--tta-orange); }
+    .topic-checkbox {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--tta-orange);
+      cursor: pointer;
+    }
+    .topic-item .topic-button {
+      border-radius: 0 8px 8px 0;
+      flex: 1;
+    }
+    .topic-item .topic-button.selected {
+      background: rgba(218, 85, 0, 0.2);
+      border-color: var(--tta-orange);
+    }
+
+    /* Complexity Selector */
+    .complexity-selector {
+      display: flex;
+      gap: 4px;
+      background: rgba(10, 26, 41, 0.8);
+      padding: 4px;
+      border-radius: 6px;
+      margin-left: 8px;
+    }
+    .complexity-btn {
+      padding: 4px 8px;
+      border: none;
+      border-radius: 4px;
+      font-size: 9px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: transparent;
+      color: var(--tta-white);
+      opacity: 0.6;
+    }
+    .complexity-btn:hover { opacity: 1; }
+    .complexity-btn.active { opacity: 1; }
+    .complexity-btn.low.active { background: #28a745; color: white; }
+    .complexity-btn.medium.active { background: #ffc107; color: #333; }
+    .complexity-btn.high.active { background: #dc3545; color: white; }
+
+    /* Calculation Display */
+    .calculation-panel {
+      background: linear-gradient(135deg, rgba(9, 143, 155, 0.15) 0%, rgba(32, 94, 167, 0.15) 100%);
+      border: 1px solid var(--tta-teal);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 16px 0;
+    }
+    .calculation-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--tta-teal);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .calculation-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+    }
+    .calc-item {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .calc-label {
+      font-size: 10px;
+      color: var(--tta-white);
+      opacity: 0.7;
+      margin-bottom: 4px;
+    }
+    .calc-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--tta-orange);
+    }
+    .calc-unit {
+      font-size: 10px;
+      color: var(--tta-white);
+      opacity: 0.7;
+    }
+    .calc-breakdown {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .calc-breakdown-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--tta-white);
+      margin-bottom: 8px;
+    }
+    .calc-breakdown-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      padding: 4px 0;
+      color: var(--tta-white);
+      opacity: 0.8;
+    }
+    .complexity-badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 8px;
+      font-weight: 600;
+      margin-left: 6px;
+    }
+    .complexity-badge.low { background: #28a745; color: white; }
+    .complexity-badge.medium { background: #ffc107; color: #333; }
+    .complexity-badge.high { background: #dc3545; color: white; }
+
+    /* Selected Topic Row */
+    .selected-topic-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.05);
+      padding: 8px 12px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
+    .selected-topic-name {
+      font-size: 11px;
+      color: var(--tta-white);
+      flex: 1;
+    }
+
     /* Page Content */
     .page-content { background: var(--tta-dark); min-height: 100vh; padding: 20px; }
     .page-container { max-width: 900px; margin: 0 auto; }
@@ -489,7 +689,7 @@
           intro: `Ein fundierter Business Case ist die Grundlage für die Projektfreigabe und das Budget. Wir erstellen eine realistische TCO-Berechnung und ROI-Analyse für verschiedene ERP-Optionen.`,
           sections: [
             {
-              label: "Business Case Inhalte",
+              label: "Business-Case-Inhalte",
               items: [
                 "Ist-Kosten-Analyse: Was kostet Ihre aktuelle Systemlandschaft wirklich?",
                 "Investitionskosten: Lizenzen, Implementierung, Hardware, Schulung",
@@ -504,7 +704,7 @@
             }
           ],
           highlight: "Der günstigste Anbieter ist selten der wirtschaftlichste. Wir rechnen ehrlich.",
-          deliverables: ["Business Case Dokument", "TCO-Vergleich", "ROI-Berechnung", "Sensitivitätsanalyse"]
+          deliverables: ["Business-Case-Dokument", "TCO-Vergleich", "ROI-Berechnung", "Sensitivitätsanalyse"]
         }
       },
       "datenqualitaet": {
@@ -611,7 +811,7 @@
               ]
             },
             {
-              label: "Fit-to-Standard Prinzip",
+              label: "Fit-to-Standard-Prinzip",
               text: "Jede Abweichung vom Standard verursacht Kosten – bei der Implementierung, bei Updates, beim Support. Wir maximieren Fit-to-Standard und minimieren Customizing."
             }
           ],
@@ -661,8 +861,8 @@
               ]
             },
             {
-              label: "Clean Core Prinzip",
-              text: "Wir folgen dem Clean Core Prinzip: Der ERP-Kern bleibt sauber, Erweiterungen werden in definierten Extension Points oder Side-by-Side umgesetzt. Das sichert Update-Fähigkeit."
+              label: "Clean-Core-Prinzip",
+              text: "Wir folgen dem Clean-Core-Prinzip: Der ERP-Kern bleibt sauber, Erweiterungen werden in definierten Extension Points oder Side-by-Side umgesetzt. Das sichert Update-Fähigkeit."
             }
           ],
           highlight: "Ein sauberes Design heute spart Millionen bei zukünftigen Updates.",
@@ -857,20 +1057,20 @@
             {
               label: "Cutover-Planung",
               items: [
-                "Cutover-Plan: Minuten-genaue Planung aller Aktivitäten",
+                "Cutover-Plan: Minutengenaue Planung aller Aktivitäten",
                 "Verantwortlichkeiten: Wer macht was wann?",
                 "Kommunikationsplan: Information an alle Stakeholder",
-                "Fallback-Szenarien: Was tun wenn etwas schiefgeht?",
-                "Go/No-Go Entscheidung: Klare Kriterien definiert"
+                "Fallback-Szenarien: Was tun, wenn etwas schiefgeht?",
+                "Go/No-Go-Entscheidung: Klare Kriterien definiert"
               ]
             },
             {
-              label: "Go-Live Checklisten",
+              label: "Go-Live-Checklisten",
               text: "Wir arbeiten mit umfassenden Checklisten, die alle Voraussetzungen für einen erfolgreichen Go-Live abprüfen. Kein kritischer Punkt wird übersehen."
             }
           ],
           highlight: "Ein Go-Live lässt sich nicht wiederholen. Wir bereiten ihn akribisch vor.",
-          deliverables: ["Cutover-Plan", "Go-Live Checklisten", "Fallback-Prozeduren", "Go/No-Go Protokoll"]
+          deliverables: ["Cutover-Plan", "Go-Live-Checklisten", "Fallback-Prozeduren", "Go/No-Go-Protokoll"]
         }
       },
 
@@ -963,7 +1163,7 @@
                 "Delta-Analyse: Was ist lokal anders?",
                 "Lokalisierung: Sprache, Recht, Steuern",
                 "Schulung: Train-the-Trainer vor Ort",
-                "Go-Live Begleitung: Support bei jedem Rollout"
+                "Go-Live-Begleitung: Support bei jedem Rollout"
               ]
             },
             {
@@ -1056,7 +1256,7 @@
       // === KONTAKT ===
       "kontakt": {
         title: "Starten Sie jetzt",
-        phase: "buchung",
+        phase: "kontakt",
         content: {
           intro: `Der erste Schritt zu einer erfolgreichen ERP-Transformation ist ein Gespräch. Wir freuen uns auf Sie.`,
           sections: [
@@ -1138,6 +1338,351 @@
     let currentView = 'home';
     let selectedTopic = null;
     let previousView = null;
+    let selectionMode = false;
+    let selectedTopics = new Set();
+    let topicComplexity = {}; // stores complexity per topic: 'low', 'medium', 'high'
+
+    // Kategorien ohne Auswahlmöglichkeit
+    const excludeFromSelection = ['info', 'nutzen', 'buchung'];
+
+    // Personentage-Kalkulation pro Service und Komplexitätsstufe
+    const ptMatrix = {
+      low: {
+        advisory: 5,      // Business-/Fachberater
+        technik: 2,       // Technischer Berater
+        pm: 1             // Projektleitung
+      },
+      medium: {
+        advisory: 12,
+        technik: 5,
+        pm: 3
+      },
+      high: {
+        advisory: 25,
+        technik: 12,
+        pm: 6
+      }
+    };
+
+    const complexityLabels = {
+      low: 'Low',
+      medium: 'Mittel',
+      high: 'Komplex'
+    };
+
+    function setTopicComplexity(topicId, complexity, event) {
+      if (event) event.stopPropagation();
+      topicComplexity[topicId] = complexity;
+      if (!selectedTopics.has(topicId)) {
+        selectedTopics.add(topicId);
+      }
+      render();
+    }
+
+    function getTopicComplexity(topicId) {
+      return topicComplexity[topicId] || 'medium';
+    }
+
+    function calculateTotalPT() {
+      let totals = {
+        advisory: 0,
+        technik: 0,
+        pm: 0,
+        gesamtPT: 0
+      };
+      
+      selectedTopics.forEach(topicId => {
+        const complexity = getTopicComplexity(topicId);
+        const pt = ptMatrix[complexity];
+        totals.advisory += pt.advisory;
+        totals.technik += pt.technik;
+        totals.pm += pt.pm;
+      });
+      
+      totals.gesamtPT = totals.advisory + totals.technik + totals.pm;
+      
+      return totals;
+    }
+
+    function renderCalculationPanel() {
+      if (selectedTopics.size === 0) return '';
+      
+      const totals = calculateTotalPT();
+      
+      // Geschätzte Projektdauer: Annahme 2-3 Berater parallel
+      const geschaetzteDauer = Math.ceil(totals.gesamtPT / 2.5);
+      
+      let breakdownHtml = '';
+      selectedTopics.forEach(topicId => {
+        const topic = detailContent[topicId];
+        const complexity = getTopicComplexity(topicId);
+        const pt = ptMatrix[complexity];
+        if (topic) {
+          breakdownHtml += `
+            <div class="selected-topic-row">
+              <span class="selected-topic-name">${topic.title}</span>
+              <span style="font-size: 10px; color: var(--tta-orange); min-width: 50px;">${pt.advisory + pt.technik + pt.pm} PT</span>
+              <div class="complexity-selector">
+                <button class="complexity-btn low ${complexity === 'low' ? 'active' : ''}" 
+                        onclick="setTopicComplexity('${topicId}', 'low', event)">Low</button>
+                <button class="complexity-btn medium ${complexity === 'medium' ? 'active' : ''}" 
+                        onclick="setTopicComplexity('${topicId}', 'medium', event)">Mittel</button>
+                <button class="complexity-btn high ${complexity === 'high' ? 'active' : ''}" 
+                        onclick="setTopicComplexity('${topicId}', 'high', event)">Komplex</button>
+              </div>
+            </div>
+          `;
+        }
+      });
+
+      return `
+        <div class="calculation-panel">
+          <div class="calculation-title">📊 Aufwandsschätzung (Richtwerte)</div>
+          <div class="calculation-grid">
+            <div class="calc-item">
+              <div class="calc-label">Business Beratung</div>
+              <div class="calc-value">${totals.advisory}</div>
+              <div class="calc-unit">Personentage</div>
+            </div>
+            <div class="calc-item">
+              <div class="calc-label">Technische Beratung</div>
+              <div class="calc-value">${totals.technik}</div>
+              <div class="calc-unit">Personentage</div>
+            </div>
+            <div class="calc-item">
+              <div class="calc-label">Projektleitung</div>
+              <div class="calc-value">${totals.pm}</div>
+              <div class="calc-unit">Personentage</div>
+            </div>
+            <div class="calc-item">
+              <div class="calc-label">Gesamt Aufwand</div>
+              <div class="calc-value">${totals.gesamtPT}</div>
+              <div class="calc-unit">Personentage</div>
+            </div>
+            <div class="calc-item">
+              <div class="calc-label">Geschätzte Dauer</div>
+              <div class="calc-value">~${geschaetzteDauer}</div>
+              <div class="calc-unit">Wochen</div>
+            </div>
+          </div>
+          <div class="calc-breakdown">
+            <div class="calc-breakdown-title">Ausgewählte Services (${selectedTopics.size}) – Komplexität anpassen:</div>
+            ${breakdownHtml}
+          </div>
+          <div style="font-size: 9px; color: rgba(255,255,255,0.5); margin-top: 12px; text-align: center;">
+            * Richtwerte basierend auf Erfahrungswerten. Individuelle Angebote nach Anforderungsanalyse.
+          </div>
+        </div>
+      `;
+    }
+
+    function toggleSelectionMode() {
+      selectionMode = !selectionMode;
+      if (!selectionMode) {
+        selectedTopics.clear();
+        topicComplexity = {};
+      }
+      render();
+    }
+
+    function toggleTopicSelection(topicId, event) {
+      if (event) event.stopPropagation();
+      if (selectedTopics.has(topicId)) {
+        selectedTopics.delete(topicId);
+      } else {
+        selectedTopics.add(topicId);
+      }
+      render();
+    }
+
+    function clearSelection() {
+      selectedTopics.clear();
+      topicComplexity = {};
+      render();
+    }
+
+    function downloadSelectedTopics() {
+      if (selectedTopics.size === 0) {
+        alert('Bitte wählen Sie mindestens ein Thema aus.');
+        return;
+      }
+
+      const totals = calculateTotalPT();
+      const geschaetzteDauer = Math.ceil(totals.gesamtPT / 2.5);
+
+      let htmlContent = `<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>TIMETOACT GROUP - Ausgewählte ERP Advisory Services</title>
+  <style>
+    @page { margin: 1.5cm; size: A4; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; max-width: 100%; margin: 0; padding: 20px; color: #0A1A29; line-height: 1.5; font-size: 11pt; }
+    h1 { color: #0A1A29; border-bottom: 3px solid #DA5500; padding-bottom: 10px; font-size: 18pt; margin-bottom: 5px; }
+    h2 { color: #098F9B; margin-top: 20px; border-bottom: 2px solid #098F9B; padding-bottom: 6px; font-size: 14pt; page-break-after: avoid; }
+    .subtitle { color: #666; margin-bottom: 20px; font-size: 10pt; }
+    .intro { font-size: 11pt; margin-bottom: 12px; }
+    .section { margin-bottom: 10px; }
+    .section-title { font-weight: 600; color: #DA5500; margin-bottom: 4px; text-transform: uppercase; font-size: 9pt; letter-spacing: 0.5px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin-bottom: 2px; font-size: 10pt; }
+    p { margin: 0 0 8px 0; font-size: 10pt; }
+    .highlight { background: linear-gradient(135deg, rgba(218,85,0,0.08) 0%, rgba(9,143,155,0.08) 100%); border-left: 3px solid #DA5500; padding: 10px 14px; margin: 12px 0; font-style: italic; font-size: 10pt; }
+    .deliverables { background: #f5f5f5; padding: 10px 14px; border-radius: 6px; margin-top: 10px; }
+    .deliverables-title { font-weight: 600; color: #DA5500; margin-bottom: 4px; text-transform: uppercase; font-size: 8pt; }
+    .deliverables p { font-size: 9pt; margin: 0; }
+    .footer { margin-top: 30px; padding-top: 15px; border-top: 2px solid #e0e0e0; text-align: center; color: #666; font-size: 9pt; }
+    .logo { font-size: 16pt; font-weight: 700; margin-bottom: 3px; color: #0A1A29; }
+    .logo span { color: #DA5500; }
+    .tagline { margin-bottom: 8px; }
+    .tagline span { color: #DA5500; font-weight: 600; }
+    .topic-block { page-break-inside: avoid; margin-bottom: 15px; }
+    
+    /* Calculation Table */
+    .calc-summary { background: #f8f9fa; border: 2px solid #098F9B; border-radius: 8px; padding: 16px; margin-bottom: 24px; page-break-inside: avoid; }
+    .calc-title { font-size: 12pt; font-weight: 600; color: #098F9B; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .calc-table { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
+    .calc-table th, .calc-table td { padding: 8px 12px; text-align: left; font-size: 10pt; }
+    .calc-table th { background: #098F9B; color: white; font-weight: 600; }
+    .calc-table td { border-bottom: 1px solid #ddd; }
+    .calc-table tr:last-child td { border-bottom: none; font-weight: 600; background: #e9ecef; }
+    .calc-table .num { text-align: right; }
+    .complexity-tag { display: inline-block; padding: 2px 6px; border-radius: 3px; font-size: 8pt; font-weight: 600; margin-left: 6px; }
+    .complexity-tag.low { background: #28a745; color: white; }
+    .complexity-tag.medium { background: #ffc107; color: #333; }
+    .complexity-tag.high { background: #dc3545; color: white; }
+    .calc-note { font-size: 8pt; color: #666; font-style: italic; margin-top: 8px; }
+    
+    @page { margin: 1.5cm; size: A4; }
+    @media print {
+      /* Browser Header/Footer komplett entfernen */
+      @page { 
+        size: A4;
+        margin: 15mm;
+      }
+      html, body { 
+        -webkit-print-color-adjust: exact; 
+        print-color-adjust: exact;
+        margin: 0;
+        padding: 0;
+      }
+      .no-print { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <h1>ERP Transformation Advisory</h1>
+  <p class="subtitle">Ausgewählte Services für Ihre ERP-Transformation</p>
+  
+  <div class="calc-summary">
+    <div class="calc-title">📊 Aufwandsschätzung (Richtwerte)</div>
+    <table class="calc-table">
+      <tr>
+        <th>Service</th>
+        <th>Komplexität</th>
+        <th class="num">Business (PT)</th>
+        <th class="num">Technik (PT)</th>
+        <th class="num">PM (PT)</th>
+        <th class="num">Gesamt</th>
+      </tr>
+`;
+
+      selectedTopics.forEach(topicId => {
+        const topic = detailContent[topicId];
+        const complexity = getTopicComplexity(topicId);
+        const pt = ptMatrix[complexity];
+        const complexityLabel = complexityLabels[complexity];
+        const topicTotal = pt.advisory + pt.technik + pt.pm;
+        if (topic) {
+          htmlContent += '<tr>';
+          htmlContent += '<td>' + topic.title + '</td>';
+          htmlContent += '<td><span class="complexity-tag ' + complexity + '">' + complexityLabel + '</span></td>';
+          htmlContent += '<td class="num">' + pt.advisory + ' PT</td>';
+          htmlContent += '<td class="num">' + pt.technik + ' PT</td>';
+          htmlContent += '<td class="num">' + pt.pm + ' PT</td>';
+          htmlContent += '<td class="num">' + topicTotal + ' PT</td>';
+          htmlContent += '</tr>';
+        }
+      });
+
+      htmlContent += `
+      <tr>
+        <td><strong>GESAMT</strong></td>
+        <td></td>
+        <td class="num">${totals.advisory} PT</td>
+        <td class="num">${totals.technik} PT</td>
+        <td class="num">${totals.pm} PT</td>
+        <td class="num"><strong>${totals.gesamtPT} PT</strong></td>
+      </tr>
+    </table>
+    <div style="text-align: right; font-size: 11pt; font-weight: 600; color: #DA5500;">
+      Gesamt: ${totals.gesamtPT} Personentage · Geschätzte Dauer: ~${geschaetzteDauer} Wochen
+    </div>
+    <div class="calc-note">* Richtwerte basierend auf Erfahrungswerten. Individuelle Angebote nach Anforderungsanalyse. PT = Personentage.</div>
+  </div>
+`;
+
+      selectedTopics.forEach(topicId => {
+        const topic = detailContent[topicId];
+        const complexity = getTopicComplexity(topicId);
+        if (topic) {
+          htmlContent += '<div class="topic-block">';
+          htmlContent += '<h2>' + topic.title + ' <span class="complexity-tag ' + complexity + '">' + complexityLabels[complexity] + '</span></h2>';
+          htmlContent += '<div class="intro">' + topic.content.intro + '</div>';
+          
+          if (topic.content.sections) {
+            topic.content.sections.forEach(section => {
+              htmlContent += '<div class="section">';
+              htmlContent += '<div class="section-title">' + section.label + '</div>';
+              if (section.items) {
+                htmlContent += '<ul>';
+                section.items.forEach(item => {
+                  htmlContent += '<li>' + item + '</li>';
+                });
+                htmlContent += '</ul>';
+              }
+              if (section.text) {
+                htmlContent += '<p>' + section.text.replace(/\\n/g, '<br>') + '</p>';
+              }
+              htmlContent += '</div>';
+            });
+          }
+          
+          if (topic.content.highlight) {
+            htmlContent += '<div class="highlight">' + topic.content.highlight + '</div>';
+          }
+          
+          if (topic.content.deliverables && topic.content.deliverables.length > 0) {
+            htmlContent += '<div class="deliverables">';
+            htmlContent += '<div class="deliverables-title">Deliverables</div>';
+            htmlContent += '<p>' + topic.content.deliverables.join(' · ') + '</p>';
+            htmlContent += '</div>';
+          }
+          htmlContent += '</div>';
+        }
+      });
+
+      htmlContent += `
+  <div class="footer">
+    <div class="logo">TIMETOACT<span>GROUP</span></div>
+    <div class="tagline"><span>We Care.</span> <span>We Drive.</span> <span>We Deliver.</span></div>
+    <p>© 2025 TIMETOACT GROUP · ERP Transformation Advisory</p>
+    <p>Marcel Wagner · marcel.wagner@timetoact-group.com</p>
+  </div>
+  <scr` + `ipt>
+    window.onload = function() {
+      setTimeout(function() {
+        window.print();
+      }, 300);
+    };
+  </scr` + `ipt>
+</body>
+</html>`;
+
+      const printWindow = window.open('', '_blank');
+      printWindow.document.write(htmlContent);
+      printWindow.document.close();
+    }
 
     function render() {
       const app = document.getElementById('app');
@@ -1230,6 +1775,19 @@
             </div>
           </div>
 
+          ${selectedTopics.size > 0 ? `
+          <div class="selection-bar" style="margin-top: 20px;">
+            <div class="selection-info">
+              Ausgewählte Themen:<span class="selection-count">${selectedTopics.size}</span>
+            </div>
+            <div class="selection-buttons">
+              <button class="download-button" onclick="downloadSelectedTopics()">📥 Als PDF speichern</button>
+              <button class="clear-button" onclick="clearSelection()">✕ Auswahl löschen</button>
+            </div>
+          </div>
+          ${renderCalculationPanel()}
+          ` : ''}
+
           <div class="footer">
             <div class="footer-tagline">
               <span>We Care.</span> <span>We Drive.</span> <span>We Deliver.</span>
@@ -1244,18 +1802,55 @@
       const topics = topicLists[currentView] || [];
       const title = viewTitles[currentView] || currentView;
       const phaseClass = currentView;
+      const canSelect = !excludeFromSelection.includes(currentView);
       
-      const topicButtons = topics.map(t => 
-        `<button class="topic-button ${phaseClass}" onclick="selectTopic('${t.id}')">${t.label}</button>`
-      ).join('');
+      let topicButtons;
+      if (selectionMode && canSelect) {
+        topicButtons = topics.map(t => {
+          const isSelected = selectedTopics.has(t.id);
+          return `<div class="topic-item">
+            <div class="topic-checkbox-wrapper ${isSelected ? 'checked' : ''}" onclick="toggleTopicSelection('${t.id}', event)">
+              <input type="checkbox" class="topic-checkbox" ${isSelected ? 'checked' : ''} onclick="toggleTopicSelection('${t.id}', event)">
+            </div>
+            <button class="topic-button ${phaseClass} ${isSelected ? 'selected' : ''}" onclick="selectTopic('${t.id}')">${t.label}</button>
+          </div>`;
+        }).join('');
+      } else {
+        topicButtons = topics.map(t => 
+          `<button class="topic-button ${phaseClass}" onclick="selectTopic('${t.id}')">${t.label}</button>`
+        ).join('');
+      }
+
+      const selectionBar = selectedTopics.size > 0 ? `
+        <div class="selection-bar">
+          <div class="selection-info">
+            Ausgewählte Themen:<span class="selection-count">${selectedTopics.size}</span>
+          </div>
+          <div class="selection-buttons">
+            <button class="download-button" onclick="downloadSelectedTopics()">📥 Als PDF speichern</button>
+            <button class="clear-button" onclick="clearSelection()">✕ Auswahl löschen</button>
+          </div>
+        </div>
+        ${renderCalculationPanel()}
+      ` : '';
+
+      const selectButton = canSelect ? `
+        <div style="display: flex; justify-content: flex-end; margin-bottom: 12px;">
+          <button class="toggle-select-button ${selectionMode ? 'active' : ''}" onclick="toggleSelectionMode()">
+            ${selectionMode ? '✓ Auswahlmodus aktiv' : '☐ Themen auswählen'}
+          </button>
+        </div>
+      ` : '';
 
       return `
         <div class="page-content">
           <div class="page-container fade-in">
             <div class="page-header ${phaseClass}">
               <h1>${title}</h1>
-              <div class="page-header-sub">${topics.length} Services verfügbar</div>
+              <div class="page-header-sub">${topics.length} ${canSelect ? 'Services verfügbar' : 'Informationen'}</div>
             </div>
+            ${selectButton}
+            ${selectionBar}
             <div class="topic-grid">${topicButtons}</div>
             <button class="back-button" onclick="goHome()">← Zurück zum Cockpit</button>
           </div>
@@ -1325,7 +1920,17 @@
               ${highlightHtml}
               ${deliverablesHtml}
             </div>
-            <button class="back-button" onclick="goBack()">← Zurück</button>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+              <button class="back-button" onclick="goBack()">← Zurück</button>
+              ${!excludeFromSelection.includes(item.phase) ? `
+              <button class="toggle-select-button ${selectedTopics.has(selectedTopic) ? 'active' : ''}" 
+                      onclick="toggleTopicSelection('${selectedTopic}', event)" 
+                      style="margin-top: 16px;">
+                ${selectedTopics.has(selectedTopic) ? '✓ In Auswahl' : '+ Zur Auswahl hinzufügen'}
+              </button>
+              ` : ''}
+              ${selectedTopics.size > 0 ? `<button class="download-button" onclick="downloadSelectedTopics()" style="margin-top: 16px;">📥 ${selectedTopics.size} Themen als PDF</button>` : ''}
+            </div>
           </div>
         </div>
       `;
