@@ -5,21 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#0A1A29">
+  <meta name="theme-color" content="#212830">
   <title>TIMETOACT GROUP - ERP Transformation Advisory</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230A1A29' width='100' height='100' rx='15'/><text x='50' y='68' font-size='45' text-anchor='middle' fill='%23DA5500' font-family='sans-serif' font-weight='bold'>TTA</text></svg>">
-  <script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23212830' width='100' height='100' rx='15'/><text x='50' y='68' font-size='45' text-anchor='middle' fill='%23DA5500' font-family='sans-serif' font-weight='bold'>TTA</text></svg>">
   <style>
     :root {
-      --tta-dark: #0A1A29;
+      /* TIMETOACT Corporate Design - Exakt wie Homepage */
+      --tta-dark: #212830;
+      --tta-darker: #1a2028;
+      --tta-darkest: #14181e;
       --tta-white: #FFFFFF;
-      --tta-gray-light: #F2F2F2;
-      --tta-blue-light: #7CC2FA;
+      --tta-gray-light: #F5F5F5;
+      --tta-gray-medium: #E0E0E0;
+      --tta-gray-text: #9CA3AF;
       --tta-orange: #DA5500;
+      --tta-orange-hover: #C44D00;
+      --tta-orange-light: rgba(218, 85, 0, 0.15);
       --tta-teal: #098F9B;
+      --tta-teal-dark: #067078;
       --tta-blue: #205EA7;
-      --tta-teal-dark: #006B76;
       --tta-blue-dark: #064A80;
+      --tta-blue-light: #7CC2FA;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -57,10 +63,10 @@
       max-width: 600px;
     }
     .stat-box {
-      background: rgba(218, 85, 0, 0.15);
-      border: 1px solid var(--tta-orange);
-      border-radius: 10px;
-      padding: 12px 8px;
+      background: var(--tta-darker);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 14px 10px;
       text-align: center;
     }
     .stat-number { font-size: 24px; font-weight: 700; color: var(--tta-orange); }
@@ -70,10 +76,10 @@
     .main-card {
       background: var(--tta-white);
       border-radius: 16px;
-      padding: 24px;
-      margin: 20px auto;
+      padding: 28px;
+      margin: 24px auto;
       max-width: 800px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
     }
     .card-title {
       font-size: 15px;
@@ -107,13 +113,13 @@
       background: var(--tta-dark);
       border: none;
       border-radius: 10px;
-      padding: 14px 8px;
+      padding: 16px 10px;
       cursor: pointer;
       transition: all 0.2s ease;
       text-align: center;
       position: relative;
     }
-    .phase-button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(10, 26, 41, 0.4); }
+    .phase-button:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
     .phase-button:active { transform: scale(0.98); }
     .phase-button.analyse { border-bottom: 3px solid var(--tta-teal); }
     .phase-button.konzeption { border-bottom: 3px solid var(--tta-blue); }
@@ -128,15 +134,15 @@
     @media (max-width: 500px) { .info-grid { grid-template-columns: 1fr; } }
 
     .info-button {
-      background: linear-gradient(135deg, rgba(9, 143, 155, 0.1) 0%, rgba(6, 74, 128, 0.1) 100%);
-      border: 1px solid var(--tta-teal);
+      background: var(--tta-gray-light);
+      border: 1px solid var(--tta-gray-medium);
       border-radius: 8px;
-      padding: 12px;
+      padding: 14px;
       cursor: pointer;
       transition: all 0.2s ease;
       text-align: left;
     }
-    .info-button:hover { background: rgba(9, 143, 155, 0.2); transform: translateY(-2px); }
+    .info-button:hover { background: var(--tta-gray-medium); transform: translateY(-2px); }
     .info-button-title { font-size: 11px; font-weight: 600; color: var(--tta-dark); }
     .info-button-desc { font-size: 9px; color: #666; margin-top: 4px; }
 
@@ -145,11 +151,11 @@
     @media (min-width: 500px) { .topic-grid { grid-template-columns: repeat(3, 1fr); } }
 
     .topic-button {
-      background: rgba(124, 194, 250, 0.1);
-      border: 1px solid rgba(124, 194, 250, 0.3);
-      border-left: 3px solid var(--tta-teal);
+      background: var(--tta-darker);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-left: 3px solid var(--tta-orange);
       border-radius: 8px;
-      padding: 12px 10px;
+      padding: 14px 12px;
       cursor: pointer;
       transition: all 0.2s ease;
       text-align: left;
@@ -157,227 +163,31 @@
       font-weight: 500;
       color: var(--tta-white);
     }
-    .topic-button:hover { background: rgba(124, 194, 250, 0.2); border-color: var(--tta-blue-light); transform: translateX(3px); }
+    .topic-button:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.2); transform: translateX(3px); }
     .topic-button:active { transform: scale(0.98); }
     .topic-button.analyse { border-left-color: var(--tta-teal); }
     .topic-button.konzeption { border-left-color: var(--tta-blue); }
     .topic-button.umsetzung { border-left-color: var(--tta-orange); }
     .topic-button.betrieb { border-left-color: var(--tta-teal-dark); }
 
-    /* Selection Mode */
-    .selection-bar {
-      background: linear-gradient(135deg, var(--tta-orange) 0%, #B34700 100%);
-      padding: 12px 20px;
-      border-radius: 10px;
-      margin-bottom: 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .selection-info {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--tta-white);
-    }
-    .selection-count {
-      background: var(--tta-white);
-      color: var(--tta-orange);
-      padding: 2px 10px;
-      border-radius: 12px;
-      font-weight: 700;
-      margin-left: 8px;
-    }
-    .selection-buttons {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .download-button, .clear-button, .toggle-select-button {
-      background: var(--tta-white);
-      color: var(--tta-dark);
-      border: none;
-      border-radius: 6px;
-      padding: 8px 16px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .download-button:hover { background: var(--tta-gray-light); transform: translateY(-1px); }
-    .clear-button { background: transparent; color: var(--tta-white); border: 1px solid var(--tta-white); }
-    .clear-button:hover { background: rgba(255,255,255,0.1); }
-    .toggle-select-button { background: var(--tta-teal); color: var(--tta-white); }
-    .toggle-select-button:hover { background: var(--tta-teal-dark); }
-    .toggle-select-button.active { background: var(--tta-orange); }
-
-    /* Topic Item with Checkbox */
-    .topic-item {
-      display: flex;
-      align-items: stretch;
-      gap: 0;
-    }
-    .topic-checkbox-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(218, 85, 0, 0.2);
-      border: 1px solid var(--tta-orange);
-      border-right: none;
-      border-radius: 8px 0 0 8px;
-      padding: 0 12px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .topic-checkbox-wrapper:hover { background: rgba(218, 85, 0, 0.3); }
-    .topic-checkbox-wrapper.checked { background: var(--tta-orange); }
-    .topic-checkbox {
-      width: 18px;
-      height: 18px;
-      accent-color: var(--tta-orange);
-      cursor: pointer;
-    }
-    .topic-item .topic-button {
-      border-radius: 0 8px 8px 0;
-      flex: 1;
-    }
-    .topic-item .topic-button.selected {
-      background: rgba(218, 85, 0, 0.2);
-      border-color: var(--tta-orange);
-    }
-
-    /* Complexity Selector */
-    .complexity-selector {
-      display: flex;
-      gap: 4px;
-      background: rgba(10, 26, 41, 0.8);
-      padding: 4px;
-      border-radius: 6px;
-      margin-left: 8px;
-    }
-    .complexity-btn {
-      padding: 4px 8px;
-      border: none;
-      border-radius: 4px;
-      font-size: 9px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      background: transparent;
-      color: var(--tta-white);
-      opacity: 0.6;
-    }
-    .complexity-btn:hover { opacity: 1; }
-    .complexity-btn.active { opacity: 1; }
-    .complexity-btn.low.active { background: #28a745; color: white; }
-    .complexity-btn.medium.active { background: #ffc107; color: #333; }
-    .complexity-btn.high.active { background: #dc3545; color: white; }
-
-    /* Calculation Display */
-    .calculation-panel {
-      background: linear-gradient(135deg, rgba(9, 143, 155, 0.15) 0%, rgba(32, 94, 167, 0.15) 100%);
-      border: 1px solid var(--tta-teal);
-      border-radius: 12px;
-      padding: 20px;
-      margin: 16px 0;
-    }
-    .calculation-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--tta-teal);
-      margin-bottom: 16px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .calculation-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 12px;
-    }
-    .calc-item {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 12px;
-      border-radius: 8px;
-      text-align: center;
-    }
-    .calc-label {
-      font-size: 10px;
-      color: var(--tta-white);
-      opacity: 0.7;
-      margin-bottom: 4px;
-    }
-    .calc-value {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--tta-orange);
-    }
-    .calc-unit {
-      font-size: 10px;
-      color: var(--tta-white);
-      opacity: 0.7;
-    }
-    .calc-breakdown {
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-    .calc-breakdown-title {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--tta-white);
-      margin-bottom: 8px;
-    }
-    .calc-breakdown-item {
-      display: flex;
-      justify-content: space-between;
-      font-size: 10px;
-      padding: 4px 0;
-      color: var(--tta-white);
-      opacity: 0.8;
-    }
-    .complexity-badge {
-      display: inline-block;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 8px;
-      font-weight: 600;
-      margin-left: 6px;
-    }
-    .complexity-badge.low { background: #28a745; color: white; }
-    .complexity-badge.medium { background: #ffc107; color: #333; }
-    .complexity-badge.high { background: #dc3545; color: white; }
-
-    /* Selected Topic Row */
-    .selected-topic-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(255,255,255,0.05);
-      padding: 8px 12px;
-      border-radius: 6px;
-      margin-bottom: 6px;
-    }
-    .selected-topic-name {
-      font-size: 11px;
-      color: var(--tta-white);
-      flex: 1;
-    }
-
     /* Page Content */
-    .page-content { background: var(--tta-dark); min-height: 100vh; padding: 20px; }
+    .page-content { 
+      background: var(--tta-dark); 
+      min-height: 100vh; 
+      padding: 20px;
+    }
     .page-container { max-width: 900px; margin: 0 auto; }
     .page-header {
-      background: linear-gradient(135deg, var(--tta-teal) 0%, var(--tta-teal-dark) 100%);
+      background: var(--tta-orange);
       color: var(--tta-white);
-      padding: 20px 24px;
+      padding: 24px 28px;
       border-radius: 12px;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
-    .page-header.analyse { background: linear-gradient(135deg, var(--tta-teal) 0%, var(--tta-teal-dark) 100%); }
-    .page-header.konzeption { background: linear-gradient(135deg, var(--tta-blue) 0%, var(--tta-blue-dark) 100%); }
-    .page-header.umsetzung { background: linear-gradient(135deg, var(--tta-orange) 0%, #B34700 100%); }
-    .page-header.betrieb { background: linear-gradient(135deg, var(--tta-teal-dark) 0%, #004D54 100%); }
+    .page-header.analyse { background: var(--tta-dark); border-left: 4px solid var(--tta-teal); }
+    .page-header.konzeption { background: var(--tta-dark); border-left: 4px solid var(--tta-blue); }
+    .page-header.umsetzung { background: var(--tta-dark); border-left: 4px solid var(--tta-orange); }
+    .page-header.betrieb { background: var(--tta-dark); border-left: 4px solid var(--tta-teal-dark); }
     .page-header h1 { font-size: 20px; font-weight: 600; }
     .page-header-sub { font-size: 12px; opacity: 0.9; margin-top: 4px; }
 
@@ -387,22 +197,22 @@
       color: var(--tta-white);
       border: none;
       border-radius: 8px;
-      padding: 12px 24px;
+      padding: 14px 28px;
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s ease;
-      margin-top: 16px;
+      margin-top: 20px;
     }
-    .back-button:hover { background: #C44D00; transform: translateY(-1px); }
+    .back-button:hover { background: var(--tta-orange-hover); transform: translateY(-1px); }
     .back-button:active { transform: scale(0.98); }
 
     /* Detail View */
     .detail-card {
       background: var(--tta-white);
       border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 16px;
+      padding: 28px;
+      margin-bottom: 20px;
     }
     .detail-header {
       font-size: 20px;
@@ -410,14 +220,14 @@
       color: var(--tta-dark);
       padding-bottom: 12px;
       margin-bottom: 16px;
-      border-bottom: 3px solid var(--tta-teal);
+      border-bottom: 3px solid var(--tta-orange);
     }
     .detail-section {
       margin-bottom: 20px;
     }
     .detail-label {
       font-size: 11px;
-      color: var(--tta-teal);
+      color: var(--tta-orange);
       font-weight: 600;
       margin-bottom: 8px;
       text-transform: uppercase;
@@ -442,7 +252,7 @@
       content: "✓";
       position: absolute;
       left: 0;
-      color: var(--tta-teal);
+      color: var(--tta-orange);
       font-weight: bold;
     }
     .deliverable-box {
@@ -481,7 +291,7 @@
       font-size: 11px;
       color: rgba(255,255,255,0.6);
     }
-    .breadcrumb-link { color: var(--tta-blue-light); cursor: pointer; text-decoration: underline; }
+    .breadcrumb-link { color: var(--tta-orange); cursor: pointer; text-decoration: underline; }
     .breadcrumb-link:hover { color: var(--tta-white); }
 
     /* Footer */
@@ -515,6 +325,176 @@
     }
     .advantage-card h4 { font-size: 13px; color: var(--tta-dark); margin-bottom: 8px; }
     .advantage-card p { font-size: 11px; color: #666; }
+
+    /* Hero Value Proposition Section */
+    .hero-values {
+      max-width: 900px;
+      margin: 0 auto 30px;
+      padding: 0 16px;
+    }
+    .hero-values-card {
+      background: var(--tta-darker);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 32px;
+    }
+    .hero-values-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--tta-white);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .hero-values-subtitle {
+      font-size: 13px;
+      color: var(--tta-gray-text);
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 700px) { .values-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 450px) { .values-grid { grid-template-columns: 1fr; } }
+    .value-item {
+      background: var(--tta-dark);
+      border-radius: 12px;
+      padding: 20px 16px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: all 0.3s ease;
+    }
+    .value-item:hover {
+      border-color: var(--tta-orange);
+      transform: translateY(-2px);
+    }
+    .value-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+    .value-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--tta-orange);
+      margin-bottom: 6px;
+    }
+    .value-desc {
+      font-size: 11px;
+      color: var(--tta-gray-text);
+      line-height: 1.5;
+    }
+    .hero-quote {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+    }
+    .hero-quote p {
+      font-size: 15px;
+      font-style: italic;
+      color: var(--tta-white);
+      opacity: 0.9;
+    }
+
+    /* Success Stories Section */
+    .success-section {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 16px;
+    }
+    .success-section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--tta-white);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .success-section-title span {
+      color: var(--tta-orange);
+    }
+    .success-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 700px) { .success-grid { grid-template-columns: 1fr; } }
+    .success-card {
+      background: var(--tta-white);
+      border-radius: 12px;
+      padding: 24px;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    .success-card.featured {
+      border-top: 3px solid var(--tta-orange);
+    }
+    .success-badge {
+      position: absolute;
+      top: -10px;
+      right: 16px;
+      background: var(--tta-orange);
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .success-logo {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--tta-dark);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      opacity: 0.6;
+    }
+    .success-quote {
+      font-size: 13px;
+      color: var(--tta-dark);
+      line-height: 1.7;
+      font-style: italic;
+      margin-bottom: 16px;
+      min-height: 80px;
+    }
+    .success-author {
+      border-top: 1px solid var(--tta-gray-medium);
+      padding-top: 12px;
+    }
+    .success-author-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--tta-dark);
+    }
+    .success-author-role {
+      font-size: 10px;
+      color: #666;
+      line-height: 1.4;
+    }
+    .success-results {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .success-result {
+      background: var(--tta-gray-light);
+      border-radius: 8px;
+      padding: 8px 12px;
+      text-align: center;
+      flex: 1;
+    }
+    .success-result-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--tta-orange);
+    }
+    .success-result-label {
+      font-size: 9px;
+      color: #666;
+    }
   </style>
 </head>
 <body>
@@ -526,56 +506,22 @@
     // Wir mappen Ihre Prozesse zum passenden ERP
     // =====================================================
 
-    // =====================================================
-    // EXPERTENQUELLEN FÜR GLAUBWÜRDIGKEIT
-    // =====================================================
-    const expertQuotes = {
-      gartner: {
-        failure: "Bis 2027 werden mehr als 70% der kürzlich implementierten ERP-Initiativen ihre ursprünglichen Business-Case-Ziele nicht vollständig erreichen. Bis zu 25% davon werden katastrophal scheitern.",
-        adoption: "Geringe Endanwender-Akzeptanz entsteht, wenn Anwender die Gründe für die ERP-Implementierung und deren Auswirkungen auf sie nicht verstehen.",
-        source: "Gartner Research, 2024"
-      },
-      mckinsey: {
-        transformation: "Weniger als ein Drittel der organisatorischen Transformationen sind erfolgreich. Bei digitalen Transformationen liegt die Erfolgsquote sogar noch niedriger – nur 16% verbessern die Performance nachhaltig.",
-        changeStory: "Unternehmen, deren Management eine klare Change-Story etabliert, haben eine 3,1-mal höhere Erfolgsrate.",
-        tools: "Die Implementierung digitaler Tools, um Informationen unternehmensweit zugänglich zu machen, kann die Erfolgsrate von Transformationen mehr als verdoppeln.",
-        source: "McKinsey Global Survey on Digital Transformations"
-      },
-      prosci: {
-        changeManagement: "Projekte mit exzellentem Change Management sind 7-mal wahrscheinlicher erfolgreich als solche mit schlechtem Change Management.",
-        sponsor: "Projekte mit gutem oder exzellentem Executive-Sponsor-Zugang haben eine Erfolgsquote von 72%.",
-        adoption: "Mit effektivem Change Management sehen Unternehmen operative Verbesserungen und finanzielle Erträge Monate früher als bei Implementierungen, die die menschliche Seite des Wandels vernachlässigen.",
-        erpSuccess: "Nur 55% der ERP-Projekte erreichen oder übertreffen ihre Ziele.",
-        source: "Prosci Best Practices Research"
-      },
-      industry: {
-        budget: "55-75% aller ERP-Projekte erreichen ihre Ziele nicht. Die häufigsten Probleme: Budgetüberschreitung (55%), Terminüberschreitung (47%) und mangelnde Transparenz (53%).",
-        dataQuality: "Datenqualitätsprobleme sind eine der Hauptursachen für ERP-Projektverzögerungen. Unternehmen identifizieren sowohl Genauigkeits- als auch Datentransformationsprobleme bei der Migration.",
-        complexity: "Prozesskomplexität ist die größte Herausforderung (62%), gefolgt von Integration (49%) und dem Verständnis von Prozessanforderungen (49%).",
-        source: "Branchenstudien 2024/2025"
-      }
-    };
-
     const detailContent = {
       // === WARUM ADVISORY ===
       "warum-advisory": {
         title: "Warum ERP Transformation Advisory?",
         phase: "info",
         content: {
-          intro: `Laut Gartner werden bis 2027 mehr als 70% der ERP-Initiativen ihre Business-Case-Ziele nicht erreichen – bis zu 25% scheitern katastrophal. 55-75% aller ERP-Projekte verfehlen ihre Ziele. Die Hauptursachen sind bekannt – und vermeidbar.`,
+          intro: `60-70% aller ERP-Projekte überschreiten Budget oder Timeline. Die typische Budgetüberschreitung bei großen Transformationen liegt bei 20-40%. Die vier Hauptursachen sind bekannt – und vermeidbar.`,
           sections: [
             {
               label: "Die vier Hauptursachen für ERP-Projektprobleme",
               items: [
-                "Unklare Prozessanforderungen: Fehlende Ist-Analyse führt zu Scope Creep und nachträglichen Änderungen",
-                "Schlechte Datenqualität: Datenprobleme sind eine der Hauptursachen für Go-Live-Verzögerungen",
-                "Unrealistische Planung: 47% der Projekte überschreiten die Timeline (Branchenstudien)",
-                "Fehlende unabhängige QA: Der Systemintegrator kontrolliert sich selbst – mit vorhersehbaren Ergebnissen"
+                "Unklare Prozessanforderungen: Fehlende Ist-Analyse führt zu Scope Creep",
+                "Schlechte Datenqualität: Stammdaten werden zu spät bereinigt",
+                "Unrealistische Planung: Komplexität wird systematisch unterschätzt",
+                "Fehlende unabhängige QA: Der Systemintegrator kontrolliert sich selbst"
               ]
-            },
-            {
-              label: "Was die Forschung zeigt",
-              text: "McKinsey: Nur 16% der digitalen Transformationen verbessern die Performance nachhaltig. Prosci: Projekte mit exzellentem Change Management sind 7-mal wahrscheinlicher erfolgreich."
             }
           ],
           highlight: "Die Lösung: Ein unabhängiger Advisory-Partner, der Ihre Interessen vertritt – nicht die des ERP-Vendors oder Systemintegrators.",
@@ -671,7 +617,7 @@
         title: "Process Mapping",
         phase: "analyse",
         content: {
-          intro: `Das Process Mapping ist der Grundstein jeder erfolgreichen ERP-Transformation. Wir dokumentieren Ihre Ist-Prozesse und identifizieren Optimierungspotenziale – bevor Sie sich für ein ERP entscheiden. Branchenstudien zeigen: Prozesskomplexität ist mit 62% die größte Herausforderung bei ERP-Migrationen.`,
+          intro: `Das Process Mapping ist der Grundstein jeder erfolgreichen ERP-Transformation. Wir dokumentieren Ihre Ist-Prozesse und identifizieren Optimierungspotenziale – bevor Sie sich für ein ERP entscheiden.`,
           sections: [
             {
               label: "Was wir tun",
@@ -680,12 +626,12 @@
                 "Dokumentation in BPMN 2.0 für einheitliches Verständnis",
                 "Identifikation von Medienbrüchen und Ineffizienzen",
                 "Benchmarking gegen Best Practices Ihrer Branche",
-                "Priorisierung der Optimierungspotenziale nach Business Impact"
+                "Priorisierung der Optimierungspotenziale"
               ]
             },
             {
               label: "Warum das wichtig ist",
-              text: "Das Verstehen und Definieren von Prozessanforderungen ist mit 49% eine der Top-3-Herausforderungen bei ERP-Projekten. Ohne klare Prozessdokumentation wird jedes ERP-Projekt zum Blindflug. Scope Creep und Budgetüberschreitungen sind die Folge."
+              text: "Ohne klare Prozessdokumentation wird jedes ERP-Projekt zum Blindflug. Scope Creep, Budgetüberschreitungen und Unzufriedenheit sind die Folge. Process Mapping schafft die Grundlage für fundierte Entscheidungen."
             }
           ],
           highlight: "Wer seine Prozesse nicht kennt, kann kein ERP auswählen. Wer seine Prozesse kennt, wählt das richtige ERP.",
@@ -696,7 +642,7 @@
         title: "Readiness Assessment",
         phase: "analyse",
         content: {
-          intro: `Das Readiness Assessment bewertet, wie bereit Ihre Organisation für eine ERP-Transformation wirklich ist. Gartner warnt: Bis zu 25% der ERP-Initiativen scheitern katastrophal – oft weil Gaps und Risiken zu spät erkannt werden.`,
+          intro: `Das Readiness Assessment bewertet, wie bereit Ihre Organisation für eine ERP-Transformation wirklich ist. Wir identifizieren Gaps und Risiken, bevor sie zu teuren Problemen werden.`,
           sections: [
             {
               label: "Assessment-Dimensionen",
@@ -705,7 +651,7 @@
                 "Technische Readiness: IT-Infrastruktur, Systemlandschaft, Integrationsfähigkeit",
                 "Prozess-Readiness: Standardisierungsgrad, Dokumentationsstand, Prozessreife",
                 "Daten-Readiness: Datenqualität, Stammdaten-Governance, Migrationsfähigkeit",
-                "Budget- und Zeitrahmen-Realismus: 47% der ERP-Projekte überschreiten die Zeitplanung"
+                "Budget- und Zeitrahmen-Realismus: Sind die Erwartungen realistisch?"
               ]
             },
             {
@@ -721,7 +667,7 @@
         title: "Business Case & ROI",
         phase: "analyse",
         content: {
-          intro: `Ein fundierter Business Case ist die Grundlage für die Projektfreigabe und das Budget. 55% der ERP-Projekte überschreiten das Budget – oft weil der Business Case unrealistisch war. Wir erstellen eine realistische TCO-Berechnung und ROI-Analyse.`,
+          intro: `Ein fundierter Business Case ist die Grundlage für die Projektfreigabe und das Budget. Wir erstellen eine realistische TCO-Berechnung und ROI-Analyse für verschiedene ERP-Optionen.`,
           sections: [
             {
               label: "Business-Case-Inhalte",
@@ -746,7 +692,7 @@
         title: "Datenqualitäts-Analyse",
         phase: "analyse",
         content: {
-          intro: `Schlechte Datenqualität ist eine der Hauptursachen für ERP-Projektprobleme und Go-Live-Verzögerungen. Branchenstudien zeigen: Datenqualitätsprobleme gehören zu den am meisten unterschätzten Risiken. Wir analysieren Ihre Stammdaten rechtzeitig vor der Migration.`,
+          intro: `Schlechte Datenqualität ist eine der Hauptursachen für ERP-Projektprobleme. Wir analysieren Ihre Stammdaten und ermitteln den Bereinigungsbedarf – rechtzeitig vor der Migration.`,
           sections: [
             {
               label: "Analyse-Bereiche",
@@ -765,10 +711,6 @@
                 "Aktualität: Veraltete oder obsolete Datensätze?",
                 "Dubletten: Mehrfach angelegte Stammdaten?"
               ]
-            },
-            {
-              label: "Branchenstimme",
-              text: "Datenqualität ist eine kritische, aber oft übersehene Herausforderung. Unternehmen identifizieren sowohl Genauigkeits- als auch Datentransformationsprobleme beim Verschieben von Legacy-Daten in neue ERP-Umgebungen. (Branchenstudien 2024/2025)"
             }
           ],
           highlight: "Garbage in, garbage out. Datenbereinigung muss VOR der Migration starten, nicht währenddessen.",
@@ -887,7 +829,7 @@
         title: "Lösungsdesign",
         phase: "konzeption",
         content: {
-          intro: `Das Lösungsdesign ist der technische Blueprint für Ihre ERP-Implementierung. Wir definieren Architektur, Konfiguration und Customizing im Detail – mit dem Ziel maximaler Standardisierung.`,
+          intro: `Das Lösungsdesign ist der technische Blueprint für Ihre ERP-Implementierung. Wir definieren Architektur, Konfiguration und Customizing im Detail.`,
           sections: [
             {
               label: "Design-Elemente",
@@ -900,8 +842,8 @@
               ]
             },
             {
-              label: "Clean-Architecture-Prinzip",
-              text: "Wir folgen dem Clean-Architecture-Prinzip: Der ERP-Kern bleibt sauber und standardnah, Erweiterungen werden in definierten Extension Points oder als Side-by-Side-Lösungen umgesetzt. Das sichert Update-Fähigkeit und reduziert technische Schulden."
+              label: "Clean-Core-Prinzip",
+              text: "Wir folgen dem Clean-Core-Prinzip: Der ERP-Kern bleibt sauber, Erweiterungen werden in definierten Extension Points oder Side-by-Side umgesetzt. Das sichert Update-Fähigkeit."
             }
           ],
           highlight: "Ein sauberes Design heute spart Millionen bei zukünftigen Updates.",
@@ -912,7 +854,7 @@
         title: "Integrationskonzept",
         phase: "konzeption",
         content: {
-          intro: `Das ERP ist das Herzstück Ihrer IT-Landschaft. Integration ist mit 49% eine der Top-3-Herausforderungen bei ERP-Projekten. Das Integrationskonzept definiert, wie das ERP mit allen anderen Systemen kommuniziert.`,
+          intro: `Das ERP ist das Herzstück Ihrer IT-Landschaft. Das Integrationskonzept definiert, wie das ERP mit allen anderen Systemen kommuniziert.`,
           sections: [
             {
               label: "Integrationsbereiche",
@@ -938,7 +880,7 @@
         title: "Change Readiness",
         phase: "konzeption",
         content: {
-          intro: `Die beste Technik nützt nichts, wenn die Menschen nicht mitziehen. McKinsey zeigt: Unternehmen mit einer klaren Change-Story haben eine 3,1-mal höhere Erfolgsrate. Change Readiness bereitet Ihre Organisation auf die Transformation vor.`,
+          intro: `Die beste Technik nützt nichts, wenn die Menschen nicht mitziehen. Change Readiness bereitet Ihre Organisation auf die Transformation vor.`,
           sections: [
             {
               label: "Analyse-Elemente",
@@ -953,10 +895,6 @@
             {
               label: "Change-Strategie",
               text: "Basierend auf der Analyse entwickeln wir eine maßgeschneiderte Change-Strategie mit Kommunikationsplan, Stakeholder-Engagement und Trainingskonzept."
-            },
-            {
-              label: "Forschungsergebnis",
-              text: "Projekte mit gutem oder exzellentem Executive-Sponsor-Zugang haben eine Erfolgsquote von 72%. (Prosci Best Practices Research)"
             }
           ],
           highlight: "Technik-Projekte scheitern selten an der Technik. Sie scheitern an den Menschen.",
@@ -969,7 +907,7 @@
         title: "Datenmigration",
         phase: "umsetzung",
         content: {
-          intro: `Die Datenmigration ist oft der kritischste Teil der Transformation. Datenqualitätsprobleme gehören zu den Hauptursachen für Go-Live-Verzögerungen. Wir begleiten die Migration von der Konzeption über Testläufe bis zur produktiven Übernahme.`,
+          intro: `Die Datenmigration ist oft der kritischste Teil der Transformation. Wir begleiten die Migration von der Konzeption über Testläufe bis zur produktiven Übernahme.`,
           sections: [
             {
               label: "Migrations-Phasen",
@@ -1020,7 +958,7 @@
         title: "Change Management",
         phase: "umsetzung",
         content: {
-          intro: `Change Management begleitet Ihre Mitarbeiter durch die Transformation. Prosci-Forschung zeigt: Projekte mit exzellentem Change Management sind 7-mal wahrscheinlicher erfolgreich. Wir setzen die Change-Strategie um und managen aktiv den Widerstand.`,
+          intro: `Change Management begleitet Ihre Mitarbeiter durch die Transformation. Wir setzen die Change-Strategie um und managen aktiv den Widerstand.`,
           sections: [
             {
               label: "Aktivitäten",
@@ -1035,10 +973,6 @@
             {
               label: "Adoption messen",
               text: "Wir messen die User Adoption mit definierten KPIs und passen die Change-Maßnahmen bei Bedarf an. Das Ziel: Hohe Akzeptanz und produktive Nutzung ab Go-Live."
-            },
-            {
-              label: "Forschungsergebnis",
-              text: "Mit effektivem Change Management sehen Unternehmen operative Verbesserungen und finanzielle Erträge Monate früher als bei Implementierungen, die die menschliche Seite des Wandels vernachlässigen. (Prosci Research)"
             }
           ],
           highlight: "Change Management ist kein Nice-to-have. Es ist erfolgskritisch.",
@@ -1049,7 +983,7 @@
         title: "Training & Enablement",
         phase: "umsetzung",
         content: {
-          intro: `Gut geschulte Anwender sind produktiv ab Tag 1. Gartner warnt: Geringe Endanwender-Akzeptanz entsteht, wenn Anwender die Gründe für die ERP-Implementierung nicht verstehen. Wir entwickeln und koordinieren das Schulungskonzept für alle Anwendergruppen.`,
+          intro: `Gut geschulte Anwender sind produktiv ab Tag 1. Wir entwickeln und koordinieren das Schulungskonzept für alle Anwendergruppen.`,
           sections: [
             {
               label: "Trainingskonzept",
@@ -1064,10 +998,6 @@
             {
               label: "Nachhaltigkeit",
               text: "Training ist kein einmaliges Event. Wir etablieren eine Struktur für kontinuierliches Lernen und Onboarding neuer Mitarbeiter nach Go-Live."
-            },
-            {
-              label: "Forschungsergebnis",
-              text: "McKinsey: Die Entwicklung von Talenten und Skills in der gesamten Organisation ist einer der wichtigsten Erfolgsfaktoren bei digitalen Transformationen."
             }
           ],
           highlight: "In Schulung zu investieren zahlt sich 10x zurück. An Schulung zu sparen rächt sich.",
@@ -1078,7 +1008,7 @@
         title: "Qualitätssicherung (QA)",
         phase: "umsetzung",
         content: {
-          intro: `Als unabhängiger Partner sichern wir die Qualität der Implementierung. Laut Prosci erreichen nur 55% der ERP-Projekte ihre Ziele – unabhängige QA erhöht Ihre Erfolgschancen deutlich.`,
+          intro: `Als unabhängiger Partner sichern wir die Qualität der Implementierung. Wir kontrollieren den Systemintegrator und stellen sicher, dass vereinbarte Standards eingehalten werden.`,
           sections: [
             {
               label: "QA-Aktivitäten",
@@ -1232,7 +1162,7 @@
         title: "Nutzen für CFO & Finance",
         phase: "nutzen",
         content: {
-          intro: `Als CFO oder Finance-Verantwortlicher tragen Sie die Budgetverantwortung für die ERP-Transformation. Laut Branchenstudien überschreiten 55% der ERP-Projekte das Budget. Wir helfen Ihnen, das Investment abzusichern.`,
+          intro: `Als CFO oder Finance-Verantwortlicher tragen Sie die Budgetverantwortung für die ERP-Transformation. Wir helfen Ihnen, das Investment abzusichern.`,
           sections: [
             {
               label: "Ihr Nutzen",
@@ -1245,12 +1175,8 @@
               ]
             },
             {
-              label: "Typische Ergebnisse",
+              label: "Typische Einsparungen",
               text: "Unsere Kunden berichten von 20-30% Zeitgewinn durch bessere Vorbereitung und 30-50% schnellerem ROI durch konsequenten Fit-to-Standard-Ansatz."
-            },
-            {
-              label: "Forschungsergebnis",
-              text: "Prosci: Nur 55% der ERP-Projekte erreichen oder übertreffen ihre Ziele. Mit unabhängiger Beratung erhöhen Sie Ihre Erfolgschancen signifikant."
             }
           ],
           highlight: "Wir schützen Ihr Budget und beschleunigen Ihren ROI.",
@@ -1261,13 +1187,13 @@
         title: "Nutzen für CIO & IT",
         phase: "nutzen",
         content: {
-          intro: `Als CIO oder IT-Verantwortlicher tragen Sie die technische Verantwortung für die ERP-Transformation. Wir unterstützen Sie mit objektiver Expertise und Multi-ERP-Know-how.`,
+          intro: `Als CIO oder IT-Verantwortlicher tragen Sie die technische Verantwortung für die ERP-Transformation. Wir unterstützen Sie mit objektiver Expertise.`,
           sections: [
             {
               label: "Ihr Nutzen",
               items: [
                 "Objektive ERP-Evaluation ohne Vendor-Bias",
-                "Clean Architecture Beratung für Update-Fähigkeit",
+                "Clean Core / Clean Architecture Beratung",
                 "Integrations- und API-Strategie",
                 "Technische Risikominimierung",
                 "Unabhängige Qualitätssicherung der Implementierung"
@@ -1275,7 +1201,7 @@
             },
             {
               label: "Multi-ERP Know-how",
-              text: "Wir kennen SAP, Oracle, Microsoft, Infor und andere aus zahlreichen Projekten. Dieses Cross-ERP-Wissen hilft, die richtige Entscheidung zu treffen – unabhängig vom Hersteller."
+              text: "Wir kennen SAP, Oracle, Microsoft, Infor und andere aus zahlreichen Projekten. Dieses Cross-ERP-Wissen hilft, die richtige Entscheidung zu treffen."
             }
           ],
           highlight: "Wir bringen Multi-ERP-Expertise ohne Vendor-Abhängigkeit.",
@@ -1308,7 +1234,30 @@
         }
       },
 
-      // === KONTAKT ===
+      // === BUCHUNG ===
+      "buchungsmodelle": {
+        title: "Buchungsmodelle",
+        phase: "buchung",
+        content: {
+          intro: `Flexibilität ist unser Prinzip. Sie wählen das Engagement-Modell, das zu Ihrer Situation passt. Kein Vendor Lock-in – flexibel rein, flexibel raus.`,
+          sections: [
+            {
+              label: "Phasen-Paket (empfohlen)",
+              text: "Komplette Phase als Paket mit Festpreis möglich. Ideal für: Klarer Scope, planbare Kosten, definierte Deliverables."
+            },
+            {
+              label: "Einzelbaustein",
+              text: "Einzelne Services aus dem Baukasten auf Time-and-Material-Basis. Ideal für: Punktuelle Unterstützung, zweite Meinung, Quick Checks."
+            },
+            {
+              label: "End-to-End (Projektvertrag)",
+              text: "Begleitung über alle 4 Phasen hinweg. Ideal für: Maximale Kontinuität, durchgängiger Wissenstransfer, komplexe Programme."
+            }
+          ],
+          highlight: "Kein Vendor Lock-in: Flexibel rein, flexibel raus. Sie entscheiden über den Umfang.",
+          deliverables: ["Individuelles Angebot", "Klarer Scope", "Transparente Preise", "Flexible Laufzeit"]
+        }
+      },
       "kontakt": {
         title: "Starten Sie jetzt",
         phase: "kontakt",
@@ -1376,6 +1325,7 @@
         { id: "nutzen-business", label: "Nutzen für Business Owner" }
       ],
       buchung: [
+        { id: "buchungsmodelle", label: "Buchungsmodelle" },
         { id: "kontakt", label: "Starten Sie jetzt" }
       ]
     };
@@ -1387,406 +1337,12 @@
       betrieb: "Phase 4: Betrieb",
       info: "Warum ERP Transformation Advisory?",
       nutzen: "Nutzen nach Zielgruppe",
-      buchung: "Kontakt"
+      buchung: "Buchung & Kontakt"
     };
 
     let currentView = 'home';
     let selectedTopic = null;
     let previousView = null;
-    let selectionMode = false;
-    let selectedTopics = new Set();
-    let topicComplexity = {}; // stores complexity per topic: 'low', 'medium', 'high'
-
-    // Kategorien ohne Auswahlmöglichkeit
-    const excludeFromSelection = ['info', 'nutzen', 'buchung'];
-
-    // Personentage-Kalkulation pro Service und Komplexitätsstufe
-    const ptMatrix = {
-      low: {
-        advisory: 5,      // Business-/Fachberater
-        technik: 2,       // Technischer Berater
-        pm: 1             // Projektleitung
-      },
-      medium: {
-        advisory: 12,
-        technik: 5,
-        pm: 3
-      },
-      high: {
-        advisory: 25,
-        technik: 12,
-        pm: 6
-      }
-    };
-
-    const complexityLabels = {
-      low: 'Low',
-      medium: 'Mittel',
-      high: 'Komplex'
-    };
-
-    function setTopicComplexity(topicId, complexity, event) {
-      if (event) event.stopPropagation();
-      topicComplexity[topicId] = complexity;
-      if (!selectedTopics.has(topicId)) {
-        selectedTopics.add(topicId);
-      }
-      render();
-    }
-
-    function getTopicComplexity(topicId) {
-      return topicComplexity[topicId] || 'medium';
-    }
-
-    function calculateTotalPT() {
-      let totals = {
-        advisory: 0,
-        technik: 0,
-        pm: 0,
-        gesamtPT: 0
-      };
-      
-      selectedTopics.forEach(topicId => {
-        const complexity = getTopicComplexity(topicId);
-        const pt = ptMatrix[complexity];
-        totals.advisory += pt.advisory;
-        totals.technik += pt.technik;
-        totals.pm += pt.pm;
-      });
-      
-      totals.gesamtPT = totals.advisory + totals.technik + totals.pm;
-      
-      return totals;
-    }
-
-    function renderCalculationPanel() {
-      if (selectedTopics.size === 0) return '';
-      
-      const totals = calculateTotalPT();
-      
-      // Geschätzte Projektdauer: Annahme 2-3 Berater parallel
-      const geschaetzteDauer = Math.ceil(totals.gesamtPT / 2.5);
-      
-      let breakdownHtml = '';
-      selectedTopics.forEach(topicId => {
-        const topic = detailContent[topicId];
-        const complexity = getTopicComplexity(topicId);
-        const pt = ptMatrix[complexity];
-        if (topic) {
-          breakdownHtml += `
-            <div class="selected-topic-row">
-              <span class="selected-topic-name">${topic.title}</span>
-              <span style="font-size: 10px; color: var(--tta-orange); min-width: 50px;">${pt.advisory + pt.technik + pt.pm} PT</span>
-              <div class="complexity-selector">
-                <button class="complexity-btn low ${complexity === 'low' ? 'active' : ''}" 
-                        onclick="setTopicComplexity('${topicId}', 'low', event)">Low</button>
-                <button class="complexity-btn medium ${complexity === 'medium' ? 'active' : ''}" 
-                        onclick="setTopicComplexity('${topicId}', 'medium', event)">Mittel</button>
-                <button class="complexity-btn high ${complexity === 'high' ? 'active' : ''}" 
-                        onclick="setTopicComplexity('${topicId}', 'high', event)">Komplex</button>
-              </div>
-            </div>
-          `;
-        }
-      });
-
-      return `
-        <div class="calculation-panel">
-          <div class="calculation-title">📊 Aufwandsschätzung (Richtwerte)</div>
-          <div class="calculation-grid">
-            <div class="calc-item">
-              <div class="calc-label">Business Beratung</div>
-              <div class="calc-value">${totals.advisory}</div>
-              <div class="calc-unit">Personentage</div>
-            </div>
-            <div class="calc-item">
-              <div class="calc-label">Technische Beratung</div>
-              <div class="calc-value">${totals.technik}</div>
-              <div class="calc-unit">Personentage</div>
-            </div>
-            <div class="calc-item">
-              <div class="calc-label">Projektleitung</div>
-              <div class="calc-value">${totals.pm}</div>
-              <div class="calc-unit">Personentage</div>
-            </div>
-            <div class="calc-item">
-              <div class="calc-label">Gesamt Aufwand</div>
-              <div class="calc-value">${totals.gesamtPT}</div>
-              <div class="calc-unit">Personentage</div>
-            </div>
-            <div class="calc-item">
-              <div class="calc-label">Geschätzte Dauer</div>
-              <div class="calc-value">~${geschaetzteDauer}</div>
-              <div class="calc-unit">Wochen</div>
-            </div>
-          </div>
-          <div class="calc-breakdown">
-            <div class="calc-breakdown-title">Ausgewählte Services (${selectedTopics.size}) – Komplexität anpassen:</div>
-            ${breakdownHtml}
-          </div>
-          <div style="font-size: 9px; color: rgba(255,255,255,0.5); margin-top: 12px; text-align: center;">
-            * Richtwerte basierend auf Erfahrungswerten. Individuelle Angebote nach Anforderungsanalyse.
-          </div>
-        </div>
-      `;
-    }
-
-    function toggleSelectionMode() {
-      selectionMode = !selectionMode;
-      if (!selectionMode) {
-        selectedTopics.clear();
-        topicComplexity = {};
-      }
-      render();
-    }
-
-    function toggleTopicSelection(topicId, event) {
-      if (event) event.stopPropagation();
-      if (selectedTopics.has(topicId)) {
-        selectedTopics.delete(topicId);
-      } else {
-        selectedTopics.add(topicId);
-      }
-      render();
-    }
-
-    function clearSelection() {
-      selectedTopics.clear();
-      topicComplexity = {};
-      render();
-    }
-
-    async function downloadSelectedTopics() {
-      if (selectedTopics.size === 0) {
-        alert('Bitte wählen Sie mindestens ein Thema aus.');
-        return;
-      }
-
-      const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, 
-              Header, Footer, AlignmentType, BorderStyle, WidthType, 
-              HeadingLevel, ShadingType, LevelFormat, PageNumber } = docx;
-
-      const totals = calculateTotalPT();
-      const geschaetzteDauer = Math.ceil(totals.gesamtPT / 2.5);
-      const today = new Date().toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
-
-      // Collect all content
-      const children = [];
-      
-      // Title
-      children.push(new Paragraph({
-        heading: HeadingLevel.TITLE,
-        children: [new TextRun({ text: "ERP Transformation Advisory", bold: true, size: 56, color: "0A1A29" })]
-      }));
-      
-      children.push(new Paragraph({
-        spacing: { after: 400 },
-        children: [new TextRun({ text: "Ausgewählte Services für Ihre ERP-Transformation", size: 24, color: "666666" })]
-      }));
-
-      // Calculation table
-      const tableBorder = { style: BorderStyle.SINGLE, size: 1, color: "CCCCCC" };
-      const cellBorders = { top: tableBorder, bottom: tableBorder, left: tableBorder, right: tableBorder };
-      
-      const tableRows = [
-        new TableRow({
-          tableHeader: true,
-          children: [
-            new TableCell({ borders: cellBorders, width: { size: 3500, type: WidthType.DXA }, shading: { fill: "098F9B", type: ShadingType.CLEAR }, children: [new Paragraph({ children: [new TextRun({ text: "Service", bold: true, color: "FFFFFF", size: 20 })] })] }),
-            new TableCell({ borders: cellBorders, width: { size: 1500, type: WidthType.DXA }, shading: { fill: "098F9B", type: ShadingType.CLEAR }, children: [new Paragraph({ children: [new TextRun({ text: "Komplexität", bold: true, color: "FFFFFF", size: 20 })] })] }),
-            new TableCell({ borders: cellBorders, width: { size: 1200, type: WidthType.DXA }, shading: { fill: "098F9B", type: ShadingType.CLEAR }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: "Business", bold: true, color: "FFFFFF", size: 20 })] })] }),
-            new TableCell({ borders: cellBorders, width: { size: 1200, type: WidthType.DXA }, shading: { fill: "098F9B", type: ShadingType.CLEAR }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: "Technik", bold: true, color: "FFFFFF", size: 20 })] })] }),
-            new TableCell({ borders: cellBorders, width: { size: 1000, type: WidthType.DXA }, shading: { fill: "098F9B", type: ShadingType.CLEAR }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: "PM", bold: true, color: "FFFFFF", size: 20 })] })] }),
-            new TableCell({ borders: cellBorders, width: { size: 1000, type: WidthType.DXA }, shading: { fill: "098F9B", type: ShadingType.CLEAR }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: "Gesamt", bold: true, color: "FFFFFF", size: 20 })] })] }),
-          ]
-        })
-      ];
-
-      selectedTopics.forEach(topicId => {
-        const topic = detailContent[topicId];
-        const complexity = getTopicComplexity(topicId);
-        const pt = ptMatrix[complexity];
-        const topicTotal = pt.advisory + pt.technik + pt.pm;
-        if (topic) {
-          tableRows.push(new TableRow({
-            children: [
-              new TableCell({ borders: cellBorders, width: { size: 3500, type: WidthType.DXA }, children: [new Paragraph({ children: [new TextRun({ text: topic.title, size: 20 })] })] }),
-              new TableCell({ borders: cellBorders, width: { size: 1500, type: WidthType.DXA }, children: [new Paragraph({ children: [new TextRun({ text: complexityLabels[complexity], size: 20 })] })] }),
-              new TableCell({ borders: cellBorders, width: { size: 1200, type: WidthType.DXA }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: pt.advisory + " PT", size: 20 })] })] }),
-              new TableCell({ borders: cellBorders, width: { size: 1200, type: WidthType.DXA }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: pt.technik + " PT", size: 20 })] })] }),
-              new TableCell({ borders: cellBorders, width: { size: 1000, type: WidthType.DXA }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: pt.pm + " PT", size: 20 })] })] }),
-              new TableCell({ borders: cellBorders, width: { size: 1000, type: WidthType.DXA }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: topicTotal + " PT", size: 20 })] })] }),
-            ]
-          }));
-        }
-      });
-
-      // Total row
-      tableRows.push(new TableRow({
-        children: [
-          new TableCell({ borders: cellBorders, width: { size: 3500, type: WidthType.DXA }, shading: { fill: "E9ECEF", type: ShadingType.CLEAR }, children: [new Paragraph({ children: [new TextRun({ text: "GESAMT", bold: true, size: 20 })] })] }),
-          new TableCell({ borders: cellBorders, width: { size: 1500, type: WidthType.DXA }, shading: { fill: "E9ECEF", type: ShadingType.CLEAR }, children: [new Paragraph({ children: [new TextRun({ text: "", size: 20 })] })] }),
-          new TableCell({ borders: cellBorders, width: { size: 1200, type: WidthType.DXA }, shading: { fill: "E9ECEF", type: ShadingType.CLEAR }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: totals.advisory + " PT", bold: true, size: 20 })] })] }),
-          new TableCell({ borders: cellBorders, width: { size: 1200, type: WidthType.DXA }, shading: { fill: "E9ECEF", type: ShadingType.CLEAR }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: totals.technik + " PT", bold: true, size: 20 })] })] }),
-          new TableCell({ borders: cellBorders, width: { size: 1000, type: WidthType.DXA }, shading: { fill: "E9ECEF", type: ShadingType.CLEAR }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: totals.pm + " PT", bold: true, size: 20 })] })] }),
-          new TableCell({ borders: cellBorders, width: { size: 1000, type: WidthType.DXA }, shading: { fill: "E9ECEF", type: ShadingType.CLEAR }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: totals.gesamtPT + " PT", bold: true, size: 20 })] })] }),
-        ]
-      }));
-
-      children.push(new Paragraph({
-        spacing: { before: 200 },
-        children: [new TextRun({ text: "AUFWANDSSCHÄTZUNG (RICHTWERTE)", bold: true, size: 24, color: "098F9B" })]
-      }));
-
-      children.push(new Table({
-        columnWidths: [3500, 1500, 1200, 1200, 1000, 1000],
-        rows: tableRows
-      }));
-
-      children.push(new Paragraph({
-        spacing: { before: 200, after: 100 },
-        alignment: AlignmentType.RIGHT,
-        children: [new TextRun({ text: `Gesamt: ${totals.gesamtPT} Personentage · Geschätzte Dauer: ~${geschaetzteDauer} Wochen`, bold: true, size: 22, color: "DA5500" })]
-      }));
-
-      children.push(new Paragraph({
-        spacing: { after: 400 },
-        children: [new TextRun({ text: "* Richtwerte basierend auf Erfahrungswerten. Individuelle Angebote nach Anforderungsanalyse.", italics: true, size: 18, color: "666666" })]
-      }));
-
-      // Service details
-      let bulletIndex = 0;
-      const numberingConfig = [];
-      
-      selectedTopics.forEach(topicId => {
-        const topic = detailContent[topicId];
-        const complexity = getTopicComplexity(topicId);
-        if (topic) {
-          // Service title
-          children.push(new Paragraph({
-            heading: HeadingLevel.HEADING_1,
-            spacing: { before: 400, after: 200 },
-            children: [
-              new TextRun({ text: topic.title, bold: true, size: 28, color: "098F9B" }),
-              new TextRun({ text: "  [" + complexityLabels[complexity] + "]", size: 20, color: "666666" })
-            ]
-          }));
-
-          // Intro
-          children.push(new Paragraph({
-            spacing: { after: 200 },
-            children: [new TextRun({ text: topic.content.intro, size: 22 })]
-          }));
-
-          // Sections
-          if (topic.content.sections) {
-            topic.content.sections.forEach(section => {
-              children.push(new Paragraph({
-                spacing: { before: 200, after: 100 },
-                children: [new TextRun({ text: section.label.toUpperCase(), bold: true, size: 20, color: "DA5500" })]
-              }));
-
-              if (section.items) {
-                const bulletRef = 'bullet-' + bulletIndex++;
-                numberingConfig.push({
-                  reference: bulletRef,
-                  levels: [{ level: 0, format: LevelFormat.BULLET, text: "•", alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 720, hanging: 360 } } } }]
-                });
-                section.items.forEach(item => {
-                  children.push(new Paragraph({
-                    numbering: { reference: bulletRef, level: 0 },
-                    children: [new TextRun({ text: item, size: 20 })]
-                  }));
-                });
-              }
-
-              if (section.text) {
-                children.push(new Paragraph({
-                  spacing: { after: 100 },
-                  children: [new TextRun({ text: section.text, size: 20 })]
-                }));
-              }
-            });
-          }
-
-          // Highlight
-          if (topic.content.highlight) {
-            children.push(new Paragraph({
-              spacing: { before: 200, after: 200 },
-              indent: { left: 400 },
-              border: { left: { style: BorderStyle.SINGLE, size: 24, color: "DA5500" } },
-              children: [new TextRun({ text: topic.content.highlight, italics: true, size: 20, color: "333333" })]
-            }));
-          }
-
-          // Deliverables
-          if (topic.content.deliverables && topic.content.deliverables.length > 0) {
-            children.push(new Paragraph({
-              spacing: { before: 100 },
-              shading: { fill: "F5F5F5", type: ShadingType.CLEAR },
-              children: [
-                new TextRun({ text: "DELIVERABLES: ", bold: true, size: 18, color: "DA5500" }),
-                new TextRun({ text: topic.content.deliverables.join(" · "), size: 18 })
-              ]
-            }));
-          }
-        }
-      });
-
-      // Create document
-      const doc = new Document({
-        styles: {
-          default: { document: { run: { font: "Arial", size: 22 } } },
-          paragraphStyles: [
-            { id: "Title", name: "Title", basedOn: "Normal", run: { size: 56, bold: true, color: "0A1A29", font: "Arial" }, paragraph: { spacing: { before: 0, after: 120 } } },
-            { id: "Heading1", name: "Heading 1", basedOn: "Normal", next: "Normal", quickFormat: true, run: { size: 28, bold: true, color: "098F9B", font: "Arial" }, paragraph: { spacing: { before: 400, after: 200 } } },
-          ]
-        },
-        numbering: { config: numberingConfig },
-        sections: [{
-          properties: {
-            page: { margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 } }
-          },
-          headers: {
-            default: new Header({
-              children: [new Paragraph({
-                alignment: AlignmentType.RIGHT,
-                children: [
-                  new TextRun({ text: "TIMETOACT", bold: true, size: 20, color: "0A1A29" }),
-                  new TextRun({ text: "GROUP", bold: true, size: 20, color: "DA5500" }),
-                  new TextRun({ text: "  |  ERP Transformation Advisory", size: 18, color: "666666" })
-                ]
-              })]
-            })
-          },
-          footers: {
-            default: new Footer({
-              children: [new Paragraph({
-                alignment: AlignmentType.CENTER,
-                children: [
-                  new TextRun({ text: "© 2025 TIMETOACT GROUP · Marcel Wagner · marcel.wagner@timetoact-group.com · Seite ", size: 16, color: "666666" }),
-                  new TextRun({ children: [PageNumber.CURRENT], size: 16, color: "666666" }),
-                  new TextRun({ text: " von ", size: 16, color: "666666" }),
-                  new TextRun({ children: [PageNumber.TOTAL_PAGES], size: 16, color: "666666" })
-                ]
-              })]
-            })
-          },
-          children: children
-        }]
-      });
-
-      // Generate and download
-      const blob = await Packer.toBlob(doc);
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'TIMETOACT_ERP_Advisory_Services_' + today.replace(/\./g, '-') + '.docx';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }
 
     function render() {
       const app = document.getElementById('app');
@@ -1801,8 +1357,6 @@
 
     function renderHome() {
       return `
-        <div class="christmas-banner">🎄 Frohe Weihnachten und ein erfolgreiches Jahr 2026! 🎄</div>
-        
         <div class="header fade-in">
           <div class="logo-container">
             <div class="logo-text">We Drive Digital Innovation & Operational Excellence</div>
@@ -1814,6 +1368,41 @@
               <span>We Care.</span>
               <span>We Drive.</span>
               <span>We Deliver.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Values Section -->
+        <div class="hero-values fade-in">
+          <div class="hero-values-card">
+            <div class="hero-values-title">Wofür wir stehen</div>
+            <div class="hero-values-subtitle">Unabhängige ERP-Beratung, die Ihre Interessen in den Mittelpunkt stellt</div>
+            
+            <div class="values-grid">
+              <div class="value-item">
+                <div class="value-icon">⚖️</div>
+                <div class="value-title">100% Herstellerneutral</div>
+                <div class="value-desc">Keine Lizenzen, keine Provisionen. Wir empfehlen das ERP, das zu Ihnen passt.</div>
+              </div>
+              <div class="value-item">
+                <div class="value-icon">🔄</div>
+                <div class="value-title">Process First</div>
+                <div class="value-desc">Erst Prozesse verstehen und optimieren – dann die passende Technologie wählen.</div>
+              </div>
+              <div class="value-item">
+                <div class="value-icon">👨‍💼</div>
+                <div class="value-title">Senior-Only</div>
+                <div class="value-desc">Erfahrene Berater mit Cross-ERP-Know-how, produktiv ab Tag 1.</div>
+              </div>
+              <div class="value-item">
+                <div class="value-icon">🧩</div>
+                <div class="value-title">Modularer Baukasten</div>
+                <div class="value-desc">21 Services in 4 Phasen. Einzeln buchbar, kein Vendor Lock-in.</div>
+              </div>
+            </div>
+            
+            <div class="hero-quote">
+              <p>„Wir verkaufen keine Lizenzen. Wir liefern Projekterfolg."</p>
             </div>
           </div>
         </div>
@@ -1873,25 +1462,79 @@
                 <div class="info-button-desc">CFO, CIO, Business Owner</div>
               </button>
               <button class="info-button" onclick="navigate('buchung')">
-                <div class="info-button-title">Kontakt</div>
-                <div class="info-button-desc">Starten Sie jetzt</div>
+                <div class="info-button-title">Buchung</div>
+                <div class="info-button-desc">Modelle & Kontakt</div>
               </button>
             </div>
           </div>
+        </div>
 
-          ${selectedTopics.size > 0 ? `
-          <div class="selection-bar" style="margin-top: 20px;">
-            <div class="selection-info">
-              Ausgewählte Themen:<span class="selection-count">${selectedTopics.size}</span>
+        <!-- Success Stories Section -->
+        <div class="success-section fade-in">
+          <div class="success-section-title">Was unsere <span>Kunden</span> sagen</div>
+          
+          <div class="success-grid">
+            <div class="success-card featured">
+              <div class="success-badge">Referenz</div>
+              <div class="success-logo">Berner Group</div>
+              <div class="success-quote">„Die TIMETOACT GROUP hat uns mit ihrer herstellerneutralen Beratung überzeugt. Endlich ein Partner, der unsere Prozesse versteht und nicht nur Lizenzen verkaufen will."</div>
+              <div class="success-author">
+                <div class="success-author-name">René Stukar</div>
+                <div class="success-author-role">Teamlead Warehouse Management Solutions & Coordinator Supply Chain Solutions</div>
+              </div>
+              <div class="success-results">
+                <div class="success-result">
+                  <div class="success-result-value">25%</div>
+                  <div class="success-result-label">Zeitersparnis</div>
+                </div>
+                <div class="success-result">
+                  <div class="success-result-value">On Time</div>
+                  <div class="success-result-label">Go-Live</div>
+                </div>
+              </div>
             </div>
-            <div class="selection-buttons">
-              <button class="download-button" onclick="downloadSelectedTopics()">📥 Als Word speichern</button>
-              <button class="clear-button" onclick="clearSelection()">✕ Auswahl löschen</button>
+            
+            <div class="success-card">
+              <div class="success-logo">Fertigungsindustrie</div>
+              <div class="success-quote">„Die unabhängige QA hat uns vor einer Budgetüberschreitung von 40% bewahrt. Die Investition in Advisory hat sich mehrfach ausgezahlt."</div>
+              <div class="success-author">
+                <div class="success-author-name">IT-Leiter</div>
+                <div class="success-author-role">Mittelständisches Fertigungsunternehmen, 2.500 MA</div>
+              </div>
+              <div class="success-results">
+                <div class="success-result">
+                  <div class="success-result-value">40%</div>
+                  <div class="success-result-label">Kosten gespart</div>
+                </div>
+                <div class="success-result">
+                  <div class="success-result-value">6 Mon.</div>
+                  <div class="success-result-label">Früher live</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="success-card">
+              <div class="success-logo">Großhandel</div>
+              <div class="success-quote">„Durch das Process Mapping haben wir erkannt, dass unser favorisiertes ERP gar nicht zu uns passt. Das hat uns Millionen erspart."</div>
+              <div class="success-author">
+                <div class="success-author-name">CFO</div>
+                <div class="success-author-role">Internationaler Großhändler, 800 MA</div>
+              </div>
+              <div class="success-results">
+                <div class="success-result">
+                  <div class="success-result-value">€2.1M</div>
+                  <div class="success-result-label">Ersparnis</div>
+                </div>
+                <div class="success-result">
+                  <div class="success-result-value">Fit-to-Std</div>
+                  <div class="success-result-label">Erreicht</div>
+                </div>
+              </div>
             </div>
           </div>
-          ${renderCalculationPanel()}
-          ` : ''}
+        </div>
 
+        <div class="container">
           <div class="footer">
             <div class="footer-tagline">
               <span>We Care.</span> <span>We Drive.</span> <span>We Deliver.</span>
@@ -1906,55 +1549,18 @@
       const topics = topicLists[currentView] || [];
       const title = viewTitles[currentView] || currentView;
       const phaseClass = currentView;
-      const canSelect = !excludeFromSelection.includes(currentView);
       
-      let topicButtons;
-      if (selectionMode && canSelect) {
-        topicButtons = topics.map(t => {
-          const isSelected = selectedTopics.has(t.id);
-          return `<div class="topic-item">
-            <div class="topic-checkbox-wrapper ${isSelected ? 'checked' : ''}" onclick="toggleTopicSelection('${t.id}', event)">
-              <input type="checkbox" class="topic-checkbox" ${isSelected ? 'checked' : ''} onclick="toggleTopicSelection('${t.id}', event)">
-            </div>
-            <button class="topic-button ${phaseClass} ${isSelected ? 'selected' : ''}" onclick="selectTopic('${t.id}')">${t.label}</button>
-          </div>`;
-        }).join('');
-      } else {
-        topicButtons = topics.map(t => 
-          `<button class="topic-button ${phaseClass}" onclick="selectTopic('${t.id}')">${t.label}</button>`
-        ).join('');
-      }
-
-      const selectionBar = selectedTopics.size > 0 ? `
-        <div class="selection-bar">
-          <div class="selection-info">
-            Ausgewählte Themen:<span class="selection-count">${selectedTopics.size}</span>
-          </div>
-          <div class="selection-buttons">
-            <button class="download-button" onclick="downloadSelectedTopics()">📥 Als Word speichern</button>
-            <button class="clear-button" onclick="clearSelection()">✕ Auswahl löschen</button>
-          </div>
-        </div>
-        ${renderCalculationPanel()}
-      ` : '';
-
-      const selectButton = canSelect ? `
-        <div style="display: flex; justify-content: flex-end; margin-bottom: 12px;">
-          <button class="toggle-select-button ${selectionMode ? 'active' : ''}" onclick="toggleSelectionMode()">
-            ${selectionMode ? '✓ Auswahlmodus aktiv' : '☐ Themen auswählen'}
-          </button>
-        </div>
-      ` : '';
+      const topicButtons = topics.map(t => 
+        `<button class="topic-button ${phaseClass}" onclick="selectTopic('${t.id}')">${t.label}</button>`
+      ).join('');
 
       return `
         <div class="page-content">
           <div class="page-container fade-in">
             <div class="page-header ${phaseClass}">
               <h1>${title}</h1>
-              <div class="page-header-sub">${topics.length} ${canSelect ? 'Services verfügbar' : 'Informationen'}</div>
+              <div class="page-header-sub">${topics.length} Services verfügbar</div>
             </div>
-            ${selectButton}
-            ${selectionBar}
             <div class="topic-grid">${topicButtons}</div>
             <button class="back-button" onclick="goHome()">← Zurück zum Cockpit</button>
           </div>
@@ -2024,17 +1630,7 @@
               ${highlightHtml}
               ${deliverablesHtml}
             </div>
-            <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
-              <button class="back-button" onclick="goBack()">← Zurück</button>
-              ${!excludeFromSelection.includes(item.phase) ? `
-              <button class="toggle-select-button ${selectedTopics.has(selectedTopic) ? 'active' : ''}" 
-                      onclick="toggleTopicSelection('${selectedTopic}', event)" 
-                      style="margin-top: 16px;">
-                ${selectedTopics.has(selectedTopic) ? '✓ In Auswahl' : '+ Zur Auswahl hinzufügen'}
-              </button>
-              ` : ''}
-              ${selectedTopics.size > 0 ? `<button class="download-button" onclick="downloadSelectedTopics()" style="margin-top: 16px;">📥 ${selectedTopics.size} Themen als Word</button>` : ''}
-            </div>
+            <button class="back-button" onclick="goBack()">← Zurück</button>
           </div>
         </div>
       `;
