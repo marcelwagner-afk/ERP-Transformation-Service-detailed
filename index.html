@@ -1,2354 +1,632 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#212830">
-  <title>TIMETOACT GROUP - ERP Transformation Advisory</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23212830' width='100' height='100' rx='15'/><text x='50' y='68' font-size='45' text-anchor='middle' fill='%23DA5500' font-family='sans-serif' font-weight='bold'>TTA</text></svg>">
-  <script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
-  <style>
-    :root {
-      /* TIMETOACT Corporate Design */
-      --tta-dark: #212830;
-      --tta-darker: #1a2028;
-      --tta-white: #FFFFFF;
-      --tta-gray-light: #F5F5F5;
-      --tta-gray-medium: #E0E0E0;
-      --tta-gray-text: #9CA3AF;
-      --tta-blue-light: #7CC2FA;
-      --tta-orange: #DA5500;
-      --tta-orange-hover: #C44D00;
-      --tta-teal: #098F9B;
-      --tta-blue: #205EA7;
-      --tta-teal-dark: #006B76;
-      --tta-blue-dark: #064A80;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
-    body {
-      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
-      background: var(--tta-dark);
-      color: var(--tta-white);
-      min-height: 100vh;
-      line-height: 1.6;
-    }
-
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    .fade-in { animation: fadeIn 0.3s ease-out; }
-
-    h1, h2, h3, h4 { font-family: 'Segoe UI Semibold', 'Segoe UI', Arial, sans-serif; font-weight: 600; }
-
-    .container { max-width: 950px; margin: 0 auto; padding: 16px; }
-
-    /* Header */
-    .header { padding: 30px 20px 20px; text-align: center; }
-    .logo-text { font-size: 11px; letter-spacing: 3px; color: var(--tta-white); opacity: 0.7; margin-bottom: 4px; }
-    .logo-main { font-size: 28px; font-weight: 700; letter-spacing: 1px; color: var(--tta-white); }
-    .logo-main span { color: var(--tta-orange); }
-    .tagline { margin-top: 16px; font-size: 14px; color: var(--tta-white); opacity: 0.9; }
-    .tagline-highlight { display: inline-block; margin-top: 8px; }
-    .tagline-highlight span { font-weight: 600; margin: 0 4px; color: var(--tta-orange); }
-
-    /* Stats Banner */
-    .stats-banner {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin: 20px auto;
-      max-width: 600px;
-    }
-    .stat-box {
-      background: var(--tta-darker);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 10px;
-      padding: 12px 8px;
-      text-align: center;
-    }
-    .stat-number { font-size: 24px; font-weight: 700; color: var(--tta-orange); }
-    .stat-label { font-size: 10px; color: var(--tta-white); opacity: 0.8; margin-top: 4px; }
-
-    /* Main Card */
-    .main-card {
-      background: var(--tta-white);
-      border-radius: 16px;
-      padding: 24px;
-      margin: 20px auto;
-      max-width: 800px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-    }
-    .card-title {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--tta-dark);
-      text-align: center;
-      margin-bottom: 8px;
-    }
-    .card-subtitle {
-      font-size: 12px;
-      color: #666;
-      text-align: center;
-      margin-bottom: 20px;
-      padding-bottom: 16px;
-      border-bottom: 2px solid var(--tta-gray-light);
-    }
-    .section-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--tta-dark);
-      margin: 20px 0 12px;
-      padding-top: 16px;
-      border-top: 2px solid var(--tta-gray-light);
-    }
-
-    /* Phase Grid */
-    .phase-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-    @media (max-width: 600px) { .phase-grid { grid-template-columns: repeat(2, 1fr); } }
-
-    .phase-button {
-      background: var(--tta-dark);
-      border: none;
-      border-radius: 10px;
-      padding: 14px 8px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-align: center;
-      position: relative;
-    }
-    .phase-button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(10, 26, 41, 0.4); }
-    .phase-button:active { transform: scale(0.98); }
-    .phase-button.analyse { border-bottom: 3px solid var(--tta-teal); }
-    .phase-button.konzeption { border-bottom: 3px solid var(--tta-blue); }
-    .phase-button.umsetzung { border-bottom: 3px solid var(--tta-orange); }
-    .phase-button.betrieb { border-bottom: 3px solid var(--tta-teal-dark); }
-    .phase-number { font-size: 20px; font-weight: 700; color: var(--tta-orange); }
-    .phase-title { font-size: 11px; font-weight: 600; color: var(--tta-white); margin: 4px 0; }
-    .phase-count { font-size: 9px; color: var(--tta-blue-light); }
-
-    /* Info Buttons */
-    .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
-    @media (max-width: 500px) { .info-grid { grid-template-columns: 1fr; } }
-
-    .info-button {
-      background: var(--tta-gray-light);
-      border: 1px solid var(--tta-gray-medium);
-      border-radius: 8px;
-      padding: 12px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-align: left;
-    }
-    .info-button:hover { background: var(--tta-gray-medium); transform: translateY(-2px); }
-    .info-button-title { font-size: 11px; font-weight: 600; color: var(--tta-dark); }
-    .info-button-desc { font-size: 9px; color: #666; margin-top: 4px; }
-
-    /* Topic Grid */
-    .topic-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-    @media (min-width: 500px) { .topic-grid { grid-template-columns: repeat(3, 1fr); } }
-
-    .topic-button {
-      background: rgba(124, 194, 250, 0.1);
-      border: 1px solid rgba(124, 194, 250, 0.3);
-      border-left: 3px solid var(--tta-teal);
-      border-radius: 8px;
-      padding: 12px 10px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-align: left;
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--tta-white);
-    }
-    .topic-button:hover { background: rgba(124, 194, 250, 0.2); border-color: var(--tta-blue-light); transform: translateX(3px); }
-    .topic-button:active { transform: scale(0.98); }
-    .topic-button.analyse { border-left-color: var(--tta-teal); }
-    .topic-button.konzeption { border-left-color: var(--tta-blue); }
-    .topic-button.umsetzung { border-left-color: var(--tta-orange); }
-    .topic-button.betrieb { border-left-color: var(--tta-teal-dark); }
-
-    /* Selection Mode */
-    .selection-bar {
-      background: linear-gradient(135deg, var(--tta-orange) 0%, #B34700 100%);
-      padding: 12px 20px;
-      border-radius: 10px;
-      margin-bottom: 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .selection-info {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--tta-white);
-    }
-    .selection-count {
-      background: var(--tta-white);
-      color: var(--tta-orange);
-      padding: 2px 10px;
-      border-radius: 12px;
-      font-weight: 700;
-      margin-left: 8px;
-    }
-    .selection-buttons {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .download-button, .clear-button, .toggle-select-button {
-      background: var(--tta-white);
-      color: var(--tta-dark);
-      border: none;
-      border-radius: 6px;
-      padding: 8px 16px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .download-button:hover { background: var(--tta-gray-light); transform: translateY(-1px); }
-    .clear-button { background: transparent; color: var(--tta-white); border: 1px solid var(--tta-white); }
-    .clear-button:hover { background: rgba(255,255,255,0.1); }
-    .toggle-select-button { background: var(--tta-teal); color: var(--tta-white); }
-    .toggle-select-button:hover { background: var(--tta-teal-dark); }
-    .toggle-select-button.active { background: var(--tta-orange); }
-
-    /* Topic Item with Checkbox */
-    .topic-item {
-      display: flex;
-      align-items: stretch;
-      gap: 0;
-    }
-    .topic-checkbox-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(218, 85, 0, 0.2);
-      border: 1px solid var(--tta-orange);
-      border-right: none;
-      border-radius: 8px 0 0 8px;
-      padding: 0 12px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .topic-checkbox-wrapper:hover { background: rgba(218, 85, 0, 0.3); }
-    .topic-checkbox-wrapper.checked { background: var(--tta-orange); }
-    .topic-checkbox {
-      width: 18px;
-      height: 18px;
-      accent-color: var(--tta-orange);
-      cursor: pointer;
-    }
-    .topic-item .topic-button {
-      border-radius: 0 8px 8px 0;
-      flex: 1;
-    }
-    .topic-item .topic-button.selected {
-      background: rgba(218, 85, 0, 0.2);
-      border-color: var(--tta-orange);
-    }
-
-    /* Complexity Selector */
-    .complexity-selector {
-      display: flex;
-      gap: 4px;
-      background: rgba(10, 26, 41, 0.8);
-      padding: 4px;
-      border-radius: 6px;
-      margin-left: 8px;
-    }
-    .complexity-btn {
-      padding: 4px 8px;
-      border: none;
-      border-radius: 4px;
-      font-size: 9px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      background: transparent;
-      color: var(--tta-white);
-      opacity: 0.6;
-    }
-    .complexity-btn:hover { opacity: 1; }
-    .complexity-btn.active { opacity: 1; }
-    .complexity-btn.low.active { background: #28a745; color: white; }
-    .complexity-btn.medium.active { background: #ffc107; color: #333; }
-    .complexity-btn.high.active { background: #dc3545; color: white; }
-
-    /* Calculation Display */
-    .calculation-panel {
-      background: linear-gradient(135deg, rgba(9, 143, 155, 0.15) 0%, rgba(32, 94, 167, 0.15) 100%);
-      border: 1px solid var(--tta-teal);
-      border-radius: 12px;
-      padding: 20px;
-      margin: 16px 0;
-    }
-    .calculation-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--tta-teal);
-      margin-bottom: 16px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .calculation-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 12px;
-    }
-    .calc-item {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 12px;
-      border-radius: 8px;
-      text-align: center;
-    }
-    .calc-label {
-      font-size: 10px;
-      color: var(--tta-white);
-      opacity: 0.7;
-      margin-bottom: 4px;
-    }
-    .calc-value {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--tta-orange);
-    }
-    .calc-unit {
-      font-size: 10px;
-      color: var(--tta-white);
-      opacity: 0.7;
-    }
-    .calc-breakdown {
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-    .calc-breakdown-title {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--tta-white);
-      margin-bottom: 8px;
-    }
-    .calc-breakdown-item {
-      display: flex;
-      justify-content: space-between;
-      font-size: 10px;
-      padding: 4px 0;
-      color: var(--tta-white);
-      opacity: 0.8;
-    }
-    .complexity-badge {
-      display: inline-block;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 8px;
-      font-weight: 600;
-      margin-left: 6px;
-    }
-    .complexity-badge.low { background: #28a745; color: white; }
-    .complexity-badge.medium { background: #ffc107; color: #333; }
-    .complexity-badge.high { background: #dc3545; color: white; }
-
-    /* Selected Topic Row */
-    .selected-topic-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(255,255,255,0.05);
-      padding: 8px 12px;
-      border-radius: 6px;
-      margin-bottom: 6px;
-    }
-    .selected-topic-name {
-      font-size: 11px;
-      color: var(--tta-white);
-      flex: 1;
-    }
-
-    /* Page Content */
-    .page-content { background: var(--tta-dark); min-height: 100vh; padding: 20px; }
-    .page-container { max-width: 900px; margin: 0 auto; }
-    .page-header {
-      background: linear-gradient(135deg, var(--tta-teal) 0%, var(--tta-teal-dark) 100%);
-      color: var(--tta-white);
-      padding: 20px 24px;
-      border-radius: 12px;
-      margin-bottom: 16px;
-    }
-    .page-header.analyse { background: linear-gradient(135deg, var(--tta-teal) 0%, var(--tta-teal-dark) 100%); }
-    .page-header.konzeption { background: linear-gradient(135deg, var(--tta-blue) 0%, var(--tta-blue-dark) 100%); }
-    .page-header.umsetzung { background: linear-gradient(135deg, var(--tta-orange) 0%, #B34700 100%); }
-    .page-header.betrieb { background: linear-gradient(135deg, var(--tta-teal-dark) 0%, #004D54 100%); }
-    .page-header h1 { font-size: 20px; font-weight: 600; }
-    .page-header-sub { font-size: 12px; opacity: 0.9; margin-top: 4px; }
-
-    /* Back Button */
-    .back-button {
-      background: var(--tta-orange);
-      color: var(--tta-white);
-      border: none;
-      border-radius: 8px;
-      padding: 12px 24px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      margin-top: 16px;
-    }
-    .back-button:hover { background: #C44D00; transform: translateY(-1px); }
-    .back-button:active { transform: scale(0.98); }
-
-    /* Detail View */
-    .detail-card {
-      background: var(--tta-white);
-      border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 16px;
-    }
-    .detail-header {
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--tta-dark);
-      padding-bottom: 12px;
-      margin-bottom: 16px;
-      border-bottom: 3px solid var(--tta-teal);
-    }
-    .detail-section {
-      margin-bottom: 20px;
-    }
-    .detail-label {
-      font-size: 11px;
-      color: var(--tta-teal);
-      font-weight: 600;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .detail-text {
-      font-size: 14px;
-      line-height: 1.7;
-      color: var(--tta-dark);
-    }
-    .detail-list {
-      list-style: none;
-      padding: 0;
-    }
-    .detail-list li {
-      padding: 6px 0 6px 20px;
-      position: relative;
-      font-size: 13px;
-      color: var(--tta-dark);
-    }
-    .detail-list li:before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      color: var(--tta-teal);
-      font-weight: bold;
-    }
-    .deliverable-box {
-      background: var(--tta-gray-light);
-      border-radius: 8px;
-      padding: 16px;
-      margin-top: 12px;
-    }
-    .deliverable-title {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--tta-orange);
-      margin-bottom: 8px;
-      text-transform: uppercase;
-    }
-    .highlight-box {
-      background: linear-gradient(135deg, rgba(218, 85, 0, 0.1) 0%, rgba(9, 143, 155, 0.1) 100%);
-      border-left: 3px solid var(--tta-orange);
-      padding: 12px 16px;
-      margin: 12px 0;
-      border-radius: 0 8px 8px 0;
-    }
-    .highlight-box p {
-      font-size: 13px;
-      color: var(--tta-dark);
-      font-style: italic;
-    }
-
-    /* Breadcrumb */
-    .breadcrumb {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 12px;
-      font-size: 11px;
-      color: rgba(255,255,255,0.6);
-    }
-    .breadcrumb-link { color: var(--tta-blue-light); cursor: pointer; text-decoration: underline; }
-    .breadcrumb-link:hover { color: var(--tta-white); }
-
-    /* Footer */
-    .footer {
-      text-align: center;
-      padding: 30px 20px;
-      color: rgba(255,255,255,0.5);
-      font-size: 11px;
-    }
-    .footer-tagline { color: var(--tta-white); font-size: 12px; margin-bottom: 8px; }
-    .footer-tagline span { color: var(--tta-orange); font-weight: 600; }
-
-    /* Christmas Banner */
-    .christmas-banner {
-      background: linear-gradient(90deg, var(--tta-teal-dark) 0%, var(--tta-teal) 50%, var(--tta-teal-dark) 100%);
-      color: var(--tta-white);
-      text-align: center;
-      padding: 10px;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    /* Advantage Cards */
-    .advantage-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 16px 0; }
-    @media (max-width: 500px) { .advantage-grid { grid-template-columns: 1fr; } }
-    .advantage-card {
-      background: var(--tta-gray-light);
-      border-radius: 10px;
-      padding: 16px;
-      border-left: 3px solid var(--tta-orange);
-    }
-    .advantage-card h4 { font-size: 13px; color: var(--tta-dark); margin-bottom: 8px; }
-    .advantage-card p { font-size: 11px; color: #666; }
-
-    /* Hero Value Proposition Section */
-    .hero-values {
-      max-width: 900px;
-      margin: 0 auto 30px;
-      padding: 0 16px;
-    }
-    .hero-values-card {
-      background: var(--tta-darker);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 16px;
-      padding: 32px;
-    }
-    .hero-values-title {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--tta-white);
-      text-align: center;
-      margin-bottom: 8px;
-    }
-    .hero-values-subtitle {
-      font-size: 13px;
-      color: var(--tta-gray-text);
-      text-align: center;
-      margin-bottom: 28px;
-    }
-    .values-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-    @media (max-width: 700px) { .values-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 450px) { .values-grid { grid-template-columns: 1fr; } }
-    .value-item {
-      background: var(--tta-dark);
-      border-radius: 12px;
-      padding: 20px 16px;
-      text-align: center;
-      border: 1px solid rgba(255,255,255,0.08);
-      transition: all 0.3s ease;
-    }
-    .value-item:hover {
-      border-color: var(--tta-orange);
-      transform: translateY(-2px);
-    }
-    .value-icon {
-      font-size: 28px;
-      margin-bottom: 12px;
-    }
-    .value-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--tta-orange);
-      margin-bottom: 6px;
-    }
-    .value-desc {
-      font-size: 11px;
-      color: var(--tta-gray-text);
-      line-height: 1.5;
-    }
-    .hero-quote {
-      margin-top: 24px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      text-align: center;
-    }
-    .hero-quote p {
-      font-size: 15px;
-      font-style: italic;
-      color: var(--tta-white);
-      opacity: 0.9;
-    }
-
-    /* Success Stories Section */
-    .success-section {
-      max-width: 900px;
-      margin: 30px auto;
-      padding: 0 16px;
-    }
-    .success-section-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--tta-white);
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .success-section-title span {
-      color: var(--tta-orange);
-    }
-    .success-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-    @media (max-width: 700px) { .success-grid { grid-template-columns: 1fr; } }
-    .success-card {
-      background: var(--tta-white);
-      border-radius: 12px;
-      padding: 24px;
-      position: relative;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    }
-    .success-card.featured {
-      border-top: 3px solid var(--tta-orange);
-    }
-    .success-badge {
-      position: absolute;
-      top: -10px;
-      right: 16px;
-      background: var(--tta-orange);
-      color: white;
-      font-size: 9px;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 10px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .success-logo {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--tta-dark);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 12px;
-      opacity: 0.6;
-    }
-    .success-quote {
-      font-size: 13px;
-      color: var(--tta-dark);
-      line-height: 1.7;
-      font-style: italic;
-      margin-bottom: 16px;
-      min-height: 80px;
-    }
-    .success-author {
-      border-top: 1px solid var(--tta-gray-medium);
-      padding-top: 12px;
-    }
-    .success-author-name {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--tta-dark);
-    }
-    .success-author-role {
-      font-size: 10px;
-      color: #666;
-      line-height: 1.4;
-    }
-    .success-results {
-      display: flex;
-      gap: 12px;
-      margin-top: 12px;
-    }
-    .success-result {
-      background: var(--tta-gray-light);
-      border-radius: 8px;
-      padding: 8px 12px;
-      text-align: center;
-      flex: 1;
-    }
-    .success-result-value {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--tta-orange);
-    }
-    .success-result-label {
-      font-size: 9px;
-      color: #666;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERP Transformation Advisory | TIMETOACT GROUP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #1a2634;
+            --bg-secondary: #1e2d3d;
+            --bg-card: #243447;
+            --bg-input: #1a2634;
+            --bg-header: #1a2634;
+            --tta-orange: #e07830;
+            --tta-teal: #2d9a9a;
+            --tta-blue: #2d5a8a;
+            --tta-green: #10b981;
+            --tta-yellow: #f59e0b;
+            --tta-red: #ef4444;
+            --tta-purple: #8b5cf6;
+            --text-primary: #ffffff;
+            --text-secondary: #b8c5d3;
+            --text-muted: #7a8fa3;
+            --border: #344559;
+            --border-light: #3d5269;
+            --shadow: 0 2px 8px rgba(0,0,0,0.3);
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-main); background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; min-height: 100vh; }
+        
+        .site-header { background: var(--bg-header); border-bottom: 1px solid var(--border); }
+        .header-top { display: flex; justify-content: flex-end; gap: 24px; padding: 8px 40px; font-size: 13px; color: var(--text-muted); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .header-top a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .header-top a:hover { color: var(--text-primary); }
+        .header-main { display: flex; align-items: center; justify-content: space-between; padding: 16px 40px; max-width: 1600px; margin: 0 auto; }
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo-img { height: 40px; }
+        .logo-text { font-size: 1.4rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.02em; }
+        .header-right { display: flex; align-items: center; gap: 20px; }
+        .header-badge { padding: 8px 20px; border-radius: 4px; font-size: 0.8rem; color: var(--tta-teal); border: 1px solid var(--tta-teal); transition: all 0.2s; cursor: pointer; background: none; }
+        .header-badge:hover { background: var(--tta-teal); color: white; }
+        
+        .nav-tabs { background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 0 40px; overflow-x: auto; }
+        .nav-tabs-inner { max-width: 1600px; margin: 0 auto; display: flex; gap: 4px; }
+        .nav-tab { padding: 16px 20px; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); background: none; border: none; cursor: pointer; position: relative; white-space: nowrap; transition: all 0.2s; }
+        .nav-tab:hover { color: var(--text-secondary); }
+        .nav-tab.active { color: var(--tta-teal); }
+        .nav-tab.active::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--tta-teal); }
+        
+        .main-content { max-width: 1600px; margin: 0 auto; padding: 2rem 40px; }
+        .tab-content { display: none; animation: fadeIn 0.3s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .section-header { margin-bottom: 1.5rem; }
+        .section-title { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); display: flex; align-items: center; gap: 12px; }
+        .section-title-icon { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+        .section-subtitle { font-size: 0.9rem; color: var(--text-muted); margin-top: 4px; }
+        
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+        .mb-2 { margin-bottom: 1.5rem; }
+        .mt-2 { margin-top: 1rem; }
+        .mt-3 { margin-top: 1.5rem; }
+        
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; transition: all 0.3s ease; }
+        .card:hover { border-color: var(--tta-teal); }
+        .card.clickable { cursor: pointer; }
+        .card.clickable:hover { transform: translateY(-2px); }
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem; }
+        .card-title { font-size: 1rem; font-weight: 600; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
+        .card-badge { font-size: 0.65rem; padding: 4px 10px; border-radius: 4px; font-weight: 600; text-transform: uppercase; }
+        .badge-orange { background: rgba(224,120,48,0.15); color: var(--tta-orange); }
+        .badge-teal { background: rgba(45,154,154,0.15); color: var(--tta-teal); }
+        .badge-blue { background: rgba(45,90,138,0.15); color: #5a9bd4; }
+        .badge-green { background: rgba(16,185,129,0.15); color: var(--tta-green); }
+        .badge-purple { background: rgba(139,92,246,0.15); color: var(--tta-purple); }
+        .badge-red { background: rgba(239,68,68,0.15); color: var(--tta-red); }
+        
+        .text-warning { color: var(--tta-yellow); }
+        .text-success { color: var(--tta-green); }
+        .text-danger { color: var(--tta-red); }
+        .text-orange { color: var(--tta-orange); }
+        .text-teal { color: var(--tta-teal); }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        
+        .info-box { background: rgba(45,90,138,0.1); border: 1px solid rgba(45,90,138,0.3); border-radius: 6px; padding: 1rem; }
+        .info-box.success { background: rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.3); }
+        .info-box.warning { background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.3); }
+        .info-box.danger { background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.3); }
+        .info-box-title { font-weight: 600; font-size: 0.85rem; margin-bottom: 6px; color: var(--text-primary); }
+        .info-box-content { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6; }
+        
+        .table-container { overflow-x: auto; }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .data-table th { text-align: left; padding: 12px; background: var(--bg-secondary); font-weight: 600; color: var(--text-secondary); border-bottom: 1px solid var(--border); }
+        .data-table td { padding: 12px; border-bottom: 1px solid var(--border); color: var(--text-primary); }
+        .data-table tr:hover td { background: rgba(45,154,154,0.05); }
+        
+        .kpi-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; position: relative; overflow: hidden; }
+        .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+        .kpi-card.orange::before { background: var(--tta-orange); }
+        .kpi-card.teal::before { background: var(--tta-teal); }
+        .kpi-card.blue::before { background: #5a9bd4; }
+        .kpi-card.green::before { background: var(--tta-green); }
+        .kpi-card.purple::before { background: var(--tta-purple); }
+        .kpi-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 500; }
+        .kpi-value { font-size: 1.5rem; font-weight: 700; margin-top: 6px; color: var(--text-primary); }
+        .kpi-change { font-size: 0.75rem; margin-top: 6px; color: var(--text-muted); }
+        .kpi-change.positive { color: var(--tta-green); }
+        
+        .result-box { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; margin-top: 1.25rem; }
+        .result-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+        .result-value { font-size: 1.75rem; font-weight: 700; color: var(--tta-teal); }
+        .result-value.orange { color: var(--tta-orange); }
+        .result-detail { font-size: 0.8rem; color: var(--text-muted); margin-top: 8px; }
+        .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1rem; margin-top: 1rem; }
+        .result-item { background: var(--bg-card); padding: 12px; border-radius: 6px; border: 1px solid var(--border); }
+        .result-item-label { font-size: 0.7rem; color: var(--text-muted); }
+        .result-item-value { font-size: 1rem; font-weight: 600; margin-top: 4px; color: var(--text-primary); }
+        
+        .phase-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden; }
+        .phase-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+        .phase-card:hover { border-color: var(--tta-teal); transform: translateY(-2px); }
+        .phase-card.analyse::before { background: var(--tta-teal); }
+        .phase-card.konzeption::before { background: #5a9bd4; }
+        .phase-card.umsetzung::before { background: var(--tta-orange); }
+        .phase-card.betrieb::before { background: var(--tta-green); }
+        .phase-number { font-size: 2rem; font-weight: 800; color: var(--tta-orange); }
+        .phase-title { font-size: 1.1rem; font-weight: 600; margin-top: 8px; color: var(--text-primary); }
+        .phase-count { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
+        
+        .value-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; text-align: center; transition: all 0.3s; }
+        .value-card:hover { border-color: var(--tta-orange); }
+        .value-icon { font-size: 2rem; margin-bottom: 12px; }
+        .value-title { font-size: 0.9rem; font-weight: 600; color: var(--tta-orange); margin-bottom: 8px; }
+        .value-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+        
+        .success-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; position: relative; }
+        .success-card.featured { border-top: 3px solid var(--tta-orange); }
+        .success-badge { position: absolute; top: -10px; right: 16px; background: var(--tta-orange); color: white; font-size: 0.65rem; font-weight: 700; padding: 4px 10px; border-radius: 10px; text-transform: uppercase; }
+        .success-logo { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+        .success-quote { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; font-style: italic; margin-bottom: 16px; }
+        .success-author { border-top: 1px solid var(--border); padding-top: 12px; }
+        .success-author-name { font-size: 0.85rem; font-weight: 600; color: var(--text-primary); }
+        .success-author-role { font-size: 0.75rem; color: var(--text-muted); line-height: 1.4; }
+        .success-results { display: flex; gap: 12px; margin-top: 12px; }
+        .success-result { background: var(--bg-secondary); border-radius: 6px; padding: 8px 12px; text-align: center; flex: 1; }
+        .success-result-value { font-size: 1rem; font-weight: 700; color: var(--tta-orange); }
+        .success-result-label { font-size: 0.65rem; color: var(--text-muted); }
+        
+        .detail-text { font-size: 0.9rem; line-height: 1.7; color: var(--text-secondary); }
+        .detail-list { list-style: none; margin-top: 0.5rem; }
+        .detail-list li { padding: 8px 0 8px 24px; position: relative; font-size: 0.85rem; color: var(--text-secondary); border-bottom: 1px solid var(--border); }
+        .detail-list li:last-child { border-bottom: none; }
+        .detail-list li::before { content: "✓"; position: absolute; left: 0; color: var(--tta-teal); font-weight: bold; }
+        
+        .deliverable-box { background: var(--bg-secondary); border-radius: 6px; padding: 1rem; margin-top: 1rem; border-left: 3px solid var(--tta-teal); }
+        .deliverable-title { font-size: 0.7rem; font-weight: 600; color: var(--tta-teal); margin-bottom: 8px; text-transform: uppercase; }
+        .deliverable-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .deliverable-tag { background: rgba(45,154,154,0.15); color: var(--tta-teal); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 500; }
+        
+        .highlight-box { background: linear-gradient(135deg, rgba(224,120,48,0.1) 0%, rgba(45,154,154,0.1) 100%); border-left: 3px solid var(--tta-orange); padding: 1rem 1.25rem; margin: 1rem 0; border-radius: 0 6px 6px 0; }
+        .highlight-box p { font-size: 0.9rem; color: var(--text-primary); font-style: italic; }
+        
+        .site-footer { background: var(--bg-secondary); border-top: 1px solid var(--border); padding: 2rem 40px; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+        
+        /* Handover Flow Styles */
+        .handover-flow { display: flex; flex-direction: column; gap: 0; margin: 1.5rem 0; }
+        .handover-step { background: var(--bg-card); border: 1px solid var(--border); padding: 1.25rem; position: relative; }
+        .handover-step:first-child { border-radius: 8px 8px 0 0; }
+        .handover-step:last-child { border-radius: 0 0 8px 8px; }
+        .handover-step.active { border-color: var(--tta-orange); border-width: 2px; background: rgba(224,120,48,0.05); }
+        .handover-step.handover { border-color: var(--tta-purple); background: rgba(139,92,246,0.05); }
+        .handover-step-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+        .handover-step-number { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; }
+        .handover-step.active .handover-step-number { background: var(--tta-orange); color: white; }
+        .handover-step.handover .handover-step-number { background: var(--tta-purple); color: white; }
+        .handover-step:not(.active):not(.handover) .handover-step-number { background: var(--border); color: var(--text-muted); }
+        .handover-step-title { font-weight: 600; color: var(--text-primary); }
+        .handover-step-brand { font-size: 0.75rem; padding: 2px 8px; border-radius: 4px; margin-left: auto; }
+        .brand-advisory { background: rgba(224,120,48,0.15); color: var(--tta-orange); }
+        .brand-walldorf { background: rgba(139,92,246,0.15); color: var(--tta-purple); }
+        .brand-other { background: rgba(45,154,154,0.15); color: var(--tta-teal); }
+        .handover-step-content { font-size: 0.85rem; color: var(--text-secondary); margin-left: 40px; }
+        .handover-arrow { text-align: center; color: var(--tta-orange); font-size: 1.5rem; margin: -8px 0; position: relative; z-index: 1; }
+        
+        /* Scope Cards */
+        .scope-card { background: var(--bg-card); border: 2px solid var(--border); border-radius: 8px; padding: 1.5rem; }
+        .scope-card.in-scope { border-color: var(--tta-orange); }
+        .scope-card.out-scope { border-color: var(--tta-purple); }
+        .scope-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+        .scope-icon { font-size: 2rem; }
+        .scope-title { font-size: 1.1rem; font-weight: 600; color: var(--text-primary); }
+        .scope-subtitle { font-size: 0.8rem; color: var(--text-muted); }
+        
+        @media (max-width: 768px) { 
+            .header-main, .nav-tabs, .main-content { padding-left: 20px; padding-right: 20px; } 
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } 
+            .logo-img { height: 32px; }
+        }
+    </style>
 </head>
 <body>
-  <div id="app"></div>
-
-  <script>
-    // =====================================================
-    // TIMETOACT GROUP - ERP Transformation Advisory
-    // Wir mappen Ihre Prozesse zum passenden ERP
-    // =====================================================
-
-    // =====================================================
-    // EXPERTENQUELLEN FÜR GLAUBWÜRDIGKEIT
-    // =====================================================
-    const expertQuotes = {
-      gartner: {
-        failure: "Bis 2027 werden mehr als 70% der kürzlich implementierten ERP-Initiativen ihre ursprünglichen Business-Case-Ziele nicht vollständig erreichen. Bis zu 25% davon werden katastrophal scheitern.",
-        adoption: "Geringe Endanwender-Akzeptanz entsteht, wenn Anwender die Gründe für die ERP-Implementierung und deren Auswirkungen auf sie nicht verstehen.",
-        source: "Gartner Research, 2024"
-      },
-      mckinsey: {
-        transformation: "Weniger als ein Drittel der organisatorischen Transformationen sind erfolgreich. Bei digitalen Transformationen liegt die Erfolgsquote sogar noch niedriger – nur 16% verbessern die Performance nachhaltig.",
-        changeStory: "Unternehmen, deren Management eine klare Change-Story etabliert, haben eine 3,1-mal höhere Erfolgsrate.",
-        tools: "Die Implementierung digitaler Tools, um Informationen unternehmensweit zugänglich zu machen, kann die Erfolgsrate von Transformationen mehr als verdoppeln.",
-        source: "McKinsey Global Survey on Digital Transformations"
-      },
-      prosci: {
-        changeManagement: "Projekte mit exzellentem Change Management sind 7-mal wahrscheinlicher erfolgreich als solche mit schlechtem Change Management.",
-        sponsor: "Projekte mit gutem oder exzellentem Executive-Sponsor-Zugang haben eine Erfolgsquote von 72%.",
-        adoption: "Mit effektivem Change Management sehen Unternehmen operative Verbesserungen und finanzielle Erträge Monate früher als bei Implementierungen, die die menschliche Seite des Wandels vernachlässigen.",
-        erpSuccess: "Nur 55% der ERP-Projekte erreichen oder übertreffen ihre Ziele.",
-        source: "Prosci Best Practices Research"
-      },
-      industry: {
-        budget: "55-75% aller ERP-Projekte erreichen ihre Ziele nicht. Die häufigsten Probleme: Budgetüberschreitung (55%), Terminüberschreitung (47%) und mangelnde Transparenz (53%).",
-        dataQuality: "Datenqualitätsprobleme sind eine der Hauptursachen für ERP-Projektverzögerungen. Unternehmen identifizieren sowohl Genauigkeits- als auch Datentransformationsprobleme bei der Migration.",
-        complexity: "Prozesskomplexität ist die größte Herausforderung (62%), gefolgt von Integration (49%) und dem Verständnis von Prozessanforderungen (49%).",
-        source: "Branchenstudien 2024/2025"
-      }
-    };
-
-    const detailContent = {
-      // === WARUM ADVISORY ===
-      "warum-advisory": {
-        title: "Warum ERP Transformation Advisory?",
-        phase: "info",
-        content: {
-          intro: `Laut Gartner werden bis 2027 mehr als 70% der ERP-Initiativen ihre Business-Case-Ziele nicht erreichen – bis zu 25% scheitern katastrophal. 55-75% aller ERP-Projekte verfehlen ihre Ziele. Die Hauptursachen sind bekannt – und vermeidbar.`,
-          sections: [
-            {
-              label: "Die vier Hauptursachen für ERP-Projektprobleme",
-              items: [
-                "Unklare Prozessanforderungen: Fehlende Ist-Analyse führt zu Scope Creep und nachträglichen Änderungen",
-                "Schlechte Datenqualität: Datenprobleme sind eine der Hauptursachen für Go-Live-Verzögerungen",
-                "Unrealistische Planung: 47% der Projekte überschreiten die Timeline (Branchenstudien)",
-                "Fehlende unabhängige QA: Der Systemintegrator kontrolliert sich selbst – mit vorhersehbaren Ergebnissen"
-              ]
-            },
-            {
-              label: "Was die Forschung zeigt",
-              text: "McKinsey: Nur 16% der digitalen Transformationen verbessern die Performance nachhaltig. Prosci: Projekte mit exzellentem Change Management sind 7-mal wahrscheinlicher erfolgreich."
-            }
-          ],
-          highlight: "Die Lösung: Ein unabhängiger Advisory-Partner, der Ihre Interessen vertritt – nicht die des ERP-Vendors oder Systemintegrators.",
-          deliverables: ["Objektive Bewertung", "Risikominimierung", "Budgetsicherheit", "Projekterfolg"]
-        }
-      },
-      "interessenkonflikte": {
-        title: "Interessenkonflikte der Systemintegratoren",
-        phase: "info",
-        content: {
-          intro: `Große Systemintegratoren haben strukturelle Interessenkonflikte, die unabhängig von den handelnden Personen bestehen. Diese Konflikte können Ihrem Projekt schaden.`,
-          sections: [
-            {
-              label: "Lizenzprovisionen – Vendor-Abhängigkeit",
-              text: "Große SIs verdienen an ERP-Lizenzen. Die Empfehlung fällt oft zugunsten des Partners aus – nicht zugunsten Ihrer Prozesse. Sie erhalten möglicherweise nicht das ERP, das am besten zu Ihnen passt."
-            },
-            {
-              label: "Junior-Pyramide – Unerfahrene Teams",
-              text: "Senior-Partner verkaufen, Juniors liefern. Sie zahlen für die Einarbeitung unerfahrener Berater auf Ihre Kosten statt für echte Erfahrung und produktive Arbeit ab Tag 1."
-            },
-            {
-              label: "Scope-Maximierung – Mehr ist mehr",
-              text: "Je größer das Projekt, desto höher der Umsatz. Es fehlt der Anreiz, schlanke und effiziente Lösungen zu empfehlen. Customizations werden gefördert statt verhindert."
-            }
-          ],
-          highlight: "Das Geschäftsmodell erzeugt systemische Interessenkonflikte – unabhängig von den handelnden Personen.",
-          deliverables: ["Objektive Beratung", "Keine Lizenzprovisionen", "Senior-Berater", "Fokus auf Ihre Ziele"]
-        }
-      },
-      "vorteile": {
-        title: "Unsere vier unfairen Vorteile",
-        phase: "info",
-        content: {
-          intro: `Wir haben unser Geschäftsmodell bewusst so gestaltet, dass unsere Interessen mit Ihren übereinstimmen. Das macht uns zum idealen Partner für Ihre ERP-Transformation.`,
-          sections: [
-            {
-              label: "100% Herstellerneutral",
-              text: "Keine Lizenzen, keine Provisionen. Wir empfehlen das ERP, das zu Ihren Prozessen passt – ob SAP, Oracle, Microsoft, Infor oder andere. Unsere Empfehlung basiert auf Ihren Anforderungen, nicht auf unserer Marge."
-            },
-            {
-              label: "Process First",
-              text: "Wir verstehen und optimieren Ihre Prozesse zuerst – dann wählen wir die Technologie. Das verhindert teure Customizations und stellt sicher, dass das ERP zu Ihnen passt, nicht umgekehrt."
-            },
-            {
-              label: "Senior-Only",
-              text: "Keine Junior-Pyramide. Erfahrene Berater mit Cross-ERP-Erfahrung, produktiv ab Tag 1. Sie bezahlen für Ergebnisse, nicht für Einarbeitung."
-            },
-            {
-              label: "Modularer Baukasten",
-              text: "21 Services in 4 Phasen. Einzeln buchbar, kein Vendor Lock-in. Flexibel rein, flexibel raus – Sie entscheiden über den Umfang."
-            }
-          ],
-          highlight: "Wir verkaufen keine Lizenzen. Wir liefern Projekterfolg.",
-          deliverables: ["Objektive Empfehlungen", "Multi-ERP Know-how", "Keine teuren Customizations", "Flexibel rein, flexibel raus"]
-        }
-      },
-      "erp-systeme": {
-        title: "Erst Prozesse, dann Technologie",
-        phase: "info",
-        content: {
-          intro: `Der übliche Weg: ERP zuerst wählen, dann Prozesse anpassen. Das führt zu teuren Customizations und Vendor Lock-in. Unser Weg: Prozesse verstehen, optimieren, dann objektiv das beste ERP wählen.`,
-          sections: [
-            {
-              label: "Der übliche Weg (problematisch)",
-              items: [
-                "Vendor empfiehlt ERP basierend auf Partnerschaft",
-                "Prozesse werden an das System angepasst",
-                "Teure Customizations entstehen",
-                "Vendor Lock-in wird zementiert"
-              ]
-            },
-            {
-              label: "Unser Weg (empfohlen)",
-              items: [
-                "Ist-Prozesse verstehen und dokumentieren",
-                "Soll-Prozesse definieren und optimieren",
-                "ERP-Systeme objektiv vergleichen",
-                "Beste Lösung für IHRE Anforderungen wählen"
-              ]
-            },
-            {
-              label: "Unterstützte ERP-Systeme",
-              text: "SAP S/4HANA, Oracle Cloud, Microsoft Dynamics 365, Infor, IFS, Odoo und weitere. Wir kennen die Stärken und Schwächen jedes Systems und empfehlen objektiv."
-            }
-          ],
-          highlight: "Wir mappen Ihre Geschäftsprozesse zum passenden ERP – nicht umgekehrt.",
-          deliverables: ["Prozess-Dokumentation", "ERP-Vergleich", "Objektive Empfehlung", "Fit-to-Standard"]
-        }
-      },
-
-      // === PHASE 1: ANALYSE ===
-      "process-mapping": {
-        title: "Process Mapping",
-        phase: "analyse",
-        content: {
-          intro: `Das Process Mapping ist der Grundstein jeder erfolgreichen ERP-Transformation. Wir dokumentieren Ihre Ist-Prozesse und identifizieren Optimierungspotenziale – bevor Sie sich für ein ERP entscheiden. Branchenstudien zeigen: Prozesskomplexität ist mit 62% die größte Herausforderung bei ERP-Migrationen.`,
-          sections: [
-            {
-              label: "Was wir tun",
-              items: [
-                "Strukturierte Prozessaufnahme in Workshops mit Ihren Fachbereichen",
-                "Dokumentation in BPMN 2.0 für einheitliches Verständnis",
-                "Identifikation von Medienbrüchen und Ineffizienzen",
-                "Benchmarking gegen Best Practices Ihrer Branche",
-                "Priorisierung der Optimierungspotenziale nach Business Impact"
-              ]
-            },
-            {
-              label: "Warum das wichtig ist",
-              text: "Das Verstehen und Definieren von Prozessanforderungen ist mit 49% eine der Top-3-Herausforderungen bei ERP-Projekten. Ohne klare Prozessdokumentation wird jedes ERP-Projekt zum Blindflug. Scope Creep und Budgetüberschreitungen sind die Folge."
-            }
-          ],
-          highlight: "Wer seine Prozesse nicht kennt, kann kein ERP auswählen. Wer seine Prozesse kennt, wählt das richtige ERP.",
-          deliverables: ["Prozesslandkarte (BPMN)", "Optimierungspotenziale", "Pain Points dokumentiert", "Prozess-KPIs"]
-        }
-      },
-      "readiness-assessment": {
-        title: "Readiness Assessment",
-        phase: "analyse",
-        content: {
-          intro: `Das Readiness Assessment bewertet, wie bereit Ihre Organisation für eine ERP-Transformation wirklich ist. Gartner warnt: Bis zu 25% der ERP-Initiativen scheitern katastrophal – oft weil Gaps und Risiken zu spät erkannt werden.`,
-          sections: [
-            {
-              label: "Assessment-Dimensionen",
-              items: [
-                "Organisatorische Readiness: Change-Fähigkeit, Ressourcenverfügbarkeit, Management-Commitment",
-                "Technische Readiness: IT-Infrastruktur, Systemlandschaft, Integrationsfähigkeit",
-                "Prozess-Readiness: Standardisierungsgrad, Dokumentationsstand, Prozessreife",
-                "Daten-Readiness: Datenqualität, Stammdaten-Governance, Migrationsfähigkeit",
-                "Budget- und Zeitrahmen-Realismus: 47% der ERP-Projekte überschreiten die Zeitplanung"
-              ]
-            },
-            {
-              label: "Ergebnis",
-              text: "Sie erhalten einen detaillierten Readiness-Report mit Ampelbewertung für jede Dimension, identifizierten Gaps und konkreten Handlungsempfehlungen zur Schließung der Gaps vor Projektstart."
-            }
-          ],
-          highlight: "Ein ehrliches Readiness Assessment heute verhindert teure Überraschungen morgen.",
-          deliverables: ["Readiness-Report", "Gap-Analyse", "Handlungsempfehlungen", "Risiko-Assessment"]
-        }
-      },
-      "business-case": {
-        title: "Business Case & ROI",
-        phase: "analyse",
-        content: {
-          intro: `Ein fundierter Business Case ist die Grundlage für die Projektfreigabe und das Budget. 55% der ERP-Projekte überschreiten das Budget – oft weil der Business Case unrealistisch war. Wir erstellen eine realistische TCO-Berechnung und ROI-Analyse.`,
-          sections: [
-            {
-              label: "Business-Case-Inhalte",
-              items: [
-                "Ist-Kosten-Analyse: Was kostet Ihre aktuelle Systemlandschaft wirklich?",
-                "Investitionskosten: Lizenzen, Implementierung, Hardware, Schulung",
-                "Laufende Kosten: Wartung, Support, Betrieb, Updates",
-                "Quantifizierbare Benefits: Prozesseffizienz, Automatisierung, Zeitersparnis",
-                "Qualitative Benefits: Transparenz, Entscheidungsqualität, Compliance"
-              ]
-            },
-            {
-              label: "TCO-Vergleich",
-              text: "Wir vergleichen die Total Cost of Ownership verschiedener ERP-Optionen über 5-10 Jahre. So sehen Sie, welche Lösung langfristig die wirtschaftlichste ist – nicht nur bei den Lizenzkosten."
-            }
-          ],
-          highlight: "Der günstigste Anbieter ist selten der wirtschaftlichste. Wir rechnen ehrlich.",
-          deliverables: ["Business-Case-Dokument", "TCO-Vergleich", "ROI-Berechnung", "Sensitivitätsanalyse"]
-        }
-      },
-      "datenqualitaet": {
-        title: "Datenqualitäts-Analyse",
-        phase: "analyse",
-        content: {
-          intro: `Schlechte Datenqualität ist eine der Hauptursachen für ERP-Projektprobleme und Go-Live-Verzögerungen. Branchenstudien zeigen: Datenqualitätsprobleme gehören zu den am meisten unterschätzten Risiken. Wir analysieren Ihre Stammdaten rechtzeitig vor der Migration.`,
-          sections: [
-            {
-              label: "Analyse-Bereiche",
-              items: [
-                "Stammdaten: Kunden, Lieferanten, Materialien, Stücklisten",
-                "Bewegungsdaten: Offene Posten, Aufträge, Bestände",
-                "Organisationsdaten: Buchungskreise, Werke, Kostenstellen",
-                "Customizing-Daten: Einstellungen, Konfiguration, Anpassungen"
-              ]
-            },
-            {
-              label: "Qualitätskriterien",
-              items: [
-                "Vollständigkeit: Fehlen kritische Datenfelder?",
-                "Konsistenz: Widersprüche zwischen Systemen?",
-                "Aktualität: Veraltete oder obsolete Datensätze?",
-                "Dubletten: Mehrfach angelegte Stammdaten?"
-              ]
-            },
-            {
-              label: "Branchenstimme",
-              text: "Datenqualität ist eine kritische, aber oft übersehene Herausforderung. Unternehmen identifizieren sowohl Genauigkeits- als auch Datentransformationsprobleme beim Verschieben von Legacy-Daten in neue ERP-Umgebungen. (Branchenstudien 2024/2025)"
-            }
-          ],
-          highlight: "Garbage in, garbage out. Datenbereinigung muss VOR der Migration starten, nicht währenddessen.",
-          deliverables: ["Datenqualitäts-Report", "Bereinigungskonzept", "Priorisierte Maßnahmenliste", "Migrationsfähigkeits-Bewertung"]
-        }
-      },
-      "erp-evaluation": {
-        title: "ERP-Evaluation",
-        phase: "analyse",
-        content: {
-          intro: `Wir evaluieren ERP-Systeme objektiv nach Ihren Kriterien – ohne Vendor-Bias. Das Ergebnis ist eine fundierte Empfehlung, welches System am besten zu Ihren Prozessen passt.`,
-          sections: [
-            {
-              label: "Evaluierte Systeme",
-              items: [
-                "SAP S/4HANA (Public Cloud, Private Cloud, On-Premise)",
-                "Oracle Cloud ERP / NetSuite",
-                "Microsoft Dynamics 365 Finance & Operations",
-                "Infor CloudSuite (branchenspezifisch)",
-                "IFS Cloud, Odoo und weitere"
-              ]
-            },
-            {
-              label: "Bewertungskriterien",
-              items: [
-                "Funktionale Abdeckung Ihrer Anforderungen",
-                "Fit-to-Standard vs. Customizing-Bedarf",
-                "Total Cost of Ownership über 5-10 Jahre",
-                "Implementierungsrisiko und -aufwand",
-                "Zukunftsfähigkeit und Innovationskraft"
-              ]
-            }
-          ],
-          highlight: "Wir empfehlen das ERP, das zu Ihnen passt – nicht das, an dem wir am meisten verdienen.",
-          deliverables: ["ERP-Vergleichsmatrix", "Scoring nach Ihren Kriterien", "Empfehlung mit Begründung", "Shortlist für PoC"]
-        }
-      },
-      "roadmap": {
-        title: "Transformations-Roadmap",
-        phase: "analyse",
-        content: {
-          intro: `Die Roadmap ist Ihr Fahrplan für die ERP-Transformation. Wir definieren Meilensteine, identifizieren Quick Wins und planen die Transformation in machbaren Schritten.`,
-          sections: [
-            {
-              label: "Roadmap-Elemente",
-              items: [
-                "Phasenplan mit realistischen Zeitrahmen",
-                "Meilensteine und Quality Gates",
-                "Quick Wins für frühe Erfolge",
-                "Abhängigkeiten und kritischer Pfad",
-                "Ressourcenplanung und Budget-Allokation"
-              ]
-            },
-            {
-              label: "Szenarien",
-              text: "Wir entwickeln verschiedene Szenarien (konservativ, optimistisch, aggressiv) mit unterschiedlichen Zeit- und Budgetrahmen, damit Sie eine informierte Entscheidung treffen können."
-            }
-          ],
-          highlight: "Eine realistische Roadmap ist wichtiger als eine optimistische. Wir planen ehrlich.",
-          deliverables: ["Transformations-Roadmap", "Meilensteinplan", "Quick-Win-Liste", "Ressourcenplan"]
-        }
-      },
-
-      // === PHASE 2: KONZEPTION ===
-      "soll-prozesse": {
-        title: "Soll-Prozess-Definition",
-        phase: "konzeption",
-        content: {
-          intro: `Auf Basis der Ist-Analyse definieren wir Ihre optimierten Soll-Prozesse. Der Fokus liegt auf Fit-to-Standard: Wir nutzen ERP-Best-Practices, wo immer möglich.`,
-          sections: [
-            {
-              label: "Vorgehen",
-              items: [
-                "Definition der Soll-Prozesse mit Ihren Fachbereichen",
-                "Integration von ERP-Best-Practices und Branchenstandards",
-                "Fit-to-Standard-Prüfung: Passt der Prozess zum ERP-Standard?",
-                "Identifikation unvermeidbarer Anpassungen",
-                "Dokumentation in BPMN 2.0"
-              ]
-            },
-            {
-              label: "Fit-to-Standard-Prinzip",
-              text: "Jede Abweichung vom Standard verursacht Kosten – bei der Implementierung, bei Updates, beim Support. Wir maximieren Fit-to-Standard und minimieren Customizing."
-            }
-          ],
-          highlight: "80% Standard, 20% Anpassung ist das Ziel. Nicht umgekehrt.",
-          deliverables: ["Soll-Prozess-Modelle", "Fit-to-Standard-Report", "Customizing-Anforderungen", "Prozess-KPIs"]
-        }
-      },
-      "gap-analyse": {
-        title: "Gap-Analyse",
-        phase: "konzeption",
-        content: {
-          intro: `Die Gap-Analyse zeigt das Delta zwischen Ihren Soll-Prozessen und dem ERP-Standard. Wir bewerten den ERP-Fit und identifizieren den Customizing-Bedarf.`,
-          sections: [
-            {
-              label: "Gap-Kategorien",
-              items: [
-                "Fit: Der ERP-Standard erfüllt die Anforderung",
-                "Gap mit Workaround: Anforderung erfüllbar durch Konfiguration/Workaround",
-                "Gap mit Customizing: Entwicklung erforderlich",
-                "Gap mit Add-On: Partnerlösung oder Drittanbieter empfohlen",
-                "Showstopper: Kritische Anforderung nicht erfüllbar"
-              ]
-            },
-            {
-              label: "Bewertung",
-              text: "Jeder Gap wird nach Kritikalität, Aufwand und Risiko bewertet. Das Ergebnis ist eine priorisierte Liste von Entscheidungen, die Sie vor der Implementierung treffen müssen."
-            }
-          ],
-          highlight: "Gaps früh erkennen kostet wenig. Gaps spät erkennen kostet viel.",
-          deliverables: ["Gap-Report", "Entscheidungsmatrix", "Customizing-Backlog", "Risikobewertung"]
-        }
-      },
-      "loesungsdesign": {
-        title: "Lösungsdesign",
-        phase: "konzeption",
-        content: {
-          intro: `Das Lösungsdesign ist der technische Blueprint für Ihre ERP-Implementierung. Wir definieren Architektur, Konfiguration und Customizing im Detail – mit dem Ziel maximaler Standardisierung.`,
-          sections: [
-            {
-              label: "Design-Elemente",
-              items: [
-                "System-Architektur: Landscape, Instanzen, Mandanten",
-                "Organisations-Strukturen: Buchungskreise, Werke, Vertriebswege",
-                "Master Data Design: Stammdaten-Modell, Nummernkreise",
-                "Prozess-Konfiguration: Einstellungen pro Prozess",
-                "Erweiterungen: Custom Code, Enhancements, Add-Ons"
-              ]
-            },
-            {
-              label: "Clean-Architecture-Prinzip",
-              text: "Wir folgen dem Clean-Architecture-Prinzip: Der ERP-Kern bleibt sauber und standardnah, Erweiterungen werden in definierten Extension Points oder als Side-by-Side-Lösungen umgesetzt. Das sichert Update-Fähigkeit und reduziert technische Schulden."
-            }
-          ],
-          highlight: "Ein sauberes Design heute spart Millionen bei zukünftigen Updates.",
-          deliverables: ["Solution Design Document", "Architektur-Blueprint", "Konfigurationskonzept", "Extension-Konzept"]
-        }
-      },
-      "integrationskonzept": {
-        title: "Integrationskonzept",
-        phase: "konzeption",
-        content: {
-          intro: `Das ERP ist das Herzstück Ihrer IT-Landschaft. Integration ist mit 49% eine der Top-3-Herausforderungen bei ERP-Projekten. Das Integrationskonzept definiert, wie das ERP mit allen anderen Systemen kommuniziert.`,
-          sections: [
-            {
-              label: "Integrationsbereiche",
-              items: [
-                "CRM-Integration: Kunden, Opportunities, Aufträge",
-                "E-Commerce: Webshop-Anbindung, Produktdaten",
-                "Produktion: MES, Maschinendaten, IoT",
-                "Logistik: WMS, TMS, Carrier-Anbindung",
-                "Finance: Banken, Zahlungsverkehr, Konsolidierung",
-                "HR: Personalwirtschaft, Zeiterfassung, Payroll"
-              ]
-            },
-            {
-              label: "Integrationsmuster",
-              text: "Wir definieren für jede Schnittstelle das optimale Integrationsmuster: Synchron vs. Asynchron, API vs. File, Point-to-Point vs. Middleware (iPaaS)."
-            }
-          ],
-          highlight: "Schlechte Integration ist der versteckte Kostentreiber vieler ERP-Projekte.",
-          deliverables: ["Integrations-Architektur", "Schnittstellen-Katalog", "API-Strategie", "Middleware-Empfehlung"]
-        }
-      },
-      "change-readiness": {
-        title: "Change Readiness",
-        phase: "konzeption",
-        content: {
-          intro: `Die beste Technik nützt nichts, wenn die Menschen nicht mitziehen. McKinsey zeigt: Unternehmen mit einer klaren Change-Story haben eine 3,1-mal höhere Erfolgsrate. Change Readiness bereitet Ihre Organisation auf die Transformation vor.`,
-          sections: [
-            {
-              label: "Analyse-Elemente",
-              items: [
-                "Stakeholder-Mapping: Wer sind die Betroffenen?",
-                "Change Impact Assessment: Wie stark verändert sich die Arbeit?",
-                "Widerstandsanalyse: Wo ist mit Widerstand zu rechnen?",
-                "Kommunikationsbedarfe: Wer muss was wann wissen?",
-                "Trainingsbedarfe: Welche Skills fehlen?"
-              ]
-            },
-            {
-              label: "Change-Strategie",
-              text: "Basierend auf der Analyse entwickeln wir eine maßgeschneiderte Change-Strategie mit Kommunikationsplan, Stakeholder-Engagement und Trainingskonzept."
-            },
-            {
-              label: "Forschungsergebnis",
-              text: "Projekte mit gutem oder exzellentem Executive-Sponsor-Zugang haben eine Erfolgsquote von 72%. (Prosci Best Practices Research)"
-            }
-          ],
-          highlight: "Technik-Projekte scheitern selten an der Technik. Sie scheitern an den Menschen.",
-          deliverables: ["Stakeholder-Map", "Change Impact Matrix", "Kommunikationsplan", "Trainingskonzept"]
-        }
-      },
-
-      // === PHASE 3: UMSETZUNG ===
-      "datenmigration": {
-        title: "Datenmigration",
-        phase: "umsetzung",
-        content: {
-          intro: `Die Datenmigration ist oft der kritischste Teil der Transformation. Datenqualitätsprobleme gehören zu den Hauptursachen für Go-Live-Verzögerungen. Wir begleiten die Migration von der Konzeption über Testläufe bis zur produktiven Übernahme.`,
-          sections: [
-            {
-              label: "Migrations-Phasen",
-              items: [
-                "Migrationskonzept: Strategie, Scope, Mapping",
-                "Datenbereinigung: Qualitätsprobleme vor Migration beheben",
-                "Entwicklung: ETL-Prozesse, Transformationsregeln",
-                "Testmigration: Iterative Tests mit Validierung",
-                "Produktivmigration: Cutover-Durchführung",
-                "Validierung: Vollständigkeit und Korrektheit prüfen"
-              ]
-            },
-            {
-              label: "Unsere Rolle",
-              text: "Wir erstellen das Migrationskonzept, begleiten die Datenbereinigung, validieren Testmigrationen und stellen sicher, dass die Produktivmigration vollständig und korrekt erfolgt."
-            }
-          ],
-          highlight: "Eine Migration kann man nicht rückgängig machen. Wir machen sie gleich richtig.",
-          deliverables: ["Migrationskonzept", "Mapping-Dokumentation", "Testmigrations-Reports", "Validierungsprotokolle"]
-        }
-      },
-      "testmanagement": {
-        title: "Testmanagement",
-        phase: "umsetzung",
-        content: {
-          intro: `Umfassendes Testing ist der Schlüssel zur Qualitätssicherung. Wir steuern die Teststrategie und koordinieren alle Testphasen bis zum UAT.`,
-          sections: [
-            {
-              label: "Testarten",
-              items: [
-                "Unit Tests: Einzelne Funktionen und Customizing",
-                "Integrationstests: Prozesse end-to-end",
-                "Regressionstests: Bestehende Funktionen nach Änderungen",
-                "Performance Tests: Last und Skalierbarkeit",
-                "User Acceptance Tests (UAT): Abnahme durch Fachbereiche"
-              ]
-            },
-            {
-              label: "Defect Management",
-              text: "Wir etablieren ein strukturiertes Defect Management mit Kategorisierung, Priorisierung und Tracking. Kritische Defects werden eskaliert und vor Go-Live gelöst."
-            }
-          ],
-          highlight: "Was nicht getestet wurde, funktioniert nicht. Wir testen gründlich.",
-          deliverables: ["Teststrategie", "Testfälle", "Test-Reports", "Defect-Tracking"]
-        }
-      },
-      "change-management": {
-        title: "Change Management",
-        phase: "umsetzung",
-        content: {
-          intro: `Change Management begleitet Ihre Mitarbeiter durch die Transformation. Prosci-Forschung zeigt: Projekte mit exzellentem Change Management sind 7-mal wahrscheinlicher erfolgreich. Wir setzen die Change-Strategie um und managen aktiv den Widerstand.`,
-          sections: [
-            {
-              label: "Aktivitäten",
-              items: [
-                "Stakeholder-Kommunikation: Regelmäßige Updates, Townhalls",
-                "Multiplikatoren-Netzwerk: Change Agents in den Fachbereichen",
-                "Quick Wins kommunizieren: Frühe Erfolge sichtbar machen",
-                "Widerstandsmanagement: Bedenken ernst nehmen, adressieren",
-                "Feedback-Schleifen: Kontinuierlich Rückmeldung einholen"
-              ]
-            },
-            {
-              label: "Adoption messen",
-              text: "Wir messen die User Adoption mit definierten KPIs und passen die Change-Maßnahmen bei Bedarf an. Das Ziel: Hohe Akzeptanz und produktive Nutzung ab Go-Live."
-            },
-            {
-              label: "Forschungsergebnis",
-              text: "Mit effektivem Change Management sehen Unternehmen operative Verbesserungen und finanzielle Erträge Monate früher als bei Implementierungen, die die menschliche Seite des Wandels vernachlässigen. (Prosci Research)"
-            }
-          ],
-          highlight: "Change Management ist kein Nice-to-have. Es ist erfolgskritisch.",
-          deliverables: ["Kommunikationsmaterial", "Change-KPIs", "Feedback-Reports", "Adoption-Tracking"]
-        }
-      },
-      "training": {
-        title: "Training & Enablement",
-        phase: "umsetzung",
-        content: {
-          intro: `Gut geschulte Anwender sind produktiv ab Tag 1. Gartner warnt: Geringe Endanwender-Akzeptanz entsteht, wenn Anwender die Gründe für die ERP-Implementierung nicht verstehen. Wir entwickeln und koordinieren das Schulungskonzept für alle Anwendergruppen.`,
-          sections: [
-            {
-              label: "Trainingskonzept",
-              items: [
-                "Zielgruppenanalyse: Wer braucht welches Training?",
-                "Curriculum-Design: Inhalte, Reihenfolge, Dauer",
-                "Train-the-Trainer: Interne Trainer ausbilden",
-                "Schulungsmaterial: Handbücher, Quick Guides, Videos",
-                "Schulungsdurchführung: Präsenz, Online, Blended"
-              ]
-            },
-            {
-              label: "Nachhaltigkeit",
-              text: "Training ist kein einmaliges Event. Wir etablieren eine Struktur für kontinuierliches Lernen und Onboarding neuer Mitarbeiter nach Go-Live."
-            },
-            {
-              label: "Forschungsergebnis",
-              text: "McKinsey: Die Entwicklung von Talenten und Skills in der gesamten Organisation ist einer der wichtigsten Erfolgsfaktoren bei digitalen Transformationen."
-            }
-          ],
-          highlight: "In Schulung zu investieren zahlt sich 10x zurück. An Schulung zu sparen rächt sich.",
-          deliverables: ["Schulungskonzept", "Trainingsmaterial", "Train-the-Trainer", "Lernplattform-Setup"]
-        }
-      },
-      "qualitaetssicherung": {
-        title: "Qualitätssicherung (QA)",
-        phase: "umsetzung",
-        content: {
-          intro: `Als unabhängiger Partner sichern wir die Qualität der Implementierung. Laut Prosci erreichen nur 55% der ERP-Projekte ihre Ziele – unabhängige QA erhöht Ihre Erfolgschancen deutlich.`,
-          sections: [
-            {
-              label: "QA-Aktivitäten",
-              items: [
-                "Unabhängige Reviews: Design, Code, Konfiguration",
-                "SI-Kontrolle: Liefert der Integrator wie vereinbart?",
-                "Quality Gates: Freigabekriterien definieren und prüfen",
-                "Eskalationsmanagement: Probleme früh adressieren",
-                "Claim Management: Ihre Interessen bei Abweichungen vertreten"
-              ]
-            },
-            {
-              label: "Warum unabhängige QA?",
-              text: "Der SI kontrolliert sich selbst nicht objektiv. Eine unabhängige QA deckt Probleme auf, die der SI nicht sieht oder nicht sehen will. Das verhindert böse Überraschungen beim Go-Live."
-            }
-          ],
-          highlight: "Unabhängige QA ist Ihre Versicherung gegen SI-Blindheit.",
-          deliverables: ["QA-Reports", "Review-Protokolle", "Mängellisten", "Abnahmeempfehlungen"]
-        }
-      },
-      "go-live": {
-        title: "Go-Live Management",
-        phase: "umsetzung",
-        content: {
-          intro: `Der Go-Live ist der kritischste Moment der Transformation. Wir planen den Cutover detailliert und stellen sicher, dass alle Fallback-Szenarien vorbereitet sind.`,
-          sections: [
-            {
-              label: "Cutover-Planung",
-              items: [
-                "Cutover-Plan: Minutengenaue Planung aller Aktivitäten",
-                "Verantwortlichkeiten: Wer macht was wann?",
-                "Kommunikationsplan: Information an alle Stakeholder",
-                "Fallback-Szenarien: Was tun, wenn etwas schiefgeht?",
-                "Go/No-Go-Entscheidung: Klare Kriterien definiert"
-              ]
-            },
-            {
-              label: "Go-Live-Checklisten",
-              text: "Wir arbeiten mit umfassenden Checklisten, die alle Voraussetzungen für einen erfolgreichen Go-Live abprüfen. Kein kritischer Punkt wird übersehen."
-            }
-          ],
-          highlight: "Ein Go-Live lässt sich nicht wiederholen. Wir bereiten ihn akribisch vor.",
-          deliverables: ["Cutover-Plan", "Go-Live-Checklisten", "Fallback-Prozeduren", "Go/No-Go-Protokoll"]
-        }
-      },
-
-      // === PHASE 4: BETRIEB ===
-      "hypercare": {
-        title: "Hypercare",
-        phase: "betrieb",
-        content: {
-          intro: `Die ersten 4-12 Wochen nach Go-Live sind kritisch. Hypercare bietet intensive Betreuung mit schneller Problemlösung und direktem User Support.`,
-          sections: [
-            {
-              label: "Hypercare-Leistungen",
-              items: [
-                "Erweiterter Support: Schnelle Reaktionszeiten, mehr Kapazität",
-                "Vor-Ort-Präsenz: Berater an kritischen Standorten",
-                "Floor Walking: Direkte Unterstützung der Anwender",
-                "Incident Management: Schnelle Problemanalyse und -lösung",
-                "Tägliche Stand-ups: Statusübersicht und Priorisierung"
-              ]
-            },
-            {
-              label: "Dauer",
-              text: "Die Hypercare-Phase dauert typischerweise 4-12 Wochen, abhängig von Projektgröße und Komplexität. Wir definieren klare Exit-Kriterien für den Übergang in den Regelbetrieb."
-            }
-          ],
-          highlight: "Die ersten Wochen entscheiden über die langfristige Akzeptanz. Wir sind da.",
-          deliverables: ["Hypercare-Reports", "Incident-Logs", "Known Issues Liste", "Handover an Support"]
-        }
-      },
-      "optimierung": {
-        title: "Kontinuierliche Optimierung",
-        phase: "betrieb",
-        content: {
-          intro: `Nach dem Go-Live ist vor der Optimierung. Wir helfen Ihnen, das volle Potenzial Ihres ERP-Systems auszuschöpfen und kontinuierlich zu verbessern.`,
-          sections: [
-            {
-              label: "Optimierungsbereiche",
-              items: [
-                "Prozessoptimierung: Basierend auf echten Nutzungsdaten",
-                "Feature-Aktivierung: Neue Funktionen nutzen",
-                "Automatisierung: Manuelle Tätigkeiten reduzieren",
-                "Reporting: Analytics und Dashboards verbessern",
-                "Performance: System-Tuning und Optimierung"
-              ]
-            },
-            {
-              label: "Quartalsreviews",
-              text: "Wir empfehlen quartalsweise Reviews, um Optimierungspotenziale systematisch zu identifizieren und einen priorisierten Backlog zu pflegen."
-            }
-          ],
-          highlight: "Ein ERP ist nie fertig. Kontinuierliche Optimierung maximiert den ROI.",
-          deliverables: ["Optimierungs-Backlog", "Nutzungsanalysen", "Feature-Empfehlungen", "Verbesserungs-Roadmap"]
-        }
-      },
-      "managed-services": {
-        title: "Managed Services",
-        phase: "betrieb",
-        content: {
-          intro: `Langfristiger Betrieb und Support für Ihr ERP-System. Wir übernehmen Application Management, Monitoring und Incident Management als laufenden Service.`,
-          sections: [
-            {
-              label: "Service-Umfang",
-              items: [
-                "Application Management: Wartung und Pflege des Systems",
-                "Incident Management: Störungsbehebung nach definierten SLAs",
-                "Change Management: Änderungen kontrolliert umsetzen",
-                "Monitoring: Proaktive Überwachung und Alerting",
-                "Release Management: Updates und Patches einspielen"
-              ]
-            },
-            {
-              label: "Service-Modelle",
-              text: "Wir bieten flexible Service-Modelle: Von punktueller Unterstützung bis zum Full-Service-Betrieb. Sie wählen den Umfang, der zu Ihnen passt."
-            }
-          ],
-          highlight: "Professioneller Betrieb sichert Stabilität und Verfügbarkeit. Wir kümmern uns.",
-          deliverables: ["SLA-Reports", "Incident-Statistiken", "Change-Logs", "Verfügbarkeitsberichte"]
-        }
-      },
-      "rollout-support": {
-        title: "Rollout Support",
-        phase: "betrieb",
-        content: {
-          intro: `Nach dem erfolgreichen Pilot folgt der Rollout auf weitere Standorte, Länder oder Gesellschaften. Wir unterstützen mit Template-Ansätzen und lokaler Anpassung.`,
-          sections: [
-            {
-              label: "Rollout-Ansatz",
-              items: [
-                "Template-Definition: Best Practices aus dem Pilot",
-                "Delta-Analyse: Was ist lokal anders?",
-                "Lokalisierung: Sprache, Recht, Steuern",
-                "Schulung: Train-the-Trainer vor Ort",
-                "Go-Live-Begleitung: Support bei jedem Rollout"
-              ]
-            },
-            {
-              label: "Skalierung",
-              text: "Mit jedem Rollout wird der Prozess effizienter. Wir etablieren ein Rollout-Playbook, das kontinuierlich verbessert wird."
-            }
-          ],
-          highlight: "Ein gutes Template ist die Basis für effiziente Rollouts.",
-          deliverables: ["Rollout-Playbook", "Template-Dokumentation", "Lokalisierungs-Checklisten", "Lessons Learned"]
-        }
-      },
-
-      // === NUTZEN ===
-      "nutzen-cfo": {
-        title: "Nutzen für CFO & Finance",
-        phase: "nutzen",
-        content: {
-          intro: `Als CFO oder Finance-Verantwortlicher tragen Sie die Budgetverantwortung für die ERP-Transformation. Laut Branchenstudien überschreiten 55% der ERP-Projekte das Budget. Wir helfen Ihnen, das Investment abzusichern.`,
-          sections: [
-            {
-              label: "Ihr Nutzen",
-              items: [
-                "Realistischer Business Case mit TCO-Transparenz",
-                "Budgetsicherheit durch unabhängige QA",
-                "ROI-Beschleunigung durch Fit-to-Standard",
-                "Vermeidung teurer Customizations",
-                "Objektive Kontrolle des Systemintegrators"
-              ]
-            },
-            {
-              label: "Typische Ergebnisse",
-              text: "Unsere Kunden berichten von 20-30% Zeitgewinn durch bessere Vorbereitung und 30-50% schnellerem ROI durch konsequenten Fit-to-Standard-Ansatz."
-            },
-            {
-              label: "Forschungsergebnis",
-              text: "Prosci: Nur 55% der ERP-Projekte erreichen oder übertreffen ihre Ziele. Mit unabhängiger Beratung erhöhen Sie Ihre Erfolgschancen signifikant."
-            }
-          ],
-          highlight: "Wir schützen Ihr Budget und beschleunigen Ihren ROI.",
-          deliverables: ["Business Case", "TCO-Analyse", "Budget-Monitoring", "ROI-Tracking"]
-        }
-      },
-      "nutzen-cio": {
-        title: "Nutzen für CIO & IT",
-        phase: "nutzen",
-        content: {
-          intro: `Als CIO oder IT-Verantwortlicher tragen Sie die technische Verantwortung für die ERP-Transformation. Wir unterstützen Sie mit objektiver Expertise und Multi-ERP-Know-how.`,
-          sections: [
-            {
-              label: "Ihr Nutzen",
-              items: [
-                "Objektive ERP-Evaluation ohne Vendor-Bias",
-                "Clean Architecture Beratung für Update-Fähigkeit",
-                "Integrations- und API-Strategie",
-                "Technische Risikominimierung",
-                "Unabhängige Qualitätssicherung der Implementierung"
-              ]
-            },
-            {
-              label: "Multi-ERP Know-how",
-              text: "Wir kennen SAP, Oracle, Microsoft, Infor und andere aus zahlreichen Projekten. Dieses Cross-ERP-Wissen hilft, die richtige Entscheidung zu treffen – unabhängig vom Hersteller."
-            }
-          ],
-          highlight: "Wir bringen Multi-ERP-Expertise ohne Vendor-Abhängigkeit.",
-          deliverables: ["ERP-Evaluation", "Architektur-Review", "QA-Reports", "Integrations-Design"]
-        }
-      },
-      "nutzen-business": {
-        title: "Nutzen für Business Owner",
-        phase: "nutzen",
-        content: {
-          intro: `Als Business Owner oder Fachbereichsleiter wollen Sie ein ERP, das Ihre Prozesse optimal unterstützt – nicht umgekehrt. Wir stellen das sicher.`,
-          sections: [
-            {
-              label: "Ihr Nutzen",
-              items: [
-                "Prozesse verstehen, dann Technologie wählen",
-                "Schnellere User Adoption",
-                "Weniger Anpassung an das System",
-                "Fokus auf Business Value",
-                "Ihre Anforderungen im Zentrum"
-              ]
-            },
-            {
-              label: "Einbindung der Fachbereiche",
-              text: "Wir binden Ihre Fachbereiche von Anfang an ein. Prozessworkshops, Gap-Analysen und UAT werden gemeinsam durchgeführt. Das erhöht Akzeptanz und Qualität."
-            }
-          ],
-          highlight: "Das ERP passt sich an Sie an – nicht Sie ans ERP.",
-          deliverables: ["Prozess-Modelle", "Gap-Analysen", "Schulungskonzept", "UAT-Support"]
-        }
-      },
-
-      // === KONTAKT ===
-      "kontakt": {
-        title: "Starten Sie jetzt",
-        phase: "kontakt",
-        content: {
-          intro: `Der erste Schritt zu einer erfolgreichen ERP-Transformation ist ein Gespräch. Wir freuen uns auf Sie.`,
-          sections: [
-            {
-              label: "Ihr Weg zu uns",
-              items: [
-                "Schritt 1: Erstgespräch (60 Min. kostenlos)",
-                "Schritt 2: Readiness Check oder Workshop",
-                "Schritt 3: Projektstart binnen 2-4 Wochen"
-              ]
-            },
-            {
-              label: "Ihr Ansprechpartner",
-              text: "Marcel Wagner\nERP Transformation Advisory Lead\nmarcel.wagner@timetoact-group.com"
-            }
-          ],
-          highlight: "\"Wir verkaufen keine Lizenzen. Wir liefern Projekterfolg.\"",
-          deliverables: ["Kostenloses Erstgespräch", "Schneller Start", "Erfahrene Berater", "Messbare Ergebnisse"]
-        }
-      }
-    };
-
-    const topicLists = {
-      analyse: [
-        { id: "process-mapping", label: "Process Mapping" },
-        { id: "readiness-assessment", label: "Readiness Assessment" },
-        { id: "business-case", label: "Business Case & ROI" },
-        { id: "datenqualitaet", label: "Datenqualitäts-Analyse" },
-        { id: "erp-evaluation", label: "ERP-Evaluation" },
-        { id: "roadmap", label: "Transformations-Roadmap" }
-      ],
-      konzeption: [
-        { id: "soll-prozesse", label: "Soll-Prozess-Definition" },
-        { id: "gap-analyse", label: "Gap-Analyse" },
-        { id: "loesungsdesign", label: "Lösungsdesign" },
-        { id: "integrationskonzept", label: "Integrationskonzept" },
-        { id: "change-readiness", label: "Change Readiness" }
-      ],
-      umsetzung: [
-        { id: "datenmigration", label: "Datenmigration" },
-        { id: "testmanagement", label: "Testmanagement" },
-        { id: "change-management", label: "Change Management" },
-        { id: "training", label: "Training & Enablement" },
-        { id: "qualitaetssicherung", label: "Qualitätssicherung (QA)" },
-        { id: "go-live", label: "Go-Live Management" }
-      ],
-      betrieb: [
-        { id: "hypercare", label: "Hypercare" },
-        { id: "optimierung", label: "Kontinuierliche Optimierung" },
-        { id: "managed-services", label: "Managed Services" },
-        { id: "rollout-support", label: "Rollout Support" }
-      ],
-      info: [
-        { id: "warum-advisory", label: "Warum ERP Advisory?" },
-        { id: "interessenkonflikte", label: "Interessenkonflikte der SIs" },
-        { id: "vorteile", label: "Unsere vier Vorteile" },
-        { id: "erp-systeme", label: "Erst Prozesse, dann ERP" }
-      ],
-      nutzen: [
-        { id: "nutzen-cfo", label: "Nutzen für CFO & Finance" },
-        { id: "nutzen-cio", label: "Nutzen für CIO & IT" },
-        { id: "nutzen-business", label: "Nutzen für Business Owner" }
-      ],
-      buchung: [
-        { id: "kontakt", label: "Starten Sie jetzt" }
-      ]
-    };
-
-    const viewTitles = {
-      analyse: "Phase 1: Analyse",
-      konzeption: "Phase 2: Konzeption",
-      umsetzung: "Phase 3: Umsetzung",
-      betrieb: "Phase 4: Betrieb",
-      info: "Warum ERP Transformation Advisory?",
-      nutzen: "Nutzen nach Zielgruppe",
-      buchung: "Kontakt"
-    };
-
-    let currentView = 'home';
-    let selectedTopic = null;
-    let previousView = null;
-    let selectionMode = false;
-    let selectedTopics = new Set();
-    let topicComplexity = {}; // stores complexity per topic: 'low', 'medium', 'high'
-
-    // Kategorien ohne Auswahlmöglichkeit
-    const excludeFromSelection = ['info', 'nutzen', 'buchung'];
-
-    // Personentage-Kalkulation pro Service und Komplexitätsstufe
-    const ptMatrix = {
-      low: {
-        advisory: 5,      // Business-/Fachberater
-        technik: 2,       // Technischer Berater
-        pm: 1             // Projektleitung
-      },
-      medium: {
-        advisory: 12,
-        technik: 5,
-        pm: 3
-      },
-      high: {
-        advisory: 25,
-        technik: 12,
-        pm: 6
-      }
-    };
-
-    const complexityLabels = {
-      low: 'Low',
-      medium: 'Mittel',
-      high: 'Komplex'
-    };
-
-    function setTopicComplexity(topicId, complexity, event) {
-      if (event) event.stopPropagation();
-      topicComplexity[topicId] = complexity;
-      if (!selectedTopics.has(topicId)) {
-        selectedTopics.add(topicId);
-      }
-      render();
-    }
-
-    function getTopicComplexity(topicId) {
-      return topicComplexity[topicId] || 'medium';
-    }
-
-    function calculateTotalPT() {
-      let totals = {
-        advisory: 0,
-        technik: 0,
-        pm: 0,
-        gesamtPT: 0
-      };
-      
-      selectedTopics.forEach(topicId => {
-        const complexity = getTopicComplexity(topicId);
-        const pt = ptMatrix[complexity];
-        totals.advisory += pt.advisory;
-        totals.technik += pt.technik;
-        totals.pm += pt.pm;
-      });
-      
-      totals.gesamtPT = totals.advisory + totals.technik + totals.pm;
-      
-      return totals;
-    }
-
-    function renderCalculationPanel() {
-      if (selectedTopics.size === 0) return '';
-      
-      const totals = calculateTotalPT();
-      
-      // Geschätzte Projektdauer: Annahme 2-3 Berater parallel
-      const geschaetzteDauer = Math.ceil(totals.gesamtPT / 2.5);
-      
-      let breakdownHtml = '';
-      selectedTopics.forEach(topicId => {
-        const topic = detailContent[topicId];
-        const complexity = getTopicComplexity(topicId);
-        const pt = ptMatrix[complexity];
-        if (topic) {
-          breakdownHtml += `
-            <div class="selected-topic-row">
-              <span class="selected-topic-name">${topic.title}</span>
-              <span style="font-size: 10px; color: var(--tta-orange); min-width: 50px;">${pt.advisory + pt.technik + pt.pm} PT</span>
-              <div class="complexity-selector">
-                <button class="complexity-btn low ${complexity === 'low' ? 'active' : ''}" 
-                        onclick="setTopicComplexity('${topicId}', 'low', event)">Low</button>
-                <button class="complexity-btn medium ${complexity === 'medium' ? 'active' : ''}" 
-                        onclick="setTopicComplexity('${topicId}', 'medium', event)">Mittel</button>
-                <button class="complexity-btn high ${complexity === 'high' ? 'active' : ''}" 
-                        onclick="setTopicComplexity('${topicId}', 'high', event)">Komplex</button>
-              </div>
+    <header class="site-header">
+        <div class="header-top"><a href="#">Standorte</a><a href="#">Newsletter</a></div>
+        <div class="header-main">
+            <div class="logo">
+                <img src="data:image/webp;base64,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" alt="TIMETOACT GROUP" class="logo-img">
+                <div class="logo-text">ERP Transformation Advisory</div>
             </div>
-          `;
-        }
-      });
-
-      return `
-        <div class="calculation-panel">
-          <div class="calculation-title">📊 Aufwandsschätzung (Richtwerte)</div>
-          <div class="calculation-grid">
-            <div class="calc-item">
-              <div class="calc-label">Business Beratung</div>
-              <div class="calc-value">${totals.advisory}</div>
-              <div class="calc-unit">Personentage</div>
+            <div class="header-right">
+                <div class="header-badge">Kontakt</div>
             </div>
-            <div class="calc-item">
-              <div class="calc-label">Technische Beratung</div>
-              <div class="calc-value">${totals.technik}</div>
-              <div class="calc-unit">Personentage</div>
-            </div>
-            <div class="calc-item">
-              <div class="calc-label">Projektleitung</div>
-              <div class="calc-value">${totals.pm}</div>
-              <div class="calc-unit">Personentage</div>
-            </div>
-            <div class="calc-item">
-              <div class="calc-label">Gesamt Aufwand</div>
-              <div class="calc-value">${totals.gesamtPT}</div>
-              <div class="calc-unit">Personentage</div>
-            </div>
-            <div class="calc-item">
-              <div class="calc-label">Geschätzte Dauer</div>
-              <div class="calc-value">~${geschaetzteDauer}</div>
-              <div class="calc-unit">Wochen</div>
-            </div>
-          </div>
-          <div class="calc-breakdown">
-            <div class="calc-breakdown-title">Ausgewählte Services (${selectedTopics.size}) – Komplexität anpassen:</div>
-            ${breakdownHtml}
-          </div>
-          <div style="font-size: 9px; color: rgba(255,255,255,0.5); margin-top: 12px; text-align: center;">
-            * Richtwerte basierend auf Erfahrungswerten. Individuelle Angebote nach Anforderungsanalyse.
-          </div>
         </div>
-      `;
-    }
-
-    function toggleSelectionMode() {
-      selectionMode = !selectionMode;
-      if (!selectionMode) {
-        selectedTopics.clear();
-        topicComplexity = {};
-      }
-      render();
-    }
-
-    function toggleTopicSelection(topicId, event) {
-      if (event) event.stopPropagation();
-      if (selectedTopics.has(topicId)) {
-        selectedTopics.delete(topicId);
-      } else {
-        selectedTopics.add(topicId);
-      }
-      render();
-    }
-
-    function clearSelection() {
-      selectedTopics.clear();
-      topicComplexity = {};
-      render();
-    }
-
-    async function downloadSelectedTopics() {
-      if (selectedTopics.size === 0) {
-        alert('Bitte wählen Sie mindestens ein Thema aus.');
-        return;
-      }
-
-      const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, 
-              Header, Footer, AlignmentType, BorderStyle, WidthType, 
-              HeadingLevel, ShadingType, LevelFormat, PageNumber } = docx;
-
-      const totals = calculateTotalPT();
-      const geschaetzteDauer = Math.ceil(totals.gesamtPT / 2.5);
-      const today = new Date().toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
-
-      // Collect all content
-      const children = [];
-      
-      // Title
-      children.push(new Paragraph({
-        heading: HeadingLevel.TITLE,
-        children: [new TextRun({ text: "ERP Transformation Advisory", bold: true, size: 56, color: "212830" })]
-      }));
-      
-      children.push(new Paragraph({
-        spacing: { after: 400 },
-        children: [new TextRun({ text: "Ausgewählte Services für Ihre ERP-Transformation", size: 24, color: "666666" })]
-      }));
-
-      // Calculation table
-      const tableBorder = { style: BorderStyle.SINGLE, size: 1, color: "CCCCCC" };
-      const cellBorders = { top: tableBorder, bottom: tableBorder, left: tableBorder, right: tableBorder };
-      
-      const tableRows = [
-        new TableRow({
-          tableHeader: true,
-          children: [
-            new TableCell({ borders: cellBorders, width: { size: 3500, type: WidthType.DXA }, shading: { fill: "098F9B", type: ShadingType.CLEAR }, children: [new Paragraph({ children: [new TextRun({ text: "Service", bold: true, color: "FFFFFF", size: 20 })] })] }),
-            new TableCell({ borders: cellBorders, width: { size: 1500, type: WidthType.DXA }, shading: { fill: "098F9B", type: ShadingType.CLEAR }, children: [new Paragraph({ children: [new TextRun({ text: "Komplexität", bold: true, color: "FFFFFF", size: 20 })] })] }),
-            new TableCell({ borders: cellBorders, width: { size: 1200, type: WidthType.DXA }, shading: { fill: "098F9B", type: ShadingType.CLEAR }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: "Business", bold: true, color: "FFFFFF", size: 20 })] })] }),
-            new TableCell({ borders: cellBorders, width: { size: 1200, type: WidthType.DXA }, shading: { fill: "098F9B", type: ShadingType.CLEAR }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: "Technik", bold: true, color: "FFFFFF", size: 20 })] })] }),
-            new TableCell({ borders: cellBorders, width: { size: 1000, type: WidthType.DXA }, shading: { fill: "098F9B", type: ShadingType.CLEAR }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: "PM", bold: true, color: "FFFFFF", size: 20 })] })] }),
-            new TableCell({ borders: cellBorders, width: { size: 1000, type: WidthType.DXA }, shading: { fill: "098F9B", type: ShadingType.CLEAR }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: "Gesamt", bold: true, color: "FFFFFF", size: 20 })] })] }),
-          ]
-        })
-      ];
-
-      selectedTopics.forEach(topicId => {
-        const topic = detailContent[topicId];
-        const complexity = getTopicComplexity(topicId);
-        const pt = ptMatrix[complexity];
-        const topicTotal = pt.advisory + pt.technik + pt.pm;
-        if (topic) {
-          tableRows.push(new TableRow({
-            children: [
-              new TableCell({ borders: cellBorders, width: { size: 3500, type: WidthType.DXA }, children: [new Paragraph({ children: [new TextRun({ text: topic.title, size: 20 })] })] }),
-              new TableCell({ borders: cellBorders, width: { size: 1500, type: WidthType.DXA }, children: [new Paragraph({ children: [new TextRun({ text: complexityLabels[complexity], size: 20 })] })] }),
-              new TableCell({ borders: cellBorders, width: { size: 1200, type: WidthType.DXA }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: pt.advisory + " PT", size: 20 })] })] }),
-              new TableCell({ borders: cellBorders, width: { size: 1200, type: WidthType.DXA }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: pt.technik + " PT", size: 20 })] })] }),
-              new TableCell({ borders: cellBorders, width: { size: 1000, type: WidthType.DXA }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: pt.pm + " PT", size: 20 })] })] }),
-              new TableCell({ borders: cellBorders, width: { size: 1000, type: WidthType.DXA }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: topicTotal + " PT", size: 20 })] })] }),
-            ]
-          }));
-        }
-      });
-
-      // Total row
-      tableRows.push(new TableRow({
-        children: [
-          new TableCell({ borders: cellBorders, width: { size: 3500, type: WidthType.DXA }, shading: { fill: "E9ECEF", type: ShadingType.CLEAR }, children: [new Paragraph({ children: [new TextRun({ text: "GESAMT", bold: true, size: 20 })] })] }),
-          new TableCell({ borders: cellBorders, width: { size: 1500, type: WidthType.DXA }, shading: { fill: "E9ECEF", type: ShadingType.CLEAR }, children: [new Paragraph({ children: [new TextRun({ text: "", size: 20 })] })] }),
-          new TableCell({ borders: cellBorders, width: { size: 1200, type: WidthType.DXA }, shading: { fill: "E9ECEF", type: ShadingType.CLEAR }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: totals.advisory + " PT", bold: true, size: 20 })] })] }),
-          new TableCell({ borders: cellBorders, width: { size: 1200, type: WidthType.DXA }, shading: { fill: "E9ECEF", type: ShadingType.CLEAR }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: totals.technik + " PT", bold: true, size: 20 })] })] }),
-          new TableCell({ borders: cellBorders, width: { size: 1000, type: WidthType.DXA }, shading: { fill: "E9ECEF", type: ShadingType.CLEAR }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: totals.pm + " PT", bold: true, size: 20 })] })] }),
-          new TableCell({ borders: cellBorders, width: { size: 1000, type: WidthType.DXA }, shading: { fill: "E9ECEF", type: ShadingType.CLEAR }, children: [new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: totals.gesamtPT + " PT", bold: true, size: 20 })] })] }),
-        ]
-      }));
-
-      children.push(new Paragraph({
-        spacing: { before: 200 },
-        children: [new TextRun({ text: "AUFWANDSSCHÄTZUNG (RICHTWERTE)", bold: true, size: 24, color: "098F9B" })]
-      }));
-
-      children.push(new Table({
-        columnWidths: [3500, 1500, 1200, 1200, 1000, 1000],
-        rows: tableRows
-      }));
-
-      children.push(new Paragraph({
-        spacing: { before: 200, after: 100 },
-        alignment: AlignmentType.RIGHT,
-        children: [new TextRun({ text: `Gesamt: ${totals.gesamtPT} Personentage · Geschätzte Dauer: ~${geschaetzteDauer} Wochen`, bold: true, size: 22, color: "DA5500" })]
-      }));
-
-      children.push(new Paragraph({
-        spacing: { after: 400 },
-        children: [new TextRun({ text: "* Richtwerte basierend auf Erfahrungswerten. Individuelle Angebote nach Anforderungsanalyse.", italics: true, size: 18, color: "666666" })]
-      }));
-
-      // Service details
-      let bulletIndex = 0;
-      const numberingConfig = [];
-      
-      selectedTopics.forEach(topicId => {
-        const topic = detailContent[topicId];
-        const complexity = getTopicComplexity(topicId);
-        if (topic) {
-          // Service title
-          children.push(new Paragraph({
-            heading: HeadingLevel.HEADING_1,
-            spacing: { before: 400, after: 200 },
-            children: [
-              new TextRun({ text: topic.title, bold: true, size: 28, color: "098F9B" }),
-              new TextRun({ text: "  [" + complexityLabels[complexity] + "]", size: 20, color: "666666" })
-            ]
-          }));
-
-          // Intro
-          children.push(new Paragraph({
-            spacing: { after: 200 },
-            children: [new TextRun({ text: topic.content.intro, size: 22 })]
-          }));
-
-          // Sections
-          if (topic.content.sections) {
-            topic.content.sections.forEach(section => {
-              children.push(new Paragraph({
-                spacing: { before: 200, after: 100 },
-                children: [new TextRun({ text: section.label.toUpperCase(), bold: true, size: 20, color: "DA5500" })]
-              }));
-
-              if (section.items) {
-                const bulletRef = 'bullet-' + bulletIndex++;
-                numberingConfig.push({
-                  reference: bulletRef,
-                  levels: [{ level: 0, format: LevelFormat.BULLET, text: "•", alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 720, hanging: 360 } } } }]
-                });
-                section.items.forEach(item => {
-                  children.push(new Paragraph({
-                    numbering: { reference: bulletRef, level: 0 },
-                    children: [new TextRun({ text: item, size: 20 })]
-                  }));
-                });
-              }
-
-              if (section.text) {
-                children.push(new Paragraph({
-                  spacing: { after: 100 },
-                  children: [new TextRun({ text: section.text, size: 20 })]
-                }));
-              }
+    </header>
+    <nav class="nav-tabs"><div class="nav-tabs-inner">
+        <button class="nav-tab active" onclick="showTab('overview')">📊 Übersicht</button>
+        <button class="nav-tab" onclick="showTab('abgrenzung')">🔀 Abgrenzung</button>
+        <button class="nav-tab" onclick="showTab('analyse')">🔍 Analyse</button>
+        <button class="nav-tab" onclick="showTab('konzeption')">📐 Konzeption</button>
+        <button class="nav-tab" onclick="showTab('umsetzung')">🚀 Umsetzung</button>
+        <button class="nav-tab" onclick="showTab('betrieb')">⚡ Betrieb</button>
+        <button class="nav-tab" onclick="showTab('warum')">❓ Warum Advisory</button>
+        <button class="nav-tab" onclick="showTab('referenzen')">⭐ Referenzen</button>
+    </div></nav>
+    <main class="main-content">
+        <!-- TAB: ÜBERSICHT -->
+        <section id="tab-overview" class="tab-content active">
+            <div class="section-header"><h2 class="section-title"><span class="section-title-icon" style="background: rgba(45,154,154,0.15);">📊</span>ERP Transformation Advisory</h2><p class="section-subtitle">Herstellerneutrale Beratung für Ihre ERP-Transformation</p></div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                <div class="kpi-card orange"><div class="kpi-label">Expertise</div><div class="kpi-value">15+ Jahre</div><div class="kpi-change">SAP & Multi-ERP</div></div>
+                <div class="kpi-card teal"><div class="kpi-label">Services</div><div class="kpi-value">21</div><div class="kpi-change">In 4 Phasen</div></div>
+                <div class="kpi-card green"><div class="kpi-label">Projekterfolg</div><div class="kpi-value">100%</div><div class="kpi-change positive">On-Time & Budget</div></div>
+                <div class="kpi-card blue"><div class="kpi-label">Ansatz</div><div class="kpi-value">Neutral</div><div class="kpi-change">Keine Provisionen</div></div>
+            </div>
+            
+            <div class="card mb-2">
+                <div class="card-header"><h3 class="card-title">🏆 Unsere vier unfairen Vorteile</h3><span class="card-badge badge-orange">Differenzierung</span></div>
+                <div class="grid-4">
+                    <div class="value-card"><div class="value-icon">🎯</div><div class="value-title">100% Neutral</div><div class="value-desc">Keine Lizenzen, keine Provisionen. Wir empfehlen das beste ERP für Sie.</div></div>
+                    <div class="value-card"><div class="value-icon">⚙️</div><div class="value-title">Process First</div><div class="value-desc">Erst Prozesse verstehen, dann Technologie wählen.</div></div>
+                    <div class="value-card"><div class="value-icon">👔</div><div class="value-title">Senior-Only</div><div class="value-desc">Keine Junior-Pyramide. Erfahrene Berater ab Tag 1.</div></div>
+                    <div class="value-card"><div class="value-icon">🧩</div><div class="value-title">Modularer Baukasten</div><div class="value-desc">21 Services, einzeln buchbar. Flexibel rein, flexibel raus.</div></div>
+                </div>
+            </div>
+            
+            <div class="section-header mt-3"><h2 class="section-title"><span class="section-title-icon" style="background: rgba(224,120,48,0.15);">🔄</span>Die 4 Phasen</h2><p class="section-subtitle">Klicken Sie auf eine Phase für Details</p></div>
+            <div class="grid-4 mb-2">
+                <div class="phase-card analyse" onclick="showTab('analyse')"><div class="phase-number">01</div><div class="phase-title">Analyse</div><div class="phase-count">6 Services</div></div>
+                <div class="phase-card konzeption" onclick="showTab('konzeption')"><div class="phase-number">02</div><div class="phase-title">Konzeption</div><div class="phase-count">5 Services</div></div>
+                <div class="phase-card umsetzung" onclick="showTab('umsetzung')"><div class="phase-number">03</div><div class="phase-title">Umsetzung</div><div class="phase-count">6 Services</div></div>
+                <div class="phase-card betrieb" onclick="showTab('betrieb')"><div class="phase-number">04</div><div class="phase-title">Betrieb</div><div class="phase-count">4 Services</div></div>
+            </div>
+            
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-header"><h3 class="card-title">📋 Unterstützte ERP-Systeme</h3><span class="card-badge badge-teal">Multi-ERP</span></div>
+                    <div class="table-container"><table class="data-table"><thead><tr><th>ERP-System</th><th>Deployment</th><th>Fokus</th></tr></thead><tbody>
+                        <tr><td><strong>SAP S/4HANA</strong></td><td>Cloud, On-Prem</td><td class="text-orange">Enterprise</td></tr>
+                        <tr><td><strong>Oracle Cloud ERP</strong></td><td>Cloud</td><td class="text-teal">Enterprise</td></tr>
+                        <tr><td><strong>Microsoft D365</strong></td><td>Cloud, On-Prem</td><td class="text-success">Mittelstand</td></tr>
+                        <tr><td><strong>Infor CloudSuite</strong></td><td>Cloud</td><td class="text-warning">Branche</td></tr>
+                        <tr><td><strong>IFS, Odoo, weitere</strong></td><td>Diverse</td><td class="text-muted">Diverse</td></tr>
+                    </tbody></table></div>
+                    <div class="info-box success mt-2"><div class="info-box-title">💡 Process First</div><div class="info-box-content">Wir mappen Ihre Prozesse zum passenden ERP – nicht umgekehrt.</div></div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><h3 class="card-title">⚠️ Typische ERP-Risiken</h3><span class="card-badge badge-red">Vermeidbar</span></div>
+                    <div class="table-container"><table class="data-table"><thead><tr><th>Risiko</th><th>Häufigkeit</th><th>Lösung</th></tr></thead><tbody>
+                        <tr><td><strong>Budgetüberschreitung</strong></td><td class="text-danger">60-70%</td><td>Business Case & QA</td></tr>
+                        <tr><td><strong>Timeline-Verzug</strong></td><td class="text-danger">60%</td><td>Roadmap & Controlling</td></tr>
+                        <tr><td><strong>Scope Creep</strong></td><td class="text-warning">55%</td><td>Process Mapping</td></tr>
+                        <tr><td><strong>Datenqualität</strong></td><td class="text-warning">45%</td><td>Datenanalyse</td></tr>
+                        <tr><td><strong>User Akzeptanz</strong></td><td class="text-warning">40%</td><td>Change Management</td></tr>
+                    </tbody></table></div>
+                    <div class="info-box danger mt-2"><div class="info-box-title">🛡️ Unabhängige QA</div><div class="info-box-content">Wir kontrollieren den Systemintegrator – und schützen Ihr Budget.</div></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- TAB: ABGRENZUNG -->
+        <section id="tab-abgrenzung" class="tab-content">
+            <div class="section-header"><h2 class="section-title"><span class="section-title-icon" style="background: rgba(224,120,48,0.15);">🔀</span>Leistungsabgrenzung</h2><p class="section-subtitle">Klare Zuständigkeiten innerhalb der TIMETOACT GROUP</p></div>
+            
+            <!-- ERP Advisory im Lead -->
+            <div class="grid-2 mb-2">
+                <div class="scope-card in-scope">
+                    <div class="scope-card-header">
+                        <div class="scope-icon">🎯</div>
+                        <div>
+                            <div class="scope-title text-orange">ERP Transformation Advisory</div>
+                            <div class="scope-subtitle">Wir führen – Strategie, Konzeption, Prozesse</div>
+                        </div>
+                    </div>
+                    <div class="card-header"><h3 class="card-title">Im Lead bei:</h3><span class="card-badge badge-orange">Kernkompetenz</span></div>
+                    <ul class="detail-list">
+                        <li><strong>ERP-Strategie</strong> – Herstellerneutrale Beratung &amp; Roadmap</li>
+                        <li><strong>Business Prozess Analyse</strong> – Ist-Aufnahme, Soll-Design, Optimierung</li>
+                        <li><strong>Konzeption</strong> – Lösungsdesign, Gap-Analyse, Integration</li>
+                        <li><strong>ERP-Evaluation</strong> – Objektiver Systemvergleich ohne Vendor-Bias</li>
+                        <li><strong>Unabhängige QA</strong> – SI-Kontrolle, Budget-Monitoring</li>
+                        <li><strong>Change Management</strong> – Stakeholder, Kommunikation, Akzeptanz</li>
+                    </ul>
+                    <div class="info-box mt-2" style="background: rgba(224,120,48,0.1); border-color: rgba(224,120,48,0.3);">
+                        <div class="info-box-title">SAP Deployments</div>
+                        <div class="info-box-content"><strong>Vollständig:</strong> SAP ECC, S/4HANA On-Premise<br><strong>Zusammenarbeit:</strong> S/4HANA RISE (mit Walldorf)</div>
+                    </div>
+                </div>
+                
+                <div class="scope-card out-scope">
+                    <div class="scope-card-header">
+                        <div class="scope-icon">🤝</div>
+                        <div>
+                            <div class="scope-title" style="color: var(--tta-purple);">Übergabe an Partner</div>
+                            <div class="scope-subtitle">Spezialisierte Implementierung</div>
+                        </div>
+                    </div>
+                    <div class="card-header"><h3 class="card-title">Übergabe bei:</h3><span class="card-badge badge-purple">Handover</span></div>
+                    <ul class="detail-list">
+                        <li><strong>SAP Public Cloud</strong> → Walldorf Consulting</li>
+                        <li><strong>GROW with SAP</strong> → Walldorf Consulting</li>
+                        <li><strong>SAP Business ByDesign</strong> → Walldorf Consulting</li>
+                        <li><strong>Microsoft Dynamics 365</strong> → novaCapta</li>
+                        <li><strong>Google Cloud / Workspace</strong> → CLOUDPILOTS</li>
+                        <li><strong>Identity Management</strong> → IPG</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- SAP Spezifische Abgrenzung -->
+            <div class="card mb-2">
+                <div class="card-header"><h3 class="card-title">📊 SAP-Leistungsmatrix</h3><span class="card-badge badge-orange">SAP Fokus</span></div>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>SAP Deployment</th>
+                                <th style="text-align: center;">ERP Advisory</th>
+                                <th style="text-align: center;">Walldorf Consulting</th>
+                                <th>Übergabepunkt</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background: rgba(224,120,48,0.05);">
+                                <td><strong>SAP ECC</strong> (alle Module)</td>
+                                <td class="text-success" style="text-align: center; font-weight: bold;">✓ Vollständig</td>
+                                <td class="text-muted" style="text-align: center;">—</td>
+                                <td><span class="card-badge badge-green">Kein Handover</span></td>
+                            </tr>
+                            <tr style="background: rgba(224,120,48,0.05);">
+                                <td><strong>S/4HANA On-Premise</strong></td>
+                                <td class="text-success" style="text-align: center; font-weight: bold;">✓ Vollständig</td>
+                                <td class="text-muted" style="text-align: center;">—</td>
+                                <td><span class="card-badge badge-green">Kein Handover</span></td>
+                            </tr>
+                            <tr style="background: rgba(139,92,246,0.04);">
+                                <td><strong>S/4HANA Private Cloud (RISE)</strong></td>
+                                <td class="text-success" style="text-align: center; font-weight: bold;">✓ Strategie &amp; Konzeption</td>
+                                <td class="text-success" style="text-align: center;">✓ Lizenz-Deal &amp; Co-Impl.</td>
+                                <td><span class="card-badge badge-blue">Zusammenarbeit</span></td>
+                            </tr>
+                            <tr style="background: rgba(139,92,246,0.08);">
+                                <td><strong>S/4HANA Public Cloud</strong></td>
+                                <td class="text-orange" style="text-align: center;">Strategie & Evaluation</td>
+                                <td class="text-success" style="text-align: center; font-weight: bold;">✓ Implementierung</td>
+                                <td><span class="card-badge badge-purple">→ Nach ERP-Evaluation</span></td>
+                            </tr>
+                            <tr style="background: rgba(139,92,246,0.08);">
+                                <td><strong>GROW with SAP</strong></td>
+                                <td class="text-orange" style="text-align: center;">Strategie & Evaluation</td>
+                                <td class="text-success" style="text-align: center; font-weight: bold;">✓ Implementierung</td>
+                                <td><span class="card-badge badge-purple">→ Nach ERP-Evaluation</span></td>
+                            </tr>
+                            <tr style="background: rgba(139,92,246,0.08);">
+                                <td><strong>SAP Business ByDesign</strong></td>
+                                <td class="text-orange" style="text-align: center;">Strategie & Evaluation</td>
+                                <td class="text-success" style="text-align: center; font-weight: bold;">✓ Implementierung</td>
+                                <td><span class="card-badge badge-purple">→ Nach ERP-Evaluation</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="info-box warning mt-2">
+                    <div class="info-box-title">⚡ SAP Cloud Zuständigkeiten</div>
+                    <div class="info-box-content"><strong>S/4HANA RISE (Private Cloud):</strong> Zusammenarbeit – ERP Advisory führt Strategie &amp; Konzeption, Walldorf Consulting übernimmt Lizenz-Deal und Co-Implementierung.<br><br><strong>SAP Public Cloud / GROW with SAP:</strong> Werden <strong>direkt nach der ERP-Evaluation</strong> an die Walldorf Consulting übergeben. Die ERP Transformation Advisory bleibt bei Bedarf für unabhängige QA und Change Management verfügbar.</div>
+                </div>
+            </div>
+            
+            <!-- Handover Flow -->
+            <div class="card mb-2">
+                <div class="card-header"><h3 class="card-title">🔄 Übergabe-Prozess bei SAP Public Cloud Projekten</h3><span class="card-badge badge-purple">Handover Flow</span></div>
+                
+                <div class="handover-flow">
+                    <div class="handover-step active">
+                        <div class="handover-step-header">
+                            <div class="handover-step-number">1</div>
+                            <div class="handover-step-title">ERP-Strategie & Business Prozess Analyse</div>
+                            <span class="handover-step-brand brand-advisory">ERP Advisory</span>
+                        </div>
+                        <div class="handover-step-content">Ist-Analyse, Prozess-Mapping, Anforderungsaufnahme, Pain Points identifizieren</div>
+                    </div>
+                    <div class="handover-arrow">↓</div>
+                    <div class="handover-step active">
+                        <div class="handover-step-header">
+                            <div class="handover-step-number">2</div>
+                            <div class="handover-step-title">Konzeption & Lösungsdesign</div>
+                            <span class="handover-step-brand brand-advisory">ERP Advisory</span>
+                        </div>
+                        <div class="handover-step-content">Soll-Prozesse, Gap-Analyse, Integrationskonzept, Deployment-Empfehlung</div>
+                    </div>
+                    <div class="handover-arrow">↓</div>
+                    <div class="handover-step active">
+                        <div class="handover-step-header">
+                            <div class="handover-step-number">3</div>
+                            <div class="handover-step-title">ERP-Evaluation & Empfehlung</div>
+                            <span class="handover-step-brand brand-advisory">ERP Advisory</span>
+                        </div>
+                        <div class="handover-step-content">Herstellerneutraler Vergleich, TCO-Analyse, finale Empfehlung (z.B. SAP Public Cloud)</div>
+                    </div>
+                    <div class="handover-arrow" style="font-size: 2rem; color: var(--tta-purple);">⬇</div>
+                    <div class="handover-step handover">
+                        <div class="handover-step-header">
+                            <div class="handover-step-number">⚡</div>
+                            <div class="handover-step-title">ÜBERGABE bei SAP Cloud Empfehlung</div>
+                            <span class="handover-step-brand brand-walldorf">Walldorf Consulting</span>
+                        </div>
+                        <div class="handover-step-content">Strukturierte Übergabe inkl. aller Dokumentation, Prozessmodelle, Anforderungen und Konzepte</div>
+                    </div>
+                    <div class="handover-arrow" style="color: var(--tta-purple);">↓</div>
+                    <div class="handover-step">
+                        <div class="handover-step-header">
+                            <div class="handover-step-number">4</div>
+                            <div class="handover-step-title">SAP Cloud Implementierung</div>
+                            <span class="handover-step-brand brand-walldorf">Walldorf Consulting</span>
+                        </div>
+                        <div class="handover-step-content">Fit-to-Standard Konfiguration, Datenmigration, Testing, Go-Live</div>
+                    </div>
+                    <div class="handover-arrow" style="color: var(--tta-orange);">↓</div>
+                    <div class="handover-step active" style="border-style: dashed;">
+                        <div class="handover-step-header">
+                            <div class="handover-step-number">?</div>
+                            <div class="handover-step-title">Optional: Unabhängige QA & Change Management</div>
+                            <span class="handover-step-brand brand-advisory">ERP Advisory</span>
+                        </div>
+                        <div class="handover-step-content">Projektbegleitende Qualitätssicherung, SI-Kontrolle, Change Management – auch bei Cloud-Projekten buchbar</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Weitere TIMETOACT Brands -->
+            <div class="card mb-2">
+                <div class="card-header"><h3 class="card-title">🏢 Weitere TIMETOACT GROUP Brands</h3><span class="card-badge badge-teal">Spezialisierung</span></div>
+                <div class="grid-4">
+                    <div class="value-card">
+                        <div class="value-icon">☁️</div>
+                        <div class="value-title" style="color: var(--tta-purple);">Walldorf Consulting</div>
+                        <div class="value-desc">SAP RISE (Lizenz-Deal), Public Cloud, GROW with SAP, ByDesign</div>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">🔐</div>
+                        <div class="value-title" style="color: var(--tta-teal);">IPG</div>
+                        <div class="value-desc">Identity & Access Management, IAM-Lösungen</div>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">🌐</div>
+                        <div class="value-title" style="color: var(--tta-teal);">CLOUDPILOTS</div>
+                        <div class="value-desc">Google Cloud Platform, Google Workspace</div>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">📊</div>
+                        <div class="value-title" style="color: var(--tta-teal);">novaCapta</div>
+                        <div class="value-desc">Microsoft Dynamics 365, Azure</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <p>„Die ERP Transformation Advisory ist Ihr strategischer Partner für <strong>ERP-Strategie, Business Prozess Analyse und Konzeption</strong>. Bei SAP ECC und S/4HANA On-Premise begleiten wir Sie vollständig. Bei <strong>S/4HANA RISE (Private Cloud)</strong> arbeiten wir eng mit der Walldorf Consulting zusammen – wir übernehmen Strategie &amp; Konzeption, Walldorf den Lizenz-Deal und die Co-Implementierung. SAP Public Cloud Projekte übergeben wir nach der Evaluation strukturiert an Walldorf."</p>
+            </div>
+        </section>
+        
+        <!-- TAB: ANALYSE -->
+        <section id="tab-analyse" class="tab-content">
+            <div class="section-header"><h2 class="section-title"><span class="section-title-icon" style="background: rgba(45,154,154,0.15);">🔍</span>Phase 1: Analyse</h2><p class="section-subtitle">Verstehen, wo Sie stehen – und wohin Sie wollen</p></div>
+            <div class="grid-3 mb-2">
+                <div class="card"><div class="card-header"><h3 class="card-title">📊 Process Mapping</h3><span class="card-badge badge-teal">Kernservice</span></div><p class="detail-text">Strukturierte Aufnahme Ihrer Ist-Prozesse in BPMN 2.0. Identifikation von Medienbrüchen und Optimierungspotenzialen.</p><div class="deliverable-box"><div class="deliverable-title">Deliverables</div><div class="deliverable-tags"><span class="deliverable-tag">Prozesslandkarte</span><span class="deliverable-tag">Pain Points</span><span class="deliverable-tag">KPIs</span></div></div></div>
+                <div class="card"><div class="card-header"><h3 class="card-title">✅ Readiness Assessment</h3><span class="card-badge badge-blue">Assessment</span></div><p class="detail-text">Wie bereit ist Ihre Organisation für die Transformation? Wir bewerten alle Dimensionen und identifizieren Gaps.</p><div class="deliverable-box"><div class="deliverable-title">Deliverables</div><div class="deliverable-tags"><span class="deliverable-tag">Readiness-Report</span><span class="deliverable-tag">Gap-Analyse</span></div></div></div>
+                <div class="card"><div class="card-header"><h3 class="card-title">💰 Business Case & ROI</h3><span class="card-badge badge-orange">Finanzen</span></div><p class="detail-text">Fundierter Business Case mit realistischer TCO-Berechnung und ROI-Analyse für verschiedene ERP-Optionen.</p><div class="deliverable-box"><div class="deliverable-title">Deliverables</div><div class="deliverable-tags"><span class="deliverable-tag">TCO-Vergleich</span><span class="deliverable-tag">ROI-Berechnung</span></div></div></div>
+                <div class="card"><div class="card-header"><h3 class="card-title">🗃️ Datenqualitäts-Analyse</h3><span class="card-badge badge-purple">Daten</span></div><p class="detail-text">Analyse Ihrer Stammdaten und Ermittlung des Bereinigungsbedarfs – rechtzeitig vor der Migration.</p><div class="deliverable-box"><div class="deliverable-title">Deliverables</div><div class="deliverable-tags"><span class="deliverable-tag">Datenqualitäts-Report</span><span class="deliverable-tag">Bereinigungskonzept</span></div></div></div>
+                <div class="card"><div class="card-header"><h3 class="card-title">⚖️ ERP-Evaluation</h3><span class="card-badge badge-teal">Kernservice</span></div><p class="detail-text">Objektive ERP-Evaluation nach Ihren Kriterien – ohne Vendor-Bias. SAP, Oracle, Microsoft & mehr.</p><div class="deliverable-box"><div class="deliverable-title">Deliverables</div><div class="deliverable-tags"><span class="deliverable-tag">Vergleichsmatrix</span><span class="deliverable-tag">Empfehlung</span></div></div></div>
+                <div class="card"><div class="card-header"><h3 class="card-title">🗺️ Transformations-Roadmap</h3><span class="card-badge badge-green">Planung</span></div><p class="detail-text">Ihr Fahrplan für die ERP-Transformation mit Meilensteinen, Quick Wins und realistischen Zeitrahmen.</p><div class="deliverable-box"><div class="deliverable-title">Deliverables</div><div class="deliverable-tags"><span class="deliverable-tag">Roadmap</span><span class="deliverable-tag">Meilensteinplan</span></div></div></div>
+            </div>
+            <div class="info-box warning"><div class="info-box-title">💡 Tipp</div><div class="info-box-content">Die Analyse-Phase sollte abgeschlossen sein, BEVOR Sie sich für ein ERP-System entscheiden.</div></div>
+        </section>
+        
+        <!-- TAB: KONZEPTION -->
+        <section id="tab-konzeption" class="tab-content">
+            <div class="section-header"><h2 class="section-title"><span class="section-title-icon" style="background: rgba(45,90,138,0.15);">📐</span>Phase 2: Konzeption</h2><p class="section-subtitle">Das Zielbild definieren – technisch und organisatorisch</p></div>
+            <div class="grid-3 mb-2">
+                <div class="card"><div class="card-header"><h3 class="card-title">🎯 Soll-Prozess-Definition</h3><span class="card-badge badge-blue">Prozesse</span></div><p class="detail-text">Optimierte Soll-Prozesse mit Fokus auf Fit-to-Standard. Wir maximieren ERP-Best-Practices.</p><div class="highlight-box"><p>„80% Standard, 20% Anpassung ist das Ziel."</p></div></div>
+                <div class="card"><div class="card-header"><h3 class="card-title">🔍 Gap-Analyse</h3><span class="card-badge badge-orange">Analyse</span></div><p class="detail-text">Das Delta zwischen Soll-Prozessen und ERP-Standard. Bewertung nach Kritikalität und Aufwand.</p><div class="highlight-box"><p>„Gaps früh erkennen kostet wenig."</p></div></div>
+                <div class="card"><div class="card-header"><h3 class="card-title">🏗️ Lösungsdesign</h3><span class="card-badge badge-teal">Technik</span></div><p class="detail-text">Der technische Blueprint: Architektur, Konfiguration, Customizing nach Clean-Core-Prinzip.</p><div class="highlight-box"><p>„Sauberes Design spart Millionen bei Updates."</p></div></div>
+                <div class="card"><div class="card-header"><h3 class="card-title">🔌 Integrationskonzept</h3><span class="card-badge badge-purple">Integration</span></div><p class="detail-text">Wie das ERP mit CRM, E-Commerce, Produktion, Logistik, Finance, HR kommuniziert.</p><div class="highlight-box"><p>„Schlechte Integration ist der versteckte Kostentreiber."</p></div></div>
+                <div class="card"><div class="card-header"><h3 class="card-title">👥 Change Readiness</h3><span class="card-badge badge-green">Menschen</span></div><p class="detail-text">Stakeholder-Mapping, Change Impact und Kommunikationsplan für Akzeptanz.</p><div class="highlight-box"><p>„Projekte scheitern an Menschen, nicht an Technik."</p></div></div>
+            </div>
+            <div class="info-box success"><div class="info-box-title">✓ Clean Core Prinzip</div><div class="info-box-content">Der ERP-Kern bleibt sauber, Erweiterungen in definierten Extension Points. Das sichert Update-Fähigkeit.</div></div>
+        </section>
+        
+        <!-- TAB: UMSETZUNG -->
+        <section id="tab-umsetzung" class="tab-content">
+            <div class="section-header"><h2 class="section-title"><span class="section-title-icon" style="background: rgba(224,120,48,0.15);">🚀</span>Phase 3: Umsetzung</h2><p class="section-subtitle">Die Transformation begleiten – bis zum erfolgreichen Go-Live</p></div>
+            <div class="grid-3 mb-2">
+                <div class="card"><div class="card-header"><h3 class="card-title">📦 Datenmigration</h3><span class="card-badge badge-orange">Kritisch</span></div><p class="detail-text">Von der Konzeption über Testläufe bis zur produktiven Übernahme.</p><div class="highlight-box"><p>„Eine Migration kann man nicht rückgängig machen."</p></div></div>
+                <div class="card"><div class="card-header"><h3 class="card-title">🧪 Testmanagement</h3><span class="card-badge badge-teal">Qualität</span></div><p class="detail-text">Unit Tests, Integration, Regression, Performance, UAT. Strukturiertes Defect Management.</p><div class="highlight-box"><p>„Was nicht getestet wurde, funktioniert nicht."</p></div></div>
+                <div class="card"><div class="card-header"><h3 class="card-title">📢 Change Management</h3><span class="card-badge badge-green">Menschen</span></div><p class="detail-text">Stakeholder-Kommunikation, Multiplikatoren-Netzwerk, Widerstandsmanagement.</p><div class="highlight-box"><p>„Change Management ist erfolgskritisch."</p></div></div>
+                <div class="card"><div class="card-header"><h3 class="card-title">🎓 Training & Enablement</h3><span class="card-badge badge-blue">Schulung</span></div><p class="detail-text">Zielgruppengerechtes Training: Curriculum, Train-the-Trainer, Schulungsmaterial.</p><div class="highlight-box"><p>„In Schulung investieren zahlt sich 10x zurück."</p></div></div>
+                <div class="card"><div class="card-header"><h3 class="card-title">🛡️ Qualitätssicherung</h3><span class="card-badge badge-red">Unabhängig</span></div><p class="detail-text">Unabhängige Reviews, SI-Kontrolle, Quality Gates. Wir vertreten Ihre Interessen.</p><div class="highlight-box"><p>„Unabhängige QA ist Ihre Versicherung."</p></div></div>
+                <div class="card"><div class="card-header"><h3 class="card-title">🎬 Go-Live Management</h3><span class="card-badge badge-purple">Kritisch</span></div><p class="detail-text">Minutengenaue Cutover-Planung, Verantwortlichkeiten, Fallback-Szenarien.</p><div class="highlight-box"><p>„Ein Go-Live lässt sich nicht wiederholen."</p></div></div>
+            </div>
+            <div class="info-box warning"><div class="info-box-title">⚠️ SI-Kontrolle ist entscheidend</div><div class="info-box-content">Der Systemintegrator kontrolliert sich selbst nicht objektiv. Typische Einsparung: 20-40% der Budgetüberschreitung vermieden.</div></div>
+        </section>
+        
+        <!-- TAB: BETRIEB -->
+        <section id="tab-betrieb" class="tab-content">
+            <div class="section-header"><h2 class="section-title"><span class="section-title-icon" style="background: rgba(16,185,129,0.15);">⚡</span>Phase 4: Betrieb</h2><p class="section-subtitle">Nach dem Go-Live ist vor der Optimierung</p></div>
+            <div class="grid-2 mb-2">
+                <div class="card"><div class="card-header"><h3 class="card-title">🏥 Hypercare</h3><span class="card-badge badge-orange">4-12 Wochen</span></div><p class="detail-text">Intensive Betreuung in den kritischen ersten Wochen nach Go-Live.</p><ul class="detail-list"><li>Schnelle Reaktionszeiten, mehr Kapazität</li><li>Direkte Unterstützung der Anwender vor Ort</li><li>Tägliche Stand-ups mit Statusübersicht</li><li>Klare Exit-Kriterien für Regelbetrieb</li></ul></div>
+                <div class="card"><div class="card-header"><h3 class="card-title">📈 Kontinuierliche Optimierung</h3><span class="card-badge badge-teal">Laufend</span></div><p class="detail-text">Das volle Potenzial Ihres ERP-Systems ausschöpfen.</p><ul class="detail-list"><li>Optimierung basierend auf echten Nutzungsdaten</li><li>Neue Funktionen aktivieren und nutzen</li><li>Manuelle Tätigkeiten automatisieren</li><li>Quartalsweise Reviews empfohlen</li></ul></div>
+                <div class="card"><div class="card-header"><h3 class="card-title">🔧 Managed Services</h3><span class="card-badge badge-green">Flexibel</span></div><p class="detail-text">Application Management, Monitoring, Incident Management als laufender Service.</p><ul class="detail-list"><li>Wartung und Pflege des Systems</li><li>Störungsbehebung nach definierten SLAs</li><li>Proaktives Monitoring und Alerting</li><li>Updates und Patches einspielen</li></ul></div>
+                <div class="card"><div class="card-header"><h3 class="card-title">🌍 Rollout Support</h3><span class="card-badge badge-blue">Skalierung</span></div><p class="detail-text">Nach dem Pilot folgt der Rollout auf weitere Standorte.</p><ul class="detail-list"><li>Template aus Best Practices des Pilots</li><li>Lokalisierung: Sprache, Recht, Steuern</li><li>Rollout-Playbook mit Verbesserung</li><li>Go-Live-Begleitung bei jedem Rollout</li></ul></div>
+            </div>
+            <div class="info-box success"><div class="info-box-title">💡 Kontinuierliche Optimierung</div><div class="info-box-content">Ein ERP ist nie „fertig". Quartalsweise Reviews identifizieren systematisch Optimierungspotenziale. 30-50% schnellerer ROI durch Post-Go-Live-Optimierung.</div></div>
+        </section>
+        
+        <!-- TAB: WARUM -->
+        <section id="tab-warum" class="tab-content">
+            <div class="section-header"><h2 class="section-title"><span class="section-title-icon" style="background: rgba(239,68,68,0.15);">❓</span>Warum ERP Transformation Advisory?</h2><p class="section-subtitle">Die Risiken verstehen – und vermeiden</p></div>
+            <div class="grid-2 mb-2">
+                <div class="card">
+                    <div class="card-header"><h3 class="card-title">📊 Die erschreckende Statistik</h3><span class="card-badge badge-red">Fakten</span></div>
+                    <div class="table-container"><table class="data-table"><thead><tr><th>Metrik</th><th>Wert</th></tr></thead><tbody>
+                        <tr><td><strong>Budget-/Timeline-Überschreitung</strong></td><td class="text-danger">60-70%</td></tr>
+                        <tr><td><strong>Typische Budgetüberschreitung</strong></td><td class="text-danger">20-40%</td></tr>
+                        <tr><td><strong>Projekte mit Scope Creep</strong></td><td class="text-warning">55%</td></tr>
+                        <tr><td><strong>Datenqualitätsprobleme</strong></td><td class="text-warning">45%</td></tr>
+                    </tbody></table></div>
+                    <div class="info-box danger mt-2"><div class="info-box-title">Die vier Hauptursachen</div><div class="info-box-content">Unklare Prozessanforderungen • Schlechte Datenqualität • Unrealistische Planung • Fehlende unabhängige QA</div></div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><h3 class="card-title">⚠️ Interessenkonflikte der SIs</h3><span class="card-badge badge-orange">Strukturell</span></div>
+                    <p class="detail-text"><strong>Lizenzprovisionen:</strong> Große SIs verdienen an ERP-Lizenzen. Die Empfehlung fällt oft zugunsten des Partners aus.</p>
+                    <p class="detail-text mt-2"><strong>Junior-Pyramide:</strong> Senior-Partner verkaufen, Juniors liefern. Sie zahlen für Einarbeitung statt Erfahrung.</p>
+                    <p class="detail-text mt-2"><strong>Scope-Maximierung:</strong> Je größer das Projekt, desto höher der Umsatz. Anreiz für schlanke Lösungen fehlt.</p>
+                    <div class="info-box warning mt-2"><div class="info-box-title">Das Geschäftsmodell</div><div class="info-box-content">...erzeugt systemische Interessenkonflikte – unabhängig von den handelnden Personen.</div></div>
+                </div>
+            </div>
+            <div class="card mb-2">
+                <div class="card-header"><h3 class="card-title">✅ Unsere Lösung: 100% auf Ihrer Seite</h3><span class="card-badge badge-teal">Differenzierung</span></div>
+                <div class="grid-4">
+                    <div class="result-box"><div class="result-label">Lizenzprovisionen</div><div class="result-value orange">0%</div><div class="result-detail">Wir verdienen nichts an Lizenzen</div></div>
+                    <div class="result-box"><div class="result-label">Junior-Anteil</div><div class="result-value orange">0%</div><div class="result-detail">Nur Senior-Berater</div></div>
+                    <div class="result-box"><div class="result-label">Vendor Lock-in</div><div class="result-value">0%</div><div class="result-detail">Modularer Baukasten</div></div>
+                    <div class="result-box"><div class="result-label">ERP-Neutralität</div><div class="result-value">100%</div><div class="result-detail">Multi-ERP Expertise</div></div>
+                </div>
+            </div>
+            <div class="highlight-box"><p>„Die Lösung: Ein unabhängiger Advisory-Partner, der Ihre Interessen vertritt – nicht die des ERP-Vendors oder Systemintegrators. Wir verkaufen keine Lizenzen. Wir liefern Projekterfolg."</p></div>
+        </section>
+        
+        <!-- TAB: REFERENZEN -->
+        <section id="tab-referenzen" class="tab-content">
+            <div class="section-header"><h2 class="section-title"><span class="section-title-icon" style="background: rgba(16,185,129,0.15);">⭐</span>Was unsere Kunden sagen</h2><p class="section-subtitle">Erfolgsgeschichten aus der Praxis</p></div>
+            <div class="grid-3 mb-2">
+                <div class="success-card featured">
+                    <div class="success-badge">Referenz</div>
+                    <div class="success-logo">Berner Group</div>
+                    <div class="success-quote">„Die TIMETOACT GROUP hat uns mit ihrer herstellerneutralen Beratung überzeugt. Endlich ein Partner, der unsere Prozesse versteht."</div>
+                    <div class="success-author"><div class="success-author-name">René Stukar</div><div class="success-author-role">Teamlead Warehouse Management Solutions</div></div>
+                    <div class="success-results"><div class="success-result"><div class="success-result-value">25%</div><div class="success-result-label">Zeitersparnis</div></div><div class="success-result"><div class="success-result-value">On Time</div><div class="success-result-label">Go-Live</div></div></div>
+                </div>
+                <div class="success-card">
+                    <div class="success-logo">Fertigungsindustrie</div>
+                    <div class="success-quote">„Die unabhängige QA hat uns vor einer Budgetüberschreitung von 40% bewahrt. Die Investition in Advisory hat sich mehrfach ausgezahlt."</div>
+                    <div class="success-author"><div class="success-author-name">IT-Leiter</div><div class="success-author-role">Mittelständisches Fertigungsunternehmen, 2.500 MA</div></div>
+                    <div class="success-results"><div class="success-result"><div class="success-result-value">40%</div><div class="success-result-label">Kosten gespart</div></div><div class="success-result"><div class="success-result-value">6 Mon.</div><div class="success-result-label">Früher live</div></div></div>
+                </div>
+                <div class="success-card">
+                    <div class="success-logo">Großhandel</div>
+                    <div class="success-quote">„Durch das Process Mapping haben wir erkannt, dass unser favorisiertes ERP gar nicht zu uns passt. Das hat uns Millionen erspart."</div>
+                    <div class="success-author"><div class="success-author-name">CFO</div><div class="success-author-role">Internationaler Großhändler, 800 MA</div></div>
+                    <div class="success-results"><div class="success-result"><div class="success-result-value">€2.1M</div><div class="success-result-label">Ersparnis</div></div><div class="success-result"><div class="success-result-value">Fit-to-Std</div><div class="success-result-label">Erreicht</div></div></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header"><h3 class="card-title">📊 Typische Ergebnisse</h3><span class="card-badge badge-green">Messbar</span></div>
+                <div class="grid-4">
+                    <div class="kpi-card green"><div class="kpi-label">Zeitgewinn</div><div class="kpi-value">20-30%</div><div class="kpi-change">Durch bessere Vorbereitung</div></div>
+                    <div class="kpi-card teal"><div class="kpi-label">ROI-Beschleunigung</div><div class="kpi-value">30-50%</div><div class="kpi-change">Durch Fit-to-Standard</div></div>
+                    <div class="kpi-card orange"><div class="kpi-label">Budgetsicherheit</div><div class="kpi-value">95%+</div><div class="kpi-change">Durch unabhängige QA</div></div>
+                    <div class="kpi-card blue"><div class="kpi-label">User Akzeptanz</div><div class="kpi-value">90%+</div><div class="kpi-change">Durch Change Management</div></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="site-footer">
+        © 2026 TIMETOACT GROUP · ERP-unabhängig: SAP · Oracle · Microsoft · Infor · IFS · weitere
+    </footer>
+    
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+            
+            // Find and activate the correct tab button
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => {
+                if (tab.getAttribute('onclick').includes("'" + tabId + "'")) {
+                    tab.classList.add('active');
+                }
             });
-          }
-
-          // Highlight
-          if (topic.content.highlight) {
-            children.push(new Paragraph({
-              spacing: { before: 200, after: 200 },
-              indent: { left: 400 },
-              border: { left: { style: BorderStyle.SINGLE, size: 24, color: "DA5500" } },
-              children: [new TextRun({ text: topic.content.highlight, italics: true, size: 20, color: "333333" })]
-            }));
-          }
-
-          // Deliverables
-          if (topic.content.deliverables && topic.content.deliverables.length > 0) {
-            children.push(new Paragraph({
-              spacing: { before: 100 },
-              shading: { fill: "F5F5F5", type: ShadingType.CLEAR },
-              children: [
-                new TextRun({ text: "DELIVERABLES: ", bold: true, size: 18, color: "DA5500" }),
-                new TextRun({ text: topic.content.deliverables.join(" · "), size: 18 })
-              ]
-            }));
-          }
+            
+            window.scrollTo(0, 0);
         }
-      });
-
-      // Create document
-      const doc = new Document({
-        styles: {
-          default: { document: { run: { font: "Arial", size: 22 } } },
-          paragraphStyles: [
-            { id: "Title", name: "Title", basedOn: "Normal", run: { size: 56, bold: true, color: "212830", font: "Arial" }, paragraph: { spacing: { before: 0, after: 120 } } },
-            { id: "Heading1", name: "Heading 1", basedOn: "Normal", next: "Normal", quickFormat: true, run: { size: 28, bold: true, color: "098F9B", font: "Arial" }, paragraph: { spacing: { before: 400, after: 200 } } },
-          ]
-        },
-        numbering: { config: numberingConfig },
-        sections: [{
-          properties: {
-            page: { margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 } }
-          },
-          headers: {
-            default: new Header({
-              children: [new Paragraph({
-                alignment: AlignmentType.RIGHT,
-                children: [
-                  new TextRun({ text: "TIMETOACT", bold: true, size: 20, color: "212830" }),
-                  new TextRun({ text: "GROUP", bold: true, size: 20, color: "DA5500" }),
-                  new TextRun({ text: "  |  ERP Transformation Advisory", size: 18, color: "666666" })
-                ]
-              })]
-            })
-          },
-          footers: {
-            default: new Footer({
-              children: [new Paragraph({
-                alignment: AlignmentType.CENTER,
-                children: [
-                  new TextRun({ text: "© 2025 TIMETOACT GROUP · Marcel Wagner · marcel.wagner@timetoact-group.com · Seite ", size: 16, color: "666666" }),
-                  new TextRun({ children: [PageNumber.CURRENT], size: 16, color: "666666" }),
-                  new TextRun({ text: " von ", size: 16, color: "666666" }),
-                  new TextRun({ children: [PageNumber.TOTAL_PAGES], size: 16, color: "666666" })
-                ]
-              })]
-            })
-          },
-          children: children
-        }]
-      });
-
-      // Generate and download
-      const blob = await Packer.toBlob(doc);
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'TIMETOACT_ERP_Advisory_Services_' + today.replace(/\./g, '-') + '.docx';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }
-
-    function render() {
-      const app = document.getElementById('app');
-      if (selectedTopic && detailContent[selectedTopic]) {
-        app.innerHTML = renderDetailView();
-      } else if (currentView !== 'home') {
-        app.innerHTML = renderTopicGrid();
-      } else {
-        app.innerHTML = renderHome();
-      }
-    }
-
-    function renderHome() {
-      return `
-        <div class="header fade-in">
-          <div class="logo-container">
-            <div class="logo-text">We Drive Digital Innovation & Operational Excellence</div>
-            <div class="logo-main">TIMETOACT<span>GROUP</span></div>
-          </div>
-          <div class="tagline">
-            ERP Transformation Advisory
-            <div class="tagline-highlight">
-              <span>We Care.</span>
-              <span>We Drive.</span>
-              <span>We Deliver.</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Hero Values Section -->
-        <div class="hero-values fade-in">
-          <div class="hero-values-card">
-            <div class="hero-values-title">Wofür wir stehen</div>
-            <div class="hero-values-subtitle">Unabhängige ERP-Beratung, die Ihre Interessen in den Mittelpunkt stellt</div>
-            
-            <div class="values-grid">
-              <div class="value-item">
-                <div class="value-icon">⚖️</div>
-                <div class="value-title">100% Herstellerneutral</div>
-                <div class="value-desc">Keine Lizenzen, keine Provisionen. Wir empfehlen das ERP, das zu Ihnen passt.</div>
-              </div>
-              <div class="value-item">
-                <div class="value-icon">🔄</div>
-                <div class="value-title">Process First</div>
-                <div class="value-desc">Erst Prozesse verstehen und optimieren – dann die passende Technologie wählen.</div>
-              </div>
-              <div class="value-item">
-                <div class="value-icon">👨‍💼</div>
-                <div class="value-title">Senior-Only</div>
-                <div class="value-desc">Erfahrene Berater mit Cross-ERP-Know-how, produktiv ab Tag 1.</div>
-              </div>
-              <div class="value-item">
-                <div class="value-icon">🧩</div>
-                <div class="value-title">Modularer Baukasten</div>
-                <div class="value-desc">21 Services in 4 Phasen. Einzeln buchbar, kein Vendor Lock-in.</div>
-              </div>
-            </div>
-            
-            <div class="hero-quote">
-              <p>„Wir verkaufen keine Lizenzen. Wir liefern Projekterfolg."</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="container">
-          <div class="stats-banner fade-in">
-            <div class="stat-box">
-              <div class="stat-number">20-30%</div>
-              <div class="stat-label">Zeitgewinn durch bessere Vorbereitung</div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-number">>95%</div>
-              <div class="stat-label">Kundenzufriedenheit (NPS)</div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-number">30-50%</div>
-              <div class="stat-label">Schnellerer ROI</div>
-            </div>
-          </div>
-
-          <div class="main-card fade-in">
-            <div class="card-title">ERP Transformation Cockpit</div>
-            <div class="card-subtitle">Wir mappen Ihre Prozesse zum passenden ERP – herstellerneutral, senior-only, modular</div>
-
-            <div class="phase-grid">
-              <button class="phase-button analyse" onclick="navigate('analyse')">
-                <div class="phase-number">1</div>
-                <div class="phase-title">ANALYSE</div>
-                <div class="phase-count">6 Services</div>
-              </button>
-              <button class="phase-button konzeption" onclick="navigate('konzeption')">
-                <div class="phase-number">2</div>
-                <div class="phase-title">KONZEPTION</div>
-                <div class="phase-count">5 Services</div>
-              </button>
-              <button class="phase-button umsetzung" onclick="navigate('umsetzung')">
-                <div class="phase-number">3</div>
-                <div class="phase-title">UMSETZUNG</div>
-                <div class="phase-count">6 Services</div>
-              </button>
-              <button class="phase-button betrieb" onclick="navigate('betrieb')">
-                <div class="phase-number">4</div>
-                <div class="phase-title">BETRIEB</div>
-                <div class="phase-count">4 Services</div>
-              </button>
-            </div>
-
-            <div class="section-title">Weitere Informationen</div>
-
-            <div class="info-grid">
-              <button class="info-button" onclick="navigate('info')">
-                <div class="info-button-title">Warum Advisory?</div>
-                <div class="info-button-desc">Interessenkonflikte, unsere Vorteile</div>
-              </button>
-              <button class="info-button" onclick="navigate('nutzen')">
-                <div class="info-button-title">Nutzen</div>
-                <div class="info-button-desc">CFO, CIO, Business Owner</div>
-              </button>
-              <button class="info-button" onclick="navigate('buchung')">
-                <div class="info-button-title">Kontakt</div>
-                <div class="info-button-desc">Starten Sie jetzt</div>
-              </button>
-            </div>
-          </div>
-
-          ${selectedTopics.size > 0 ? `
-          <div class="selection-bar" style="margin-top: 20px;">
-            <div class="selection-info">
-              Ausgewählte Themen:<span class="selection-count">${selectedTopics.size}</span>
-            </div>
-            <div class="selection-buttons">
-              <button class="download-button" onclick="downloadSelectedTopics()">📥 Als Word speichern</button>
-              <button class="clear-button" onclick="clearSelection()">✕ Auswahl löschen</button>
-            </div>
-          </div>
-          ${renderCalculationPanel()}
-          ` : ''}
-        </div>
-
-        <!-- Success Stories Section -->
-        <div class="success-section fade-in">
-          <div class="success-section-title">Was unsere <span>Kunden</span> sagen</div>
-          
-          <div class="success-grid">
-            <div class="success-card featured">
-              <div class="success-badge">Referenz</div>
-              <div class="success-logo">Berner Group</div>
-              <div class="success-quote">„Die TIMETOACT GROUP hat uns mit ihrer herstellerneutralen Beratung überzeugt. Endlich ein Partner, der unsere Prozesse versteht und nicht nur Lizenzen verkaufen will."</div>
-              <div class="success-author">
-                <div class="success-author-name">René Stukar</div>
-                <div class="success-author-role">Teamlead Warehouse Management Solutions & Coordinator Supply Chain Solutions</div>
-              </div>
-              <div class="success-results">
-                <div class="success-result">
-                  <div class="success-result-value">25%</div>
-                  <div class="success-result-label">Zeitersparnis</div>
-                </div>
-                <div class="success-result">
-                  <div class="success-result-value">On Time</div>
-                  <div class="success-result-label">Go-Live</div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="success-card">
-              <div class="success-logo">Fertigungsindustrie</div>
-              <div class="success-quote">„Die unabhängige QA hat uns vor einer Budgetüberschreitung von 40% bewahrt. Die Investition in Advisory hat sich mehrfach ausgezahlt."</div>
-              <div class="success-author">
-                <div class="success-author-name">IT-Leiter</div>
-                <div class="success-author-role">Mittelständisches Fertigungsunternehmen, 2.500 MA</div>
-              </div>
-              <div class="success-results">
-                <div class="success-result">
-                  <div class="success-result-value">40%</div>
-                  <div class="success-result-label">Kosten gespart</div>
-                </div>
-                <div class="success-result">
-                  <div class="success-result-value">6 Mon.</div>
-                  <div class="success-result-label">Früher live</div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="success-card">
-              <div class="success-logo">Großhandel</div>
-              <div class="success-quote">„Durch das Process Mapping haben wir erkannt, dass unser favorisiertes ERP gar nicht zu uns passt. Das hat uns Millionen erspart."</div>
-              <div class="success-author">
-                <div class="success-author-name">CFO</div>
-                <div class="success-author-role">Internationaler Großhändler, 800 MA</div>
-              </div>
-              <div class="success-results">
-                <div class="success-result">
-                  <div class="success-result-value">€2.1M</div>
-                  <div class="success-result-label">Ersparnis</div>
-                </div>
-                <div class="success-result">
-                  <div class="success-result-value">Fit-to-Std</div>
-                  <div class="success-result-label">Erreicht</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="container">
-          <div class="footer">
-            <div class="footer-tagline">
-              <span>We Care.</span> <span>We Drive.</span> <span>We Deliver.</span>
-            </div>
-            <div>© 2025 TIMETOACT GROUP · ERP-unabhängig: SAP · Oracle · Microsoft · Infor · IFS · weitere</div>
-          </div>
-        </div>
-      `;
-    }
-
-    function renderTopicGrid() {
-      const topics = topicLists[currentView] || [];
-      const title = viewTitles[currentView] || currentView;
-      const phaseClass = currentView;
-      const canSelect = !excludeFromSelection.includes(currentView);
-      
-      let topicButtons;
-      if (selectionMode && canSelect) {
-        topicButtons = topics.map(t => {
-          const isSelected = selectedTopics.has(t.id);
-          return `<div class="topic-item">
-            <div class="topic-checkbox-wrapper ${isSelected ? 'checked' : ''}" onclick="toggleTopicSelection('${t.id}', event)">
-              <input type="checkbox" class="topic-checkbox" ${isSelected ? 'checked' : ''} onclick="toggleTopicSelection('${t.id}', event)">
-            </div>
-            <button class="topic-button ${phaseClass} ${isSelected ? 'selected' : ''}" onclick="selectTopic('${t.id}')">${t.label}</button>
-          </div>`;
-        }).join('');
-      } else {
-        topicButtons = topics.map(t => 
-          `<button class="topic-button ${phaseClass}" onclick="selectTopic('${t.id}')">${t.label}</button>`
-        ).join('');
-      }
-
-      const selectionBar = selectedTopics.size > 0 ? `
-        <div class="selection-bar">
-          <div class="selection-info">
-            Ausgewählte Themen:<span class="selection-count">${selectedTopics.size}</span>
-          </div>
-          <div class="selection-buttons">
-            <button class="download-button" onclick="downloadSelectedTopics()">📥 Als Word speichern</button>
-            <button class="clear-button" onclick="clearSelection()">✕ Auswahl löschen</button>
-          </div>
-        </div>
-        ${renderCalculationPanel()}
-      ` : '';
-
-      const selectButton = canSelect ? `
-        <div style="display: flex; justify-content: flex-end; margin-bottom: 12px;">
-          <button class="toggle-select-button ${selectionMode ? 'active' : ''}" onclick="toggleSelectionMode()">
-            ${selectionMode ? '✓ Auswahlmodus aktiv' : '☐ Themen auswählen'}
-          </button>
-        </div>
-      ` : '';
-
-      return `
-        <div class="page-content">
-          <div class="page-container fade-in">
-            <div class="page-header ${phaseClass}">
-              <h1>${title}</h1>
-              <div class="page-header-sub">${topics.length} ${canSelect ? 'Services verfügbar' : 'Informationen'}</div>
-            </div>
-            ${selectButton}
-            ${selectionBar}
-            <div class="topic-grid">${topicButtons}</div>
-            <button class="back-button" onclick="goHome()">← Zurück zum Cockpit</button>
-          </div>
-        </div>
-      `;
-    }
-
-    function renderDetailView() {
-      const item = detailContent[selectedTopic];
-      const content = item.content;
-      const backTitle = viewTitles[previousView] || 'Übersicht';
-      
-      let sectionsHtml = '';
-      if (content.sections) {
-        content.sections.forEach(section => {
-          sectionsHtml += `<div class="detail-section">`;
-          sectionsHtml += `<div class="detail-label">${section.label}</div>`;
-          if (section.items) {
-            sectionsHtml += `<ul class="detail-list">`;
-            section.items.forEach(item => {
-              sectionsHtml += `<li>${item}</li>`;
-            });
-            sectionsHtml += `</ul>`;
-          }
-          if (section.text) {
-            sectionsHtml += `<div class="detail-text">${section.text}</div>`;
-          }
-          sectionsHtml += `</div>`;
-        });
-      }
-
-      let deliverablesHtml = '';
-      if (content.deliverables && content.deliverables.length > 0) {
-        deliverablesHtml = `
-          <div class="deliverable-box">
-            <div class="deliverable-title">Deliverables</div>
-            <div class="detail-text">${content.deliverables.join(' · ')}</div>
-          </div>
-        `;
-      }
-
-      let highlightHtml = '';
-      if (content.highlight) {
-        highlightHtml = `
-          <div class="highlight-box">
-            <p>${content.highlight}</p>
-          </div>
-        `;
-      }
-
-      return `
-        <div class="page-content">
-          <div class="page-container fade-in">
-            <div class="breadcrumb">
-              <span class="breadcrumb-link" onclick="goHome()">Cockpit</span>
-              <span>›</span>
-              <span class="breadcrumb-link" onclick="goBack()">${backTitle}</span>
-              <span>›</span>
-              <span>${item.title}</span>
-            </div>
-            <div class="detail-card">
-              <h1 class="detail-header">${item.title}</h1>
-              <div class="detail-section">
-                <div class="detail-text">${content.intro}</div>
-              </div>
-              ${sectionsHtml}
-              ${highlightHtml}
-              ${deliverablesHtml}
-            </div>
-            <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
-              <button class="back-button" onclick="goBack()">← Zurück</button>
-              ${!excludeFromSelection.includes(item.phase) ? `
-              <button class="toggle-select-button ${selectedTopics.has(selectedTopic) ? 'active' : ''}" 
-                      onclick="toggleTopicSelection('${selectedTopic}', event)" 
-                      style="margin-top: 16px;">
-                ${selectedTopics.has(selectedTopic) ? '✓ In Auswahl' : '+ Zur Auswahl hinzufügen'}
-              </button>
-              ` : ''}
-              ${selectedTopics.size > 0 ? `<button class="download-button" onclick="downloadSelectedTopics()" style="margin-top: 16px;">📥 ${selectedTopics.size} Themen als Word</button>` : ''}
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    function navigate(view) {
-      previousView = currentView;
-      currentView = view;
-      selectedTopic = null;
-      render();
-      window.scrollTo(0, 0);
-    }
-
-    function selectTopic(topicId) {
-      previousView = currentView;
-      selectedTopic = topicId;
-      render();
-      window.scrollTo(0, 0);
-    }
-
-    function goHome() {
-      currentView = 'home';
-      selectedTopic = null;
-      previousView = null;
-      render();
-      window.scrollTo(0, 0);
-    }
-
-    function goBack() {
-      if (selectedTopic) {
-        selectedTopic = null;
-        render();
-      } else {
-        goHome();
-      }
-      window.scrollTo(0, 0);
-    }
-
-    render();
-  </script>
+    </script>
 </body>
 </html>
